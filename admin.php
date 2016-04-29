@@ -2,7 +2,7 @@
 /**
  * Author: huanglele
  * Date: 2016/4/29
- * Time: 上午 09:34
+ * Time: 上午 10:12
  * Description:
  */
 
@@ -11,7 +11,8 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
 define('APP_DEBUG',True);
-define('BIND_MODULE','Home');
+define('BIND_MODULE','Admin');
+
 // 定义应用目录
 define('APP_PATH','./App/');
 
