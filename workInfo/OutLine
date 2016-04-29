@@ -1,0 +1,12 @@
+后台
+    Common  基础公共类
+        |- _initialize  判断登录
+        |- login    登录
+        |- getData  分页获取数据
+        |- checkAccess 检测当前用户是否拥有操作权限
+
+    User    用户管理类
+        |- index        显示所有的用户列表
+        |- user         显示普通用户列表
+        |- person       显示个体户列表
+        |- company      显示企业用户列表

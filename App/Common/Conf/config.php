@@ -1,11 +1,16 @@
 <?php
 return array(
+    //加载扩展配置文件
+    'LOAD_EXT_CONFIG' => 'site',
+
 	//定义数据库
     'DB_TYPE' => 'mysql',
     'DB_HOST' => '127.0.0.1',
+    'DB_NAME' => 'siront',
     'DB_USER' => 'siront',
     'DB_PWD' => 'siront123',
-    'DB_NAME' => 'siront',
+    'DB_CHARSET'=> 'utf8',
+    'DB_PREFIX' => 'siront_',
 
     'SHOW_PAGE_TRACE' => true,
     //定义模板信息
