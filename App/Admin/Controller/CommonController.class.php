@@ -85,7 +85,7 @@ class CommonController extends Controller
      * @param bool|false $field 需要查询的字段
      * @return mixed 查询的数据数组
      */
-    private function getData($M, $map, $order, $field=false){
+    protected function getData($M, $map, $order, $field=false){
         $count = $M->where($map)->count();
         $Page = new \Think\Page($count);
         $show = $Page->show();

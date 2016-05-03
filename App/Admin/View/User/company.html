@@ -2,11 +2,11 @@
 <section class="content-header">
     <h1>
         用户管理
-        <small>普通用户</small>
+        <small>企业用户</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="<{:U('index/index')}>"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">普通用户</li>
+        <li class="active">企业用户</li>
     </ol>
 </section>
 
@@ -28,13 +28,13 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <volist name="UserStatus" id="vo">
                                                 <li class="divider"></li>
-                                                <li><a href="<{:U('user/user')}>?status=<{$key}>"><{$vo}></a></li>
+                                                <li><a href="<{:U('user/company')}>?status=<{$key}>"><{$vo}></a></li>
                                             </volist>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 search-form">
-                                    <form action="<{:U('user/user')}>" name="userSearch" class="text-right">
+                                    <form action="<{:U('user/company')}>" name="userSearch" class="text-right">
                                         <div class="input-group">
                                             <div class="input-group-btn">
                                                 <input type="hidden" name="searchType" value="phone">
@@ -64,8 +64,6 @@
                                         <th>头像</th>
                                         <th>电话</th>
                                         <th>状态</th>
-                                        <th>个体户</th>
-                                        <th>企业</th>
                                         <th>详情</th>
                                     </tr>
                                     </thead>
@@ -77,25 +75,7 @@
                                             <td><img src="<{$vo.img|headImgUrl}>" width="20px" class="img-circle"></td>
                                             <td><{$vo.phone}></td>
                                             <td>
-                                                <small class="badge <{$UserStatusColor[$vo['status']]}>"><{$UserStatus[$vo['status']]}></small>
-                                            </td>
-                                            <td>
-                                                <eq name="vo.statusp" value="0">
-                                                    <small class="badge bg-aqua">否</small>
-                                                    <else />
-                                                    <a href="<{:U('user/personInfo')}>?uid=<{$vo.uid}>">
-                                                        <small class="badge <{$UserStatusColor[$vo['statusp']]}>"><{$PersonStatus[$vo['statusp']]}></small>
-                                                    </a>
-                                                </eq>
-                                            </td>
-                                            <td>
-                                                <eq name="vo.statuscp" value="0">
-                                                    <small class="badge bg-aqua">否</small>
-                                                    <else />
-                                                    <a href="<{:U('user/companyInfo')}>?uid=<{$vo.uid}>">
-                                                        <small class="badge <{$UserStatusColor[$vo['statuscp']]}>"><{$CompanyStatus[$vo['statuscp']]}></small>
-                                                    </a>
-                                                </eq>
+                                                <small class="badge btn-sm <{$UserStatusColor[$vo['status']]}>"><{$UserStatus[$vo['status']]}></small>
                                             </td>
                                             <td><a href="<{:U('user/userInfo')}>?uid=<{$vo.uid}>">详情</a></td>
                                         </tr>
@@ -108,7 +88,7 @@
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
                     <div class="pull-right">
-                       <div><{$page}></div>
+                        <div><{$page}></div>
                     </div>
                 </div><!-- box-footer -->
             </div><!-- /.box -->

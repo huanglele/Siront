@@ -3402,3 +3402,9 @@ fieldset[disabled] .btn-vk.active {
   color: #587ea3;
   background-color: #ffffff;
 }
+
+
+/*自己添加部分*/
+.dropdown-menu{
+  min-width: 100%;
+}
