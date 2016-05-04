@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3435a3e3-afde-4211-a85b-2945656f013f" name="我的siront" url="http://siront.91yiso.com">
+        <fileTransfer host="116.255.185.220" port="21" rootFolder="/public_html" username="siront">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
