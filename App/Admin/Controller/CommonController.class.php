@@ -29,7 +29,8 @@ class CommonController extends Controller
             }else{
                 if($this->status != 1){ //账户被限制了
                     die('你的账户已经被限制了，请联系管理员');
-                }else{
+                }else{//登录成功
+                    if(!$this->checkAccess()){$this->error('没有操作权限');die;}
                     $this->assign('role',$this->role);
                     $this->assign('controller',strtolower(CONTROLLER_NAME));
                 }
@@ -104,10 +105,10 @@ class CommonController extends Controller
      */
     private function checkAccess(){
         $RoleOfAccess = include COMMON_PATH.'Conf/RoleOfAccess.php';
-        $action =  strtolower(CONTROLLER_NAME.'#'.ACTION_NAME);
+        $action =  strtolower(CONTROLLER_NAME.'.'.ACTION_NAME);
         if(array_key_exists($action,$RoleOfAccess)){
-            $access = $RoleOfAccess[$action];
-            if(array_key_exists($this->aid,$access)){
+            $access = $RoleOfAccess[$action];   //操作允许的角色
+            if(in_array($this->role,$access)){
                 return true;
             }else{
                 return false;

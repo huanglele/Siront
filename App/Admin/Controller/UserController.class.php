@@ -12,11 +12,8 @@ namespace Admin\Controller;
 class UserController extends CommonController
 {
 
-    public function _initialize(){
-        parent::_initialize();
-        if(strtolower('index')==ACTION_NAME){
-            $this->user();      //默认显示所有的普通用户
-        }
+    public function index(){
+        $this->user();
     }
 
     /**
@@ -61,7 +58,7 @@ class UserController extends CommonController
         }
 
         $this->assign('status',$status);
-        $field = 'uid,nickname,phone,headimgurl as img,user_status as status,person_status as statusP,company_status as statusCp';
+        $field = 'uid,nickname,phone,headimgurl as img,user_status as status,person_status as statusP,company_status as statusCp,create_time as time';
         $this->listUser($map,$field);
         $this->assign('UserStatus',C('UserStatus'));
         $this->assign('PersonStatus',C('PersonStatus'));
@@ -83,7 +80,7 @@ class UserController extends CommonController
         }
         $this->assign('status',$status);
         $map['company_status'] = 0;
-        $field = 'uid,nickname,phone,headimgurl as img,user_status as status';
+        $field = 'uid,nickname,phone,headimgurl as img,user_status as status,create_time as time';
         $this->listUser($map,$field);
         $this->assign('UserStatus',C('UserStatus'));
         $this->assign('PersonStatus',C('PersonStatus'));
@@ -104,7 +101,7 @@ class UserController extends CommonController
         }
         $this->assign('status',$status);
         $map['person_status'] = 0;
-        $field = 'uid,nickname,phone,headimgurl as img,user_status as status';
+        $field = 'uid,nickname,phone,headimgurl as img,user_status as status,create_time as time';
         $this->listUser($map,$field);
         $this->assign('UserStatus',C('UserStatus'));
         $this->assign('CompanyStatus',C('CompanyStatus'));
@@ -131,5 +128,16 @@ class UserController extends CommonController
     public function getInfo(){
         $uid = I('get.uid',0,'number_int');
         return M('user')->find($uid);
+    }
+
+    /**
+     * 添加一个企业用户
+     */
+    public function addCompany(){
+        if(isset($_POST['submit'])){
+
+        }else{
+            $this->display('addCompany');
+        }
     }
 }

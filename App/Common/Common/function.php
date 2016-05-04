@@ -19,3 +19,11 @@ function headImgUrl($url=false){
         return $url;
     }
 }
+
+function myDate($timestamp){
+    if(is_numeric($timestamp) && $timestamp>0){
+        return date('Y-m-d H:i:s',$timestamp);
+    }else{
+        return '';
+    }
+}

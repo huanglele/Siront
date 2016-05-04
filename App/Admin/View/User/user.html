@@ -66,6 +66,7 @@
                                         <th>状态</th>
                                         <th>个体户</th>
                                         <th>企业</th>
+                                        <th>注册时间</th>
                                         <th>详情</th>
                                     </tr>
                                     </thead>
@@ -97,6 +98,7 @@
                                                     </a>
                                                 </eq>
                                             </td>
+                                            <td><{$vo.time|myDate}></td>
                                             <td><a href="<{:U('user/userInfo')}>?uid=<{$vo.uid}>">详情</a></td>
                                         </tr>
                                     </volist>

@@ -32,6 +32,9 @@
                                             </volist>
                                         </ul>
                                     </div>
+                                    <div class="btn-group">
+                                        <a role="button" class="btn btn-warning" href="<{:U('user/addCompany')}>">添加企业用户</a>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 search-form">
                                     <form action="<{:U('user/company')}>" name="userSearch" class="text-right">
@@ -64,6 +67,7 @@
                                         <th>头像</th>
                                         <th>电话</th>
                                         <th>状态</th>
+                                        <th>注册时间</th>
                                         <th>详情</th>
                                     </tr>
                                     </thead>
@@ -77,6 +81,7 @@
                                             <td>
                                                 <small class="badge btn-sm <{$UserStatusColor[$vo['status']]}>"><{$UserStatus[$vo['status']]}></small>
                                             </td>
+                                            <td><{$vo.time|myDate}></td>
                                             <td><a href="<{:U('user/userInfo')}>?uid=<{$vo.uid}>">详情</a></td>
                                         </tr>
                                     </volist>
