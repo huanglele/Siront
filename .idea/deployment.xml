@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="我的siront" uploadOnCheckin="3435a3e3-afde-4211-a85b-2945656f013f">
+  <component name="PublishConfigData" serverName="我的siront" uploadOnCheckin="db2bc1b5-08e5-4043-aebd-235678c7d0d2">
     <serverData>
       <paths name="公司siront">
         <serverdata>
@@ -17,6 +17,6 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myUploadOnCheckinName" value="siront" />
+    <option name="myUploadOnCheckinName" value="公司siront" />
   </component>
 </project>
