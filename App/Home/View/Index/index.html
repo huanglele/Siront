@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>鼠标拾取地图坐标</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <script type="text/javascript"
+            src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&plugin=AMap.Autocomplete"></script>
+
+    <script type="text/javascript" src="__PUBLIC__/js/jquery.min.js" ></script>
+    <style>
+        #container,#myPageTop{
+            display: inline-block;
+            width: 49%;
+        }
+        #tip {
+            background-color: #fff;
+            padding-left: 10px;
+            padding-right: 10px;
+            position: absolute;
+            font-size: 12px;
+            right: 10px;
+            top: 20px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            line-height: 30px;
+        }
+        .marker {
+            color: #ff6600;
+            padding: 4px 10px;
+            border: 1px solid #fff;
+            white-space: nowrap;
+            font-size: 12px;
+            font-family: "";
+            background-color: #0066ff;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div id="tip"></div>
+<div id="myPageTop">
+    <table>
+        <tr>
+            <td>
+                <label>按关键字搜索：</label>
+            </td>
+            <td class="column2">
+                <label>左击获取经纬度：</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" placeholder="请输入关键字进行搜索" id="tipinput">
+            </td>
+            <td class="column2">
+                <input type="text" readonly="true" id="lnglat">
+            </td>
+        </tr>
+        <tr>
+            <td><button id="autoMark">自动定位</button></td>
+            <td><button id="clearMark">重新标记</button></td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+
+    var lon = 116.397428;
+    var lat = 39.90923;
+    marker = null;
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        zoom: 13
+    });
+
+
+    //地图中添加地图操作ToolBar插件
+    map.plugin(['AMap.ToolBar'], function() {
+        //设置地位标记为自定义标记
+        var toolBar = new AMap.ToolBar();
+        map.addControl(toolBar);
+    });
+
+    //使用浏览器定位
+    map.plugin('AMap.Geolocation', function() {
+        geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+            zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+            buttonPosition:'RB'
+        });
+        map.addControl(geolocation);
+        geolocation.getCurrentPosition();
+        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+    });
+
+
+    //为地图注册click事件获取鼠标点击出的经纬度坐标
+    var clickEventListener = map.on('click', function(e) {
+        if(!marker){
+            lon = e.lnglat.getLng();
+            lat = e.lnglat.getLat();
+            addMark();
+        }
+    });
+
+
+
+    //解析定位结果
+    function onComplete(data) {
+        log('定位成功');
+        lon = data.position.getLng();
+        lat = data.position.getLat();
+        addMark();
+    }
+    //解析定位错误信息
+    function onError(data) {
+        log('定位失败');
+    }
+
+
+    /**
+     * 添加一个标记，只有在不存在标记时才会创建
+     */
+    function addMark(){
+        if(!marker){
+            log('创建了一个标记');
+            marker = new AMap.Marker({
+                icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+                position: [lon, lat],
+                draggable: true,
+                cursor: 'move',
+                raiseOnDrag: true
+            });
+            marker.setMap(map);
+        }
+    }
+
+    function clearMark(){
+        if(marker){
+            log('清除了标记')
+            marker.setMap(null);
+            marker = null;
+        }
+    }
+
+    function getMarkPosition(){
+        if(marker){
+            return marker.get('position');
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 打印函数
+     * @param str
+     */
+    function log(str){
+        console.log(str);
+    }
+
+    $(window).ready(function(){
+        $('#autoMark').click(function(){
+            clearMark();
+            addMark();
+        })
+
+        $('#clearMark').click(function(){
+            clearMark();
+        })
+    })
+</script>
+</body>
+</html>	

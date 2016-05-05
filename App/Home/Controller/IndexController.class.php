@@ -3,7 +3,11 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
-        $this->display('map');
+        $this->display('index');
 
+    }
+
+    public function map(){
+        $this->display('map');
     }
 }

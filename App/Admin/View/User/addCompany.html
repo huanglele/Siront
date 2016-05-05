@@ -71,44 +71,262 @@
                     <h3 class="box-title">企业信息</h3>
                 </div>
                 <div class="box-body">
-                    <!-- Color Picker -->
+                    <!--设置企业地址 -->
                     <div class="form-group">
-                        <label>Color picker:</label>
-                        <input type="text" class="form-control my-colorpicker1 colorpicker-element">
-                    </div><!-- /.form group -->
-
-                    <!-- Color Picker -->
-                    <div class="form-group">
-                        <label>Color picker with addon:</label>
-                        <div class="input-group my-colorpicker2 colorpicker-element">
-                            <input type="text" class="form-control">
+                        <label>设置企业地址</label>
+                        <div class="input-group">
                             <div class="input-group-addon">
-                                <i style="background-color: rgb(0, 0, 0);"></i>
+                                <i class="fa fa-map-marker"></i>
                             </div>
-                        </div><!-- /.input group -->
+                            <input type="text" class="form-control disabled" disabled="disabled">
+                            <input type="hidden" name="lon">
+                            <input type="hidden" name="lat">
+                            <div class="input-group-btn">
+                                <button role="button" class="btn btn-info" id="chooseMapBtn" >选择</button>
+                            </div>
+                        </div>
                     </div><!-- /.form group -->
 
-                    <!-- time Picker -->
-                    <div class="bootstrap-timepicker"><div class="bootstrap-timepicker-widget dropdown-menu"><table><tbody><tr><td><a href="#" data-action="incrementHour"><i class="glyphicon glyphicon-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="incrementMinute"><i class="glyphicon glyphicon-chevron-up"></i></a></td><td class="separator">&nbsp;</td><td class="meridian-column"><a href="#" data-action="toggleMeridian"><i class="glyphicon glyphicon-chevron-up"></i></a></td></tr><tr><td><span class="bootstrap-timepicker-hour">09</span></td> <td class="separator">:</td><td><span class="bootstrap-timepicker-minute">00</span></td> <td class="separator">&nbsp;</td><td><span class="bootstrap-timepicker-meridian">AM</span></td></tr><tr><td><a href="#" data-action="decrementHour"><i class="glyphicon glyphicon-chevron-down"></i></a></td><td class="separator"></td><td><a href="#" data-action="decrementMinute"><i class="glyphicon glyphicon-chevron-down"></i></a></td><td class="separator">&nbsp;</td><td><a href="#" data-action="toggleMeridian"><i class="glyphicon glyphicon-chevron-down"></i></a></td></tr></tbody></table></div>
-                        <div class="form-group">
-                            <label>Time picker:</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control timepicker">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-clock-o"></i>
-                                </div>
-                            </div><!-- /.input group -->
-                        </div><!-- /.form group -->
-                    </div>
+
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
 
         </div>
     </div>
 </section>
+
+<div id="chooseMapModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">设置位置</h4>
+                <input class="" type="text" id="tipinput">
+            </div>
+            <div class="modal-body">
+                <div class="mapBox">
+                    <div id="AMap"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="autoMark"  class="btn btn-info">自动定位</button>
+                <button id="clearMark" class="btn btn-default">重新标记</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                <button type="button" id="surePosition" class="btn btn-success">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+<script type="text/javascript"
+        src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&plugin=AMap.Autocomplete"></script>
+<style>
+    .mapBox{
+        position: relative;
+        height: 500px;
+    }
+    .mapBox #AMap{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .mapBox .AMap_tip{
+        position: relative;
+        margin: 20px auto;
+    }
+</style>
 <!-- Page script -->
 <script type="text/javascript">
+
+    function aMap(){
+        var lon = 116.397428;
+        var lat = 39.90923;
+        var marker = null;
+        var map = null;
+        var container = 'container';
+        this.setLon = function(lon){
+            lon = lon;
+        }
+        this.setLat = function(lat){
+            lat = lat;
+        }
+        this.setContainer = function(con){
+            container = con;
+        }
+
+        var auto = new AMap.Autocomplete({
+            input: "tipinput"
+        });
+
+        this.init = function(){
+            map = new AMap.Map(container, {
+                resizeEnable: true,
+                zoom: 13
+            });
+            //地图中添加地图操作ToolBar插件
+            map.plugin(['AMap.ToolBar'], function() {
+                //设置地位标记为自定义标记
+                var toolBar = new AMap.ToolBar();
+                map.addControl(toolBar);
+            });
+            map.on('click', function(e) { //为地图注册click事件获取鼠标点击出的经纬度坐标
+                if(!marker){
+                    lon = e.lnglat.getLng();
+                    lat = e.lnglat.getLat();
+                    addMark();
+                }
+            })
+
+            AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+            function select(e) {
+                if (e.poi && e.poi.location) {
+                    map.setZoom(15);
+                    map.setCenter(e.poi.location);
+                }
+            }
+        }
+
+        //使用浏览器定位
+        this.findPositionByBrowser = function(){
+            map.plugin('AMap.Geolocation', function() {
+                geolocation = new AMap.Geolocation({
+                    enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                    timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+                    buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                    zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+                    buttonPosition:'RB'
+                });
+                map.addControl(geolocation);
+                geolocation.getCurrentPosition();
+                AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+                AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+            });
+        }
+
+        this.addMark = function(){
+            addMark();
+        }
+
+        this.clearMark = function(){
+            clearMark();
+        }
+        this.getMarkPosition = function(){
+            return marker.get('position');
+        }
+
+        /**
+         * 添加一个标记，只有在不存在标记时才会创建
+         */
+        function addMark(){
+            if(!marker){
+                log('创建了一个标记');
+                marker = new AMap.Marker({
+                    icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+                    position: [lon, lat],
+                    draggable: true,
+                    cursor: 'move',
+                    raiseOnDrag: true
+                });
+                marker.setMap(map);
+            }
+        }
+
+        function clearMark(){
+            if(marker){
+                log('清除了标记')
+                marker.setMap(null);
+                marker = null;
+            }
+        }
+
+        //解析定位结果
+        function onComplete(data) {
+            log('定位成功');
+            lon = data.position.getLng();
+            lat = data.position.getLat();
+            addMark();
+        }
+        //解析定位错误信息
+        function onError(data) {
+            log('定位失败');
+        }
+
+
+        //获取用户所在城市信息
+        function showCityInfo() {
+            //实例化城市查询类
+            var citysearch = new AMap.CitySearch();
+            //自动获取用户IP，返回当前城市
+            citysearch.getLocalCity(function(status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    if (result && result.city && result.bounds) {
+                        var cityinfo = result.city;
+                        var citybounds = result.bounds;
+                        document.getElementById('tip').innerHTML = '您当前所在城市：'+cityinfo;
+                        //地图显示当前城市
+                        map.setBounds(citybounds);
+                    }
+                } else {
+                    document.getElementById('tip').innerHTML = result.info;
+                }
+            });
+        }
+
+        function log(str){
+            console.log(str);
+        }
+    }
+
+
     $(window).ready(function(){
         $("[data-mask]").inputmask();
+
+        //选择地图modal
+        $('#chooseMapBtn').click(function(){
+            $('#chooseMapModal').modal();
+            if(typeof map=='undefined'){
+                map = new aMap();
+                map.setContainer('AMap');
+                map.init();
+                map.findPositionByBrowser();
+                $('#autoMark').click(function(){
+                    map.clearMark();
+                    map.addMark();
+                })
+
+                $('#clearMark').click(function(){
+                    map.clearMark();
+                })
+            }else{
+                return;
+            }
+        })
+
+        //确定点位置
+        $('#surePosition').click(function(){
+            if(typeof map=='undefined'){
+                if(confirm('你还没有选择位置，确定离开？')){
+                    $('#chooseMapModal').modal('hiden');
+                }else{
+                    return ;
+                }
+            }else{
+                var position = map.getMarkPosition();
+                //获取位置信息
+                $('input[name="lon"]').val(position.A);
+                $('input[name="lat"]').val(position.F);
+                $('#chooseMapModal').modal('hiden');
+            }
+        })
+
+
+
+
     })
 </script>

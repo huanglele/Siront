@@ -1,35 +1,24 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <title>选择我的位置</title>
-    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
-    <script type="text/javascript"
-            src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&pl=AMap.Autocomplete"></script>
-
-    <script type="text/javascript" src="__PUBLIC__/js/jquery.min.js" ></script>
-    <style>
-        .mapBox{
-            position: relative;
-        }
-        .mapBox #AMap{
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .mapBox .AMap_tip{
-            position: relative;
-            margin: 20px auto;
-        }
-    </style>
-</head>
-<body>
+<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+<script type="text/javascript"
+        src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&pl=AMap.Autocomplete"></script>
+<style>
+    .mapBox{
+        position: relative;
+    }
+    .mapBox #AMap{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .mapBox .AMap_tip{
+        position: relative;
+        margin: 20px auto;
+    }
+</style>
 <div class="mapBox">
     <div id="AMap"></div>
     <div class="AMap_tip">
@@ -39,8 +28,6 @@
 </div>
 
 <script type="text/javascript">
-
-
     /**
      * 地图定位选取点
      * 1.新建一个地图
@@ -192,5 +179,3 @@
     })
 
 </script>
-</body>
-</html>	
