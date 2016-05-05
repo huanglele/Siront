@@ -328,7 +328,7 @@
                 //获取位置信息
                 $('input[name="lon"]').val(position.A);
                 $('input[name="lat"]').val(position.F);
-                $('input[name="place"]').val(getPlaceFormLonLat(position.A,position.F));
+                getPlaceFormLonLat(position.A,position.F);
                 $('#chooseMapModal').modal('hide');
             }
         })
@@ -342,7 +342,7 @@
     function geocoder_CallBack(data) {
         var address = data.regeocode.formattedAddress; //返回地址描述
         log(address);
-        return address
+        $('input[name="place"]').val(address);
     }
 
     function getPlaceFormLonLat(lon,lat){
@@ -352,7 +352,7 @@
         });
         geocoder.getAddress([lon,lat], function(status, result) {
             if (status === 'complete' && result.info === 'OK') {
-                return geocoder_CallBack(result);
+                geocoder_CallBack(result);
             }
         });
     }
