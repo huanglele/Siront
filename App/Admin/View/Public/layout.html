@@ -314,7 +314,7 @@
                         <i class="fa fa-th"></i> <span>用户管理</span> <small class="badge pull-right bg-green">new</small>
                     </a>
                 </li>-->
-                <li class="treeview  <eq name='controller' value='user'>active</eq> ">
+                <li class="treeview <eq name='controller' value='user'>active</eq> ">
                     <a href="#">
                         <i class="fa fa-bar-chart-o"></i>
                         <span>用户管理</span>
@@ -326,18 +326,15 @@
                         <li><a href="<{:U('user/company')}>"><i class="fa fa-angle-double-right"></i> 企业用户</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="treeview <eq name='controller' value='task'>active</eq> ">
                     <a href="#">
                         <i class="fa fa-laptop"></i>
-                        <span>UI Elements</span>
+                        <span>任务管理</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                        <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                        <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                        <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                        <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
+                        <li><a href="<{:U('task/index')}>"><i class="fa fa-angle-double-right"></i>所有任务</a></li>
+                        <li><a href="<{:U('task/category')}>"><i class="fa fa-angle-double-right"></i>管理分类</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

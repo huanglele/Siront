@@ -1,0 +1,85 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        任务管理
+        <small>任务分类</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="<{:U('index/index')}>"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">任务分类</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="mailbox row">
+        <div class="col-xs-12">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row pad">
+                                <div class="col-sm-6">
+                                    <!-- Action button -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm btn-flat dropdown-toggle" data-toggle="dropdown">
+                                            <{$CatStatus[$status]}> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <volist name="CatStatus" id="vo">
+                                                <li class="divider"></li>
+                                                <li><a href="<{:U('task/category')}>?status=<{$key}>"><{$vo}></a></li>
+                                            </volist>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button id="addCategoryBtn" role="button" class="btn btn-warning">添加分类</button>
+                                    </div>
+                                </div>
+                            </div><!-- /.row -->
+
+                            <div class="table-responsive">
+                                <!-- THE MESSAGES -->
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>名称</th>
+                                        <th>状态</th>
+                                        <th>删除</th>
+                                        <th>添加</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr>
+                                            <td><{$vo.id}></td>
+                                            <td><{$vo.name}></td>
+                                            <td><{$CatStatus[$vo['status']]}></td>
+                                            <td><a href="<{:U('task/delCat')}>?cid=<{$vo.id}>">删除</a></td>
+                                            <td><button type="button" class="btn btn-social" data-cid="<{$vo.id}>">添加</button></td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.table-responsive -->
+                        </div><!-- /.col (RIGHT) -->
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    <div class="pull-right">
+                        <div><{$page}></div>
+                    </div>
+                </div><!-- box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col (MAIN) -->
+    </div>
+</section>
+
+<include file="Task/addCategory" />
+<script>
+    $(window).ready(function(){
+        $('#addCategoryBtn').click(function(){
+            $('#addCategory').modal();
+        });
+    })
+</script>

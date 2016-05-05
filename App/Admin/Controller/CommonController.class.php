@@ -68,7 +68,7 @@ class CommonController extends Controller
         }else{
             layout(false);
             C('SHOW_PAGE_TRACE',false);
-            $this->display('Public/login');
+            $this->display('Public/login');die;
         }
     }
 
