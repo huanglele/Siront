@@ -335,9 +335,14 @@
 
     })
 
+    function log(str){
+        console.log(str);
+    }
 
     function geocoder_CallBack(data) {
-        return address = data.regeocode.formattedAddress; //返回地址描述
+        var address = data.regeocode.formattedAddress; //返回地址描述
+        log(address);
+        return address
     }
 
     function getPlaceFormLonLat(lon,lat){
@@ -347,7 +352,7 @@
         });
         geocoder.getAddress([lon,lat], function(status, result) {
             if (status === 'complete' && result.info === 'OK') {
-                geocoder_CallBack(result);
+                return geocoder_CallBack(result);
             }
         });
     }
