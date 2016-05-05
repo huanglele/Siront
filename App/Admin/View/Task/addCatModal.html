@@ -1,19 +1,25 @@
-<div id="addCategory" class="modal fade">
+<div id="addCategoryModal" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">添加分类</h4>
+                <h4 class="modal-title">添加分类/<small><{$title}></small></h4>
             </div>
             <div class="modal-body">
                 <form id="addCatForm" action="<{:U('task/addCat')}>" method="post">
-                    <input name="id" value="0" type="hidden">
+                    <input name="cid" value="<{$cid}>" type="hidden">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-th-list"></i>
                             </div>
                             <input type="text" name="names[]" class="form-control">
+                            <div class="input-group-addon">
+                                <select class="" name="status[]">
+                                    <option value="1">启用</option>
+                                    <option value="0">不启用</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -29,7 +35,7 @@
 
 <script>
     $('#addOneCatGroup').click(function(){
-        var html = '<div class="form-group"><div class="input-group"> <div class="input-group-addon"> <i class="fa fa-th-list"></i> </div> <input type="text" name="names[]" class="form-control"> </div></div>';
+        var html = '<div class="form-group"> <div class="input-group"> <div class="input-group-addon"> <i class="fa fa-th-list"></i> </div> <input type="text" name="names[]" class="form-control">  <div class="input-group-addon"> <select name="status[]"> <option value="1">启用</option> <option value="0">不启用</option> </select> </div></div> </div>';
         $('#addCatForm').append(html);
     })
     $('#CatFormSubBtn').click(function(){

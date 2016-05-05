@@ -2,11 +2,12 @@
 <section class="content-header">
     <h1>
         任务管理
-        <small>任务分类</small>
+        <small><a href="<{:U('task/category')}>">任务分类</a></small><small>/<{$title}></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="<{:U('index/index')}>"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">任务分类</li>
+        <li class="active"><a href="<{:U('task/category')}>">任务分类</a></li>
+        <li class="active"><{$title}></li>
     </ol>
 </section>
 
@@ -27,7 +28,7 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <volist name="CatStatus" id="vo">
                                                 <li class="divider"></li>
-                                                <li><a href="<{:U('task/category')}>?status=<{$key}>"><{$vo}></a></li>
+                                                <li><a href="<{:U('task/showCat')}>?cid=<{$cid}>&status=<{$key}>"><{$vo}></a></li>
                                             </volist>
                                         </ul>
                                     </div>
@@ -56,8 +57,7 @@
                                             <td><{$CatStatus[$vo['status']]}></td>
                                             <td>
                                                 <a class="btn btn-sm btn-danger delLink"  href="<{:U('task/delCat')}>?id=<{$vo.id}>">删除</a>
-                                                <a class="btn btn-sm btn-primary"  href="<{:U('task/showCat')}>?cid=<{$vo.id}>">查看</a>
-                                                <button type="button" class="btn btn-sm btn-warning updateCatBtns" data-id="<{$vo.id}>" data-title="<{$vo.name}>" data-status="<{$vo.status}>">修改</button>
+                                                <button type="button" class="btn btn-sm btn-warning updateCatBtns"  data-status="<{$vo.status}>" data-title="<{$vo.name}>" data-id="<{$vo.id}>">修改</button>
                                             </td>
                                         </tr>
                                     </volist>

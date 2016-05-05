@@ -137,6 +137,7 @@ class UserController extends CommonController
         if(isset($_POST['submit'])){
 
         }else{
+            $this->assign('includeFiles','Task/addCatModal,Task/updateCatModal');
             $this->display('addCompany');
         }
     }

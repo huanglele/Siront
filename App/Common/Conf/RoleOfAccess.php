@@ -20,5 +20,6 @@ return array(
 
     /*任务管理部分*/
     //'task.index' => array(),      //显示所有的任务
+    //'task.addcat' => array(),     //添加分类
 
 );
