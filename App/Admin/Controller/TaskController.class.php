@@ -158,7 +158,6 @@ class TaskController extends CommonController
         }
         S('CatMap',$menu);
         S('CatName',$name);
-        var_dump($menu);
     }
 
     public function delEmptyCat(){
