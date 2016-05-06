@@ -32,6 +32,8 @@ class TaskController extends CommonController
         $this->assign('status',$status);
         $map['cid'] = 0;
         $this->getData(M('category'),$map,'cid desc');
+        $nums = M('category')->where(array('cid' => array('neq',0)))->group('cid')->getField('cid,count(`id`) as num');
+        $this->assign('nums',$nums);
         $this->assign('CatStatus',C('CategoryStatus'));
         $this->assign('title','一级分类');
         $this->assign('cid',0);
@@ -83,6 +85,7 @@ class TaskController extends CommonController
                 }
             }
             if(M('category')->addAll($allDate)){
+                $this->updateCacheCategory();
                 $this->success('添加成功',U('task/category'));
             }else{
                 $this->error('添加失败',U('task/category'));
@@ -96,6 +99,7 @@ class TaskController extends CommonController
     public function updateCat(){
         if(isset($_POST)){
             if(M('category')->save($_POST)){
+                $this->updateCacheCategory();
                 $this->success('更新成功');
             }else{
                 $this->error('更新失败');
@@ -119,6 +123,7 @@ class TaskController extends CommonController
                 $this->error('请先删除该分类下的二级分类');
             }else{
                 $M->delete($id);
+                $this->updateCacheCategory();
                 $this->success('删除成功');
             }
         }else{  //二级标题
@@ -127,9 +132,37 @@ class TaskController extends CommonController
                 $this->error('已存在任务不可删除');
             }else{
                 $M->delete($id);
+                $this->updateCacheCategory();
                 $this->success('删除成功');
             }
         }
     }
 
+    /**
+     *更新分类缓存信息
+     */
+    public function updateCacheCategory(){
+        $list = M('category')->select();
+        if(!$list) $list = array();
+        $menu = array();
+        $name = array();
+        foreach($list as $v){
+            $menu[$v['cid']][$v['id']] = $v;
+            $name[$v['id']] = $v['name'];
+        }
+        //防止一级目录下没有二级子目录为空
+        foreach($menu['0'] as $v){
+            if(!array_key_exists($v['id'],$menu)){
+                $menu[$v['id']] = array();
+            }
+        }
+        S('CatMap',$menu);
+        S('CatName',$name);
+        var_dump($menu);
+    }
+
+    public function delEmptyCat(){
+        $map['name'] = '';
+        M('category')->where($map)->delete();
+    }
 }

@@ -3408,3 +3408,21 @@ fieldset[disabled] .btn-vk.active {
 .dropdown-menu{
   min-width: 100%;
 }
+.con-disabled{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1010;
+  background: rgba(255, 255, 255, 0.7);
+}
+.con-disabled-img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1020;
+  background: transparent url('../img/con-disabled.png') 50% 50% no-repeat;
+}

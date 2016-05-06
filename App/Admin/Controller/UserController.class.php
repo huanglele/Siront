@@ -135,9 +135,13 @@ class UserController extends CommonController
      */
     public function addCompany(){
         if(isset($_POST['submit'])){
-
+            var_dump($_POST);
         }else{
-            $this->assign('includeFiles','Task/addCatModal,Task/updateCatModal');
+            $catMenu = S('CatMap');
+            $this->assign('catMenuF',$catMenu['0']);
+            unset($catMenu['0']);
+            $this->assign('catMenuS',$catMenu);
+            $this->assign('includeFiles','User/chooseMapModal');
             $this->display('addCompany');
         }
     }

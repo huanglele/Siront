@@ -44,6 +44,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>名称</th>
+                                        <th>子类</th>
                                         <th>状态</th>
                                         <th>操作</th>
                                     </tr>
@@ -53,6 +54,7 @@
                                         <tr>
                                             <td><{$vo.id}></td>
                                             <td><{$vo.name}></td>
+                                            <td><{$nums[$vo['id']]|default=0}></td>
                                             <td><{$CatStatus[$vo['status']]}></td>
                                             <td>
                                                 <a class="btn btn-sm btn-danger delLink"  href="<{:U('task/delCat')}>?id=<{$vo.id}>">删除</a>

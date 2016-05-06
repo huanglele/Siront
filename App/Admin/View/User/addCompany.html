@@ -19,166 +19,178 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
-            <div class="box box-danger">
-                <div class="box-header">
-                    <h3 class="box-title">基本信息</h3>
-                </div>
-                <div class="box-body">
-                    <div class="form-group">
-                        <label>手机号</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-mobile-phone"></i>
+            <div>
+                <!--添加企业用户表单-->
+                <form action="<{:U('user/addCompany')}>" method="post" enctype="multipart/form-data" >
+                    <!--表单导航信息-->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#infoForm" aria-controls="infoForm" role="tab" data-toggle="tab">基本信息</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#companyForm" aria-controls="companyForm" role="tab" data-toggle="tab">企业信息</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#catForm" aria-controls="catForm" role="tab" data-toggle="tab">行业信息</a>
+                        </li>
+                        <li class="pull-right">
+                            <button name="submit" type="submit" class="btn btn-danger">提交</button>
+                        </li>
+                    </ul>
+                    <!--表单信息-->
+                    <div class="tab-content">
+                        <!--基本信息-->
+                        <div  role="tabpanel" id="infoForm" class="active tab-pane box box-danger">
+                            <div class="box-header">
+                                <h3 class="box-title">基本信息</h3>
                             </div>
-                            <input type="text" name="phone" data-inputmask="'mask': ['999-9999-9999', '+099 99 99 9999[9]-9999'], 'greedy' : false" class="form-control"  data-mask="">
-                            <div class="input-group-addon">
-                                <i class="fa bg-red fa-asterisk"></i>
-                            </div>
-                        </div><!-- /.input group -->
-                    </div><!-- /.form group -->
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label>手机号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-mobile-phone"></i>
+                                        </div>
+                                        <input type="text" name="phone" data-inputmask="'mask': ['999-9999-9999', '+099 99 99 9999[9]-9999'], 'greedy' : false" class="form-control"  data-mask="">
+                                        <div class="input-group-addon">
+                                            <i class="fa bg-red fa-asterisk"></i>
+                                        </div>
+                                    </div><!-- /.input group -->
+                                </div><!-- /.form group -->
 
-                    <div class="form-group">
-                        <label>昵称</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <input type="text" name="nickname" class="form-control" data-inputmask="'mask':'9', 'repeat': 10, 'greedy': false" data-mask="">
-                            <div class="input-group-addon">
-                                <i class="fa bg-red fa-asterisk"></i>
-                            </div>
-                        </div><!-- /.input group -->
-                    </div><!-- /.form group -->
+                                <div class="form-group">
+                                    <label>昵称</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" name="nickname" class="form-control" data-inputmask="'mask':'9', 'repeat': 10, 'greedy': false" data-mask="">
+                                        <div class="input-group-addon">
+                                            <i class="fa bg-red fa-asterisk"></i>
+                                        </div>
+                                    </div><!-- /.input group -->
+                                </div><!-- /.form group -->
 
-                    <div class="form-group">
-                        <label>密码</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-dot-circle-o"></i>
-                            </div>
-                            <input type="text" name="password" class="form-control" >
-                            <div class="input-group-addon">
-                                <i class="fa bg-red fa-asterisk"></i>
-                            </div>
-                        </div><!-- /.input group -->
-                    </div><!-- /.form group -->
+                                <div class="form-group">
+                                    <label>密码</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-dot-circle-o"></i>
+                                        </div>
+                                        <input type="text" name="password" class="form-control" >
+                                        <div class="input-group-addon">
+                                            <i class="fa bg-red fa-asterisk"></i>
+                                        </div>
+                                    </div><!-- /.input group -->
+                                </div><!-- /.form group -->
 
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
 
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">企业信息</h3>
-                </div>
-                <div class="box-body">
+                        <!--企业信息-->
+                        <div  role="tabpanel" id="companyForm"  class="tab-pane box box-info">
+                            <div class="box-header">
+                                <h3 class="box-title">企业信息</h3>
+                            </div>
+                            <div class="box-body">
 
-                    <!--设置企业地址 -->
-                    <div class="form-group">
-                        <label>设置企业地址</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-map-marker"></i>
-                            </div>
-                            <input type="text" name="place" class="form-control" >
-                            <input type="hidden" name="lon">
-                            <input type="hidden" name="lat">
-                            <div class="input-group-btn">
-                                <button role="button" class="btn btn-info" id="chooseMapBtn" >选择</button>
-                            </div>
-                        </div>
-                    </div><!-- /.form group -->
+                                <!--设置企业地址 -->
+                                <div class="form-group">
+                                    <label>设置企业地址</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <input type="text" name="place" class="form-control" >
+                                        <input type="hidden" name="lon">
+                                        <input type="hidden" name="lat">
+                                        <div class="input-group-btn">
+                                            <button role="button" class="btn btn-info" id="chooseMapBtn" >选择</button>
+                                        </div>
+                                    </div>
+                                </div><!-- /.form group -->
 
-                    <!--公司联系方式-->
-                    <div class="form-group">
-                        <label>公司联系方式</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-phone"></i>
+                                <!--公司联系方式-->
+                                <div class="form-group">
+                                    <label>公司联系方式</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <input type="text" name="tel" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>法人身份证</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-credit-card"></i>
+                                        </div>
+                                        <input type="file" name="sfz" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>企业营业执照</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-picture-o"></i>
+                                        </div>
+                                        <input type="file" name="license" class="form-control">
+                                    </div>
+                                </div>
+
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+
+                        <!--行业信息-->
+                        <div  role="tabpanel" id="catForm"  class="tab-pane box box-primary">
+                            <div class="box-header">
+                                <h3>选择行业</h3>
                             </div>
-                            <input type="text" name="tel" class="form-control">
+                            <div class="box-body">
+                                <div>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <volist name="catMenuF" id="v">
+                                            <li role="presentation"><a href="#catmenu<{$v.id}>" disabled title="nihoa" aria-controls="catmenu<{$v.id}>" role="tab" data-toggle="tab"><{$v.name}></a></li>
+                                        </volist>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <volist name="catMenuS" id="vo">
+                                            <div role="tabpanel" style="position: relative;" class="tab-pane row" id="catmenu<{$key}>" <eq name="catMenuF[$key]['status']" value="0">title='该分类未启用'</eq>>
+                                            <eq name="catMenuF[$key]['status']" value="0">
+                                                <div class="con-disabled"></div>
+                                                <div class="con-disabled-img"></div>
+                                            </eq>
+                                                <volist name="vo" id="v">
+                                                    <div class="col-sm-4">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" <eq name="v.status" value="0">disabled alt='未启用'</eq>  name="tags[]" value="<{$v.id}>" class=""/>
+                                                                <{$v.name}>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                </volist>
+                                            </div>
+                                        </volist>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label>法人身份证</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-credit-card"></i>
-                            </div>
-                            <input type="file" name="sfz" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>企业营业执照</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-picture-o"></i>
-                            </div>
-                            <input type="file" name="license" class="form-control">
-                        </div>
-                    </div>
-
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                </form>
+            </div>
 
         </div>
     </div>
 </section>
 
-<div id="chooseMapModal" class="modal fade">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">设置位置</h4>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-search"></i>
-                    </div>
-                    <input class="inline-block form-control" type="text" id="tipinput">
-                </div>
-                <div class="mapBox">
-                    <div id="AMap"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="autoMark"  class="btn btn-info">自动定位</button>
-                <button id="clearMark" class="btn btn-default">重新标记</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
-                <button type="button" id="surePosition" class="btn btn-success">确定</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
-<script type="text/javascript"
-        src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&plugin=AMap.Autocomplete,AMap.Geocoder"></script>
-<style>
-    .mapBox{
-        position: relative;
-        height: 500px;
-    }
-    .mapBox #AMap{
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-    }
-    .mapBox .AMap_tip{
-        position: relative;
-        margin: 20px auto;
-    }
-    .amap-sug-result{
-        z-index: 999999;
-    }
-</style>
 <!-- Page script -->
 <script type="text/javascript">
 
@@ -321,7 +333,6 @@
         }
     }
 
-
     $(window).ready(function(){
         $("[data-mask]").inputmask();
 
@@ -360,7 +371,7 @@
                 log('执行了隐藏');
                 var position = map.getMarkPosition();
                 //获取位置信息
-                $('input[name="lon"]').val(position.A);
+                $('input[name="lon"]').val(position.);
                 $('input[name="lat"]').val(position.F);
                 getPlaceFormLonLat(position.A,position.F);
             }
@@ -385,6 +396,7 @@
             }
         })
 
+
     })
 
     function log(str){
@@ -408,5 +420,23 @@
             }
         });
     }
+
+    $(function(){
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal',
+            radioClass: 'iradio_minimal'
+        });
+        //Red color scheme for iCheck
+        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red'
+        });
+        //Flat red color scheme for iCheck
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red'
+        });
+    })
 
 </script>
