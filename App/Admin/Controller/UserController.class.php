@@ -12,6 +12,16 @@ namespace Admin\Controller;
 class UserController extends CommonController
 {
 
+    public function _initialize(){
+        parent::_initialize();
+        $userStatusColor =array(
+            '1' => 'bg-yellow',
+            '2' => 'bg-green',
+            '3' => 'bg-navy',
+        );
+        $this->assign('UserStatusColor',$userStatusColor);
+    }
+
     public function index(){
         $this->user();
     }
@@ -20,13 +30,6 @@ class UserController extends CommonController
      * 处理搜索
      */
     private function searchToMap(){
-        $userStatusColor =array(
-            '1' => 'bg-yellow',
-            '2' => 'bg-green',
-            '3' => 'bg-navy',
-        );
-        $this->assign('UserStatusColor',$userStatusColor);
-
         $map = array();
         $type = I('get.searchType');
         $q = I('get.q');
@@ -118,6 +121,10 @@ class UserController extends CommonController
     public function userInfo(){
         $info = $this->getInfo();
 
+        $this->assign('UserStatus',C('UserStatus'));
+        $this->assign('PersonStatus',C('PersonStatus'));
+        $this->assign('CompanyStatus',C('CompanyStatus'));
+
         $this->assign('info',$info);
         $this->display('userInfo');
     }
@@ -144,5 +151,49 @@ class UserController extends CommonController
             $this->assign('includeFiles','User/chooseMapModal');
             $this->display('addCompany');
         }
+    }
+
+    /**
+     * 更新用户的状态
+     */
+    public function updateUserStatus(){
+        if(isset($_POST['submit'])){
+            $uid = I('post.uid');
+            $user_status = I('post.user_status',null,'number_int');
+            $person_status = I('post.person_status',null,'number_int');
+            $company_status = I('post.company_status',null,'number_int');
+            $map['uid'] = $uid;
+            $data = array();
+            if($user_status){
+                $data['user_status'] = $user_status;
+            }
+            if($person_status){
+                $data['person_status'] = $person_status;
+            }
+            if($company_status){
+                $data['company_status'] = $company_status;
+            }
+            if(count($data)){
+                M('user')->where($map)->save($data);
+            }
+            if($person_status){
+                M('person_info')->where($map)->save('status',$person_status);
+            }
+            if($company_status){
+                M('company_info')->where($map)->setField('status',$company_status);
+            }
+            $this->success('更新成功');
+        }else{
+            $this->error('页面不存在');
+        }
+    }
+
+    /**
+     * 开通一个个体户
+     */
+    public function openPerson(){
+        $uid = I('get.uid');
+        $info = $this->getInfo($uid);
+
     }
 }

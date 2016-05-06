@@ -21,4 +21,7 @@ return array(
     'MODULE_ALLOW_LIST'    =>    array('Home','Admin'),
     'DEFAULT_MODULE'       =>    'Home',
 
+    //设置session的方式
+    'SESSION_TYPE'=>'File',
+
 );

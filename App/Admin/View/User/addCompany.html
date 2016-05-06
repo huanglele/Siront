@@ -161,11 +161,11 @@
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <volist name="catMenuS" id="vo">
-                                            <div role="tabpanel" style="position: relative;" class="tab-pane row" id="catmenu<{$key}>" <eq name="catMenuF[$key]['status']" value="0">title='该分类未启用'</eq>>
-                                            <eq name="catMenuF[$key]['status']" value="0">
-                                                <div class="con-disabled"></div>
-                                                <div class="con-disabled-img"></div>
-                                            </eq>
+                                            <div role="tabpanel" style="position: relative;" class="tab-pane row" id="catmenu<{$key}>" >
+                                                <eq name="catMenuF[$key]['status']" value="0">
+                                                    <div class="con-disabled"></div>
+                                                    <div class="con-disabled-img"></div>
+                                                </eq>
                                                 <volist name="vo" id="v">
                                                     <div class="col-sm-4">
                                                         <div class="checkbox">
@@ -175,7 +175,6 @@
                                                             </label>
                                                         </div>
                                                     </div>
-
                                                 </volist>
                                             </div>
                                         </volist>

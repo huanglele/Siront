@@ -2,15 +2,195 @@
 <section class="content-header">
     <h1>
         用户管理
-        <small>个体户</small>
+        <small>用户详情</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="<{:U('index/index')}>"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li><a href="<{:U('user/user')}>">个体户</a></li>
+        <li><a href="<{:U('user/user')}>">用户</a></li>
         <li class="active"><{$info.nickname}></li>
     </ol>
 </section>
 
 <section class="content">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3>用户详情<small>/<{$info.nickname}></small></h3>
+                </div>
+                <div class="box-body">
+                    <!--不可变更基本信息-->
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <label>手机号</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-mobile-phone"></i>
+                                    </div>
+                                    <input type="text" disabled value="<{$info.phone}>" class="form-control">
+                                </div><!-- /.input group -->
+                            </div><!-- /.form group -->
 
+                            <div class="form-group">
+                                <label>注册时间</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" value="<{$info.create_time|myDate}>" class="form-control" disabled>
+                                </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+
+
+                            <div class="form-group">
+                                <label>昵称</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" value="<{$info.nickname}>" class="form-control" disabled>
+                                </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="img">
+                                <img height="200px" src="<{$info.headimgurl|headImgUrl}>" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--余额、积分-->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>余额</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-rmb"></i>
+                                    </div>
+                                    <input type="text" value="<{$info.money}>" class="form-control" disabled>
+                                </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>积分</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-circle-o"></i>
+                                    </div>
+                                    <input type="text" value="<{$info.coin}>" class="form-control" disabled>
+                                </div><!-- /.input group -->
+                            </div><!-- /.form group -->
+                        </div>
+                    </div>
+
+                    <!--用户的其他角色状态-->
+                    <div class="row">
+                        <form action="<{:U('user/updateUserStatus')}>" method="post">
+                            <!--用户角色-->
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">用户状态</span>
+                                        <select name="user_status" class="form-control">
+                                            <volist name="UserStatus" id="v">
+                                                <gt name="key" value="0">
+                                                    <option value="<{$key}>"><{$v}></option>
+                                                </gt>
+                                            </volist>
+                                        </select>
+                                    <span class="input-group-addon">
+                                        <small class="badge <{$UserStatusColor[$info['user_status']]}>"><{$UserStatus[$info['user_status']]}></small>
+                                    </span>
+                                    </div><!-- /.input group -->
+                                </div><!-- /.form group -->
+                            </div>
+                            <!--个体户角色-->
+                            <div class="col-sm-3">
+                                <gt name="info.person_status" value="0">
+                                    <!--是个体户-->
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">用户状态</span>
+                                            <select name="person_status" class="form-control">
+                                                <volist name="PersonStatus" id="v">
+                                                    <gt name="key" value="0">
+                                                        <option value="<{$key}>"><{$v}></option>
+                                                    </gt>
+                                                </volist>
+                                            </select>
+                                    <span class="input-group-addon">
+                                        <small class="badge <{$UserStatusColor[$info['person_status']]}>"><{$PersonStatus[$info['person_status']]}></small>
+                                    </span>
+                                        </div><!-- /.input group -->
+                                    </div><!-- /.form group -->
+                                    <else />
+                                    <!--不是个体户-->
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">用户状态</span>
+                                            <input class="form-control disabled" disabled value="非个体户">
+                                        <span class="input-group-addon">
+                                            <small class="badge bg-yellow">
+                                                <a href="<{:U('user/openPerson')}>?uid=<{$info.uid}>">开通</a>
+                                            </small>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </gt>
+                            </div>
+                            <!--企业角色-->
+                            <div class="col-sm-3">
+                                <gt name="info.company_status" value="0">
+                                    <!--是个体户-->
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">企业状态</span>
+                                            <select name="company_status" class="form-control">
+                                                <volist name="CompanyStatus" id="v">
+                                                    <gt name="key" value="0">
+                                                        <option value="<{$key}>"><{$v}></option>
+                                                    </gt>
+                                                </volist>
+                                            </select>
+                                        <span class="input-group-addon">
+                                            <small class="badge <{$UserStatusColor[$info['company_status']]}>"><{$CompanyStatus[$info['company_status']]}></small>
+                                        </span>
+                                        </div><!-- /.input group -->
+                                    </div><!-- /.form group -->
+                                    <else />
+                                    <!--不是个体户-->
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">用户状态</span>
+                                            <input class="form-control disabled" disabled value="非企业用户">
+                                            <span class="input-group-addon">
+                                                <small class="badge bg-yellow">
+                                                    <a href="<{:U('user/openCompany')}>?uid=<{$info.uid}>">开通</a>
+                                                </small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </gt>
+                            </div>
+                            <div class="col-sm-3">
+                                <input name="uid" value="<{$info.uid}>" type="hidden">
+                                <button role="button" name="submit" class="btn btn-danger" type="submit">更新</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+<script>
+    $(window).ready(function(){
+        $('select[name="user_status"]').val('<{$info.user_status}>');
+        <gt name='info.person_status' value='0'> $('select[name="person_status"]').val('<{$info.person_status}>')</gt>;
+        <gt name='info.company_status' value='0'> $('select[name="company_status"]').val('<{$info.company_status}>')</gt>;
+    })
+</script>
