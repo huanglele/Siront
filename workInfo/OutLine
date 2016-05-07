@@ -3,6 +3,9 @@
     administrator
     Xycadmin357890
 
+公共变量说
+    telCode     发送的短信验证码
+
 缓存数据说明
  S缓存
     CatMap     分类二级数组
@@ -13,7 +16,7 @@
     headImgUrl  返回一个图片的url
     myDate      将timestamp转换成date(Y-m-d H:i:s)格式
 
-后台
+后台（Admin）
     Common  基础公共类
         |- _initialize  判断登录
         |- login    登录
@@ -32,5 +35,16 @@
         |- updateUserStatus 更新用户的信息
 
 
-手机前台
+用户手机端(Mobile)
+    Index
+        |- login    登录
+        |- reg      注册
+        |- index    发布任务界面
+
+微信端
+
+
+移动端接口
+
+用户电脑端？
 
