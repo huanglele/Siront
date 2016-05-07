@@ -15,6 +15,7 @@ class UserController extends CommonController
     public function _initialize(){
         parent::_initialize();
         $userStatusColor =array(
+            '0' => '',
             '1' => 'bg-yellow',
             '2' => 'bg-green',
             '3' => 'bg-navy',
@@ -116,7 +117,7 @@ class UserController extends CommonController
     }
 
     /**
-     *
+     *普通用户
      */
     public function userInfo(){
         $info = $this->getInfo();
@@ -130,10 +131,19 @@ class UserController extends CommonController
     }
 
     /**
+     * 查看一个个体户
+     */
+    public function personInfo(){
+        $info = $this->getInfo();
+    }
+
+    /**
      * 获取用户基本信息
      */
-    public function getInfo(){
-        $uid = I('get.uid',0,'number_int');
+    private function getInfo($uid = false){
+        if(false==$uid){
+            $uid = I('get.uid',0,'number_int');
+        }
         return M('user')->find($uid);
     }
 
@@ -164,23 +174,19 @@ class UserController extends CommonController
             $company_status = I('post.company_status',null,'number_int');
             $map['uid'] = $uid;
             $data = array();
-            if($user_status){
+            if(!is_null($user_status)){
                 $data['user_status'] = $user_status;
             }
-            if($person_status){
+            if(!is_null($person_status)){
                 $data['person_status'] = $person_status;
+                $this->updatePersonStatus($uid,$person_status);
             }
-            if($company_status){
+            if(!is_null($company_status)){
                 $data['company_status'] = $company_status;
+                $this->updateCompanyStatus($uid,$company_status);
             }
             if(count($data)){
                 M('user')->where($map)->save($data);
-            }
-            if($person_status){
-                M('person_info')->where($map)->save('status',$person_status);
-            }
-            if($company_status){
-                M('company_info')->where($map)->setField('status',$company_status);
             }
             $this->success('更新成功');
         }else{
@@ -189,11 +195,52 @@ class UserController extends CommonController
     }
 
     /**
-     * 开通一个个体户
+     * 更新个体户的状态
+     * 如果之前不是个体户则新增一个个体户
      */
-    public function openPerson(){
-        $uid = I('get.uid');
-        $info = $this->getInfo($uid);
-
+    private function updatePersonStatus($uid,$s){
+        $map['uid'] = $uid;
+        $Per = M('person_info');
+        $personInfo = $Per->find($uid);
+        //判断用户状态
+        if($s==0 && is_null($personInfo)){  //更新为非个体户且不来就不存在个体户
+            //什么都不做就好
+        }elseif($s==0 && !is_null($personInfo)){ //更新为非个体户，但是之前是个体户
+            $Per->where($map)->setField('status',$s);
+        }elseif($s>0 && is_null($personInfo)){  //第一次创建个体户
+            $data['uid'] = $uid;
+            $data['lon'] = $data['lat'] = $data['score'] = 0;
+            $data['cid'] = $data['phone'] = $data['sfzurl'] = '';
+            $data['status'] = $s;
+            $Per->save($data);
+        }elseif($s>0 && !is_null($personInfo)){ //已经存在个体户，现在更新状态
+            $Per->where($map)->setField('status',$s);
+        }
     }
+
+    /**
+     * 更新一个企业用户的信息
+     * 如果没有则创建一个企业用户
+     */
+    private function updateCompanyStatus($uid,$s){
+        $map['uid'] = $uid;
+        $Company = M('company_info');
+        $companyInfo = $Company->find($uid);
+        //判断用户状态
+        if($s==0 && is_null($companyInfo)){  //更新为非企业用户且不来就不存在企业用户
+            //什么都不做就好
+        }elseif($s==0 && !is_null($companyInfo)){ //更新为非企业用户，但是之前是企业用户
+            $Company->where($map)->setField('status',$s);
+        }elseif($s>0 && is_null($companyInfo)){  //第一次创建企业用户
+            $data['uid'] = $uid;
+            $data['lon'] = $data['lat'] = $data['score'] = 0;
+            $data['cid'] = $data['phone'] = $data['sfzurl'] = '';
+            $data['status'] = $s;
+            $Company->save($data);
+        }elseif($s>0 && !is_null($companyInfo)){ //已经存在企业用户，现在更新状态
+            $Company->where($map)->setField('status',$s);
+        }
+    }
+
+
 }

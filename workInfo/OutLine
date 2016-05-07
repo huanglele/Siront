@@ -30,5 +30,7 @@
         |- companyInfo  显示一个企业的具体信息
         |- addCompany   添加一个企业用户
         |- updateUserStatus 更新用户的信息
-        |- openCompany   创建一个企业账户
-        |- openPerson    创建一个个体户
+
+
+手机前台
+

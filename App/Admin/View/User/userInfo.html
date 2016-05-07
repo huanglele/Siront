@@ -93,7 +93,10 @@
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <span class="input-group-addon">用户状态</span>
+                                        <span class="input-group-addon">
+                                            <small class="badge bg-aqua">客</small>
+                                            <small class="badge <{$UserStatusColor[$info['user_status']]}>"><{$UserStatus[$info['user_status']]}></small>
+                                        </span>
                                         <select name="user_status" class="form-control">
                                             <volist name="UserStatus" id="v">
                                                 <gt name="key" value="0">
@@ -101,80 +104,60 @@
                                                 </gt>
                                             </volist>
                                         </select>
-                                    <span class="input-group-addon">
-                                        <small class="badge <{$UserStatusColor[$info['user_status']]}>"><{$UserStatus[$info['user_status']]}></small>
-                                    </span>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-ban"></i>
+                                        </span>
                                     </div><!-- /.input group -->
                                 </div><!-- /.form group -->
                             </div>
                             <!--个体户角色-->
                             <div class="col-sm-3">
-                                <gt name="info.person_status" value="0">
-                                    <!--是个体户-->
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">用户状态</span>
-                                            <select name="person_status" class="form-control">
-                                                <volist name="PersonStatus" id="v">
-                                                    <gt name="key" value="0">
-                                                        <option value="<{$key}>"><{$v}></option>
-                                                    </gt>
-                                                </volist>
-                                            </select>
-                                    <span class="input-group-addon">
-                                        <small class="badge <{$UserStatusColor[$info['person_status']]}>"><{$PersonStatus[$info['person_status']]}></small>
-                                    </span>
-                                        </div><!-- /.input group -->
-                                    </div><!-- /.form group -->
-                                    <else />
-                                    <!--不是个体户-->
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">用户状态</span>
-                                            <input class="form-control disabled" disabled value="非个体户">
+                                <div class="form-group">
+                                    <div class="input-group">
                                         <span class="input-group-addon">
-                                            <small class="badge bg-yellow">
-                                                <a href="<{:U('user/openPerson')}>?uid=<{$info.uid}>">开通</a>
-                                            </small>
+                                            <small class="badge bg-blue">工</small>
+                                            <small class="badge <{$UserStatusColor[$info['person_status']]}>"><{$PersonStatus[$info['person_status']]}></small>
                                         </span>
-                                        </div>
-                                    </div>
-                                </gt>
+                                        <select name="person_status" class="form-control">
+                                            <volist name="PersonStatus" id="v">
+                                                <option value="<{$key}>"><{$v}></option>
+                                            </volist>
+                                        </select>
+                                        <span class="input-group-addon">
+                                            <gt name="info.person_status" value="0">
+                                                <a href="<{:U('user/personInfo')}>?uid=<{$info.uid}>" >查看</a>
+                                                <else />
+                                                <i class="fa fa-ban"></i>
+                                            </gt>
+                                        </span>
+                                    </div><!-- /.input group -->
+                                </div><!-- /.form group -->
                             </div>
+
                             <!--企业角色-->
                             <div class="col-sm-3">
-                                <gt name="info.company_status" value="0">
-                                    <!--是个体户-->
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">企业状态</span>
-                                            <select name="company_status" class="form-control">
-                                                <volist name="CompanyStatus" id="v">
-                                                    <gt name="key" value="0">
-                                                        <option value="<{$key}>"><{$v}></option>
-                                                    </gt>
-                                                </volist>
-                                            </select>
+                                <div class="form-group">
+                                    <div class="input-group">
                                         <span class="input-group-addon">
+                                            <small class="badge bg-purple">企</small>
                                             <small class="badge <{$UserStatusColor[$info['company_status']]}>"><{$CompanyStatus[$info['company_status']]}></small>
                                         </span>
-                                        </div><!-- /.input group -->
-                                    </div><!-- /.form group -->
-                                    <else />
-                                    <!--不是个体户-->
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">用户状态</span>
-                                            <input class="form-control disabled" disabled value="非企业用户">
-                                            <span class="input-group-addon">
-                                                <small class="badge bg-yellow">
-                                                    <a href="<{:U('user/openCompany')}>?uid=<{$info.uid}>">开通</a>
-                                                </small>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </gt>
+                                        <select name="company_status" class="form-control">
+                                            <volist name="CompanyStatus" id="v">
+                                                <option value="<{$key}>"><{$v}></option>
+                                            </volist>
+                                        </select>
+                                         <span class="input-group-addon">
+                                            <gt name="info.company_status" value="0">
+                                                <a href="<{:U('user/openCompany')}>?uid=<{$info.uid}>" >查看</a>
+                                                <else />
+                                                <i class="fa fa-ban"></i>
+                                            </gt>
+                                        </span>
+                                    </div><!-- /.input group -->
+                                </div><!-- /.form group -->
                             </div>
+
                             <div class="col-sm-3">
                                 <input name="uid" value="<{$info.uid}>" type="hidden">
                                 <button role="button" name="submit" class="btn btn-danger" type="submit">更新</button>
@@ -190,7 +173,7 @@
 <script>
     $(window).ready(function(){
         $('select[name="user_status"]').val('<{$info.user_status}>');
-        <gt name='info.person_status' value='0'> $('select[name="person_status"]').val('<{$info.person_status}>')</gt>;
-        <gt name='info.company_status' value='0'> $('select[name="company_status"]').val('<{$info.company_status}>')</gt>;
+        $('select[name="person_status"]').val('<{$info.person_status}>');
+        $('select[name="company_status"]').val('<{$info.company_status}>');
     })
 </script>
