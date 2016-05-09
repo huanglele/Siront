@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/mobile/login_reg.css">
     <script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/pageDialog.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/function.js"></script>
 </head>
 <body>
 <header>
@@ -27,13 +28,12 @@
     <a href="<{:U('index/reg')}>" class="reg_btn">注册</a>
 </header>
 <section class="login_wrap">
-    <form action="" method="post" class="form_con" id="login_submit">
+    <form action="<{:U('ajax/ajaxLogin')}>" method="post" class="form_con" id="login_submit">
 
         <div class="user">
             <span class="icon"><img src="__PUBLIC__/mobile/user.png" alt=""></span>
             <div class="user_code">
-                <input id="username" type="text" name="username" placeholder="用户名：手机号码" value="" subform="login_sub">
-                <span class="del_btn" style="display: none"></span>
+                <input id="phone" type="text" name="phone" placeholder="手机号码" value="" subform="login_sub">
             </div>
         </div>
 
@@ -41,13 +41,12 @@
             <span class="icon"><img src="__PUBLIC__/mobile/pwd.png" alt=""></span>
             <div class="pwd_code">
                 <input id="password" type="password" name="password" placeholder="密码" value="" subform="login_sub">
-                <span class="del_btn" style="display: none"></span>
             </div>
         </div>
 
         <div class="find_pwd">
             <div class="find_btn">
-                <a href="http://m.gome.com.cn/find_password.html">找回密码</a>
+                <a href="<{:U('index/findPwd')}>">找回密码</a>
             </div>
         </div>
 
@@ -57,6 +56,59 @@
     </form>
     </div>
 </section>
+<script>
+    var formSub = false;
+    $(window).ready(function(){
+        $('#phone').on('change',function(){
+            checkInput();
+        });
+        $('#password').on('change',function(){
+            checkInput();
+        });
 
+        $('#login_sub').click(function(){
+            log('我被点击了');
+            if(checkInput()){
+                $.ajax({
+                    'url':"<{:U('ajax/ajaxLogin')}>",
+                    'data':{
+                        phone:$('#phone').val(),
+                        'password':$('#password').val()
+                    },
+                    'type':'POST',
+                    'success':function(data){
+                        if(typeof data.msg != 'undefined'){
+                            $.PageDialog.success(data.msg);
+                        }
+                        if(data.status=='success'){
+                            //window.location.href = "<{:U('index/index')}>";
+                        }
+                    }
+                })
+            }
+        })
+    })
+
+    function checkInput(){
+        var res = false;
+        var msg = '';
+        if(!isMobil($('#phone').val())){
+            res = false;
+            msg = '手机号格式不对'
+        }else if(!checkPwd($('#password').val())){
+            res = false;
+            msg = '密码格式不对'
+        }else{
+            res = true;
+        }
+        if(res){
+            $('#login_sub').css('background','');
+        }else{
+            $('#login_sub').css('background','#9b9b9b');
+            $.PageDialog.fail(msg);
+        }
+        return res;
+    }
+</script>
 </body>
 </html>

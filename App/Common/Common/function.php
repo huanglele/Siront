@@ -103,3 +103,7 @@ function myCurl($url,$params=false,$ispost=0){
     curl_close( $ch );
     return $response;
 }
+
+function hidePhoneNum($s){
+    return substr($s,0,3).'****'.substr($s,6,4);
+}

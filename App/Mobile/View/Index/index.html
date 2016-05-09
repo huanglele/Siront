@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <title>许愿池</title>
+    <script>
+        isLogin = <eq name='isLogin' value='1'>true<else />false</eq>;
+        baseUrl = "__APP__";
+    </script>
+    <script src="__PUBLIC__/js/jquery.min.js" type="text/javascript" ></script>
+    <script src="__PUBLIC__/js/jquery-ui-1.10.3.min.js" type="text/javascript" ></script>
+    <script src="__PUBLIC__/mobile/app.js" type="text/javascript" ></script>
+    <script type="text/javascript" src="__PUBLIC__/js/pageDialog.js"></script>
+    <script src="__PUBLIC__/js/function.js" type="text/javascript" ></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/mobile/style.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1462781656_8376808.css">
+</head>
+<body>
+<div id="wrap">
+    <div id="main" class="clearfix">
+        <div id="navigator"></div>
+        <div id="operation"></div>
+        <div id="subMenu"></div>
+        <div class="content">
+            <div>
+                <p id="hello" class="hello">
+                    <span>您</span>
+                    <span>好</span>
+                    <span>,</span>
+                    <span>有</span>
+                    <span>什</span>
+                    <span>么</span>
+                    <span>可</span>
+                    <span>以</span>
+                    <span>您</span>
+                    <span>的</span>
+                    <span><i class="iconfont icon-smile"></i></span>
+                </p>
+            </div>
+            <div id="location">
+                <div class="location">
+
+                </div>
+            </div>
+            <div id="rule"></div>
+            <div id="order"></div>
+        </div>
+    </div>
+</div>
+
+<!--点击个人中心按钮-->
+<div id="btnMenu" style="display: block;">
+    <div class="user-menu">
+        <i class="iconfont icon-user"></i>
+    </div>
+</div>
+
+<!--菜单导航-->
+<div id="menu" class="menu hidden">
+    <div class="l list-hook">
+        <ul>
+            <li class="phone item" idx="0">
+                <a>
+                    <i class="iconfont icon-user"></i>
+                </a>
+            </li>
+            <li class="trip item" idx="1">
+                <a>
+                    <i class="iconfont icon-list"></i>我的求助
+                </a>
+            </li>
+            <li class="settings item" idx="2">
+                <a>
+                    <i class="iconfont icon-setting"></i>设置
+                </a>
+            </li>
+            <li class="advertisement item" idx="3">
+                <a>
+                    <i class="iconfont icon-join"></i>我的技能
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="r close-hook visible">
+        <a class="closeMenu"><i></i></a>
+    </div>
+</div>
+
+<!--登录-->
+<div class="login-popup" id="loginBox" style="display: none">
+    <div class="pop-valid">
+        <div class="title">登录</div>
+        <div class="phone border-1px phone-wrapper-hook ">
+            <input class="input-val phone-hook" type="phone" name="phone" placeholder="输入手机号" maxlength="11">
+            <div class="error phone-error-hook"></div>
+        </div>
+        <div class="code border-1px code-wrapper-hook">
+            <input class="input-val code-hook" type="password" name="password" placeholder="密码" maxlength="16" minlength="6">
+
+            <div class="error code-error-hook"></div>
+        </div>
+        <div id="login_sub" class="login-btn disable login-btn-hook">登录</div>
+        <div id="login_tip" class="login_tip"></div>
+        <div class="link"><span class="law-hook">同意《法律声明及隐私政策》</span></div>
+    </div>
+    <div id="closeLogin" class="close"></div>
+</div>
+
+<div id="grayBox" class="grayBox"></div>
+
+<script>
+
+</script>
+</body>
+</html>

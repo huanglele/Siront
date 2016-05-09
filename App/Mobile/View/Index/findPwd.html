@@ -22,7 +22,7 @@
 </head>
 <body>
 <header>
-    <span class="title">注册</span>
+    <span class="title">找回密码</span>
     <a href="<{:U('index/login')}>" class="reg_btn">登录</a>
 </header>
 <section class="login_wrap">
@@ -54,11 +54,6 @@
             </div>
         </div>
 
-        <div class="find_pwd">
-            <div class="find_btn">
-                <a href="<{:U('index/findPwd')}>">找回密码</a>
-            </div>
-        </div>
 
         <div class="login_btn" id="login_sub">
             <a href="javascript:void(0)">登录</a>
@@ -129,7 +124,7 @@
                 return false;
             }
             $.ajax({
-                'url':"<{:U('ajax/ajaxReg')}>",
+                'url':"<{:U('ajax/ajaxFindPwd')}>",
                 'type':"POST",
                 'data':{
                     'no':no,
@@ -139,11 +134,11 @@
                 'success':function(data){
                     if(data['status']=='success'){
                         $.PageDialog.ok(data.msg);
-                        window.location.href = "<{:U('index/index')}>";
+                        window.location.href = "<{:U('index/login')}>";
                     }else if(data['status']=='error'){
                         $.PageDialog.fail(data.msg);
                     }else{
-                        $.PageDialog.fail('注册失败，请重试');
+                        $.PageDialog.fail('操作失败，请重试');
                     }
                 }
             })
