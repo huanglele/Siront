@@ -7,7 +7,8 @@ class IndexController extends Controller {
     }
 
     public function mem(){
-        session('hello','你好');
+        $Mem = new \Memcache();
+        var_dump($Mem);
     }
 
     public function info(){

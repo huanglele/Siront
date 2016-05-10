@@ -126,7 +126,7 @@ body {
     border-right: 1px solid #e5e5e5;
 }
 
-.menu {
+.menu{
     position: fixed;
     top: 0;
     left: -100%;
@@ -923,7 +923,10 @@ body {
     width: 100%;
     padding-bottom: 140px;
 }
-
+.content {
+    width: 86%;
+    margin: 0 7%;
+}
 #navigator {
      margin-left: 43px;
      height: 50px;
@@ -939,11 +942,566 @@ body {
     position: relative;
 }
 
+.location .wrapper {
+    position: relative;
+    height: 51px;
+    line-height: 51px;
+    position: relative
+}
+
+.location .wrapper:before, .location .wrapper:after {
+    display: block;
+    position: absolute;
+    border-top: 1px solid #ccc;
+    left: 0;
+    width: 100%;
+    content: ' '
+}
+
+.location .wrapper:before {
+    display: none;
+    top: 0
+}
+
+.location .wrapper:after {
+    display: block;
+    bottom: 0
+}
+
+.location .wrapper .i-from, .location .wrapper .i-to {
+    position: relative;
+    top: 2px;
+    left: -4px
+}
+
+.location .wrapper .i-from:before {
+    color: #41b07b
+}
+
+.location .wrapper .i-to:before {
+    color: #e37378
+}
+
+.location .wrapper .txt-from, .location .wrapper .txt-to {
+    display: inline-block;
+    height: 49px;
+    width: 90%;
+    overflow: hidden;
+    vertical-align: top;
+    font-size: 1.4rem;
+    color: #666
+}
+
+.location .wrapper .txt-from.default, .location .wrapper .txt-to.default {
+    color: #fa8919
+}
+
+.location .wrapper .txt-from .fail-tip, .location .wrapper .txt-to .fail-tip {
+    color: #adadad
+}
+.location input{
+    border: 0px;
+    outline: none;
+}
+
+
+#d-wall {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 998;
+    opacity: .3;
+    width: 100%;
+    height: 100%;
+    background-color: #000
+}
+
+#d-wrap {
+    position: fixed;
+    z-index: 999;
+    border-radius: 5px;
+    padding: 0;
+    width: 280px;
+    text-align: center;
+    top: 327px;
+    left: 60px;
+    display: none;
+    background: rgb(255, 255, 255);
+}
+
+#d-wrap .confirm, #d-wrap .alert {
+    padding: 6.79%
+}
+
+#d-wrap .confirm .d-icon, #d-wrap .alert .d-icon {
+    display: inline-block;
+    min-width: 45px;
+    min-height: 45px;
+    line-height: 45px;
+    margin: 5px 0 12px;
+    background-color: #f0f0f0;
+    border-radius: 50%
+}
+
+#d-wrap .loading, #d-wrap .tip {
+    text-align: center;
+    padding: 0 8px
+}
+
+#d-wrap .loading .d-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 24px 0 18px;
+    line-height: 40px;
+    background: 0 0
+}
+
+#d-wrap .loading .icon-loading {
+    background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.3/loading_2.gif);
+    background-size: 40px 40px;
+    background-repeat: no-repeat
+}
+
+#d-wrap .tip .d-icon {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin: 24px 0 18px
+}
+
+#d-wrap .tip .icon-tip {
+    background-repeat: no-repeat;
+}
+
+#d-wrap .tip .icon-success {
+    background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.3/send-text.png);
+    background-size: 45px 45px;
+    background-repeat: no-repeat
+}
+
+#d-wrap .alert .icon-alert {
+    background-repeat: no-repeat;
+}
+
+#d-wrap .floading .icon-flat {
+    background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.3/i-loading.gif);
+    background-size: 43px 34px;
+    background-repeat: no-repeat;
+    height: 43px;
+    width: 43px;
+    margin: 0 auto
+}
+
+#d-wrap .d-title {
+    color: #333;
+    font-family: STHeitiSC-Medium;
+    font-size: 1.9rem;
+    margin-bottom: 4px
+}
+
+#d-wrap .d-tip {
+    line-height: 1.5em;
+    margin-bottom: 5px
+}
+
+#d-wrap a[class^=btn-] {
+    display: inline-block;
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+    margin: 4px 0;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: default;
+    background-clip: padding-box
+}
+
+#d-wrap .btn-white {
+    background-color: #fff;
+    border: 1px solid #cfcfcf;
+    color: #666
+}
+
+#d-wrap .btn-orange {
+    background-color: #41b07b;
+    color: #fff
+}
+
+#d-wrap .confirm a[class^=btn-] {
+    width: 46.7%
+}
+
+#d-wrap .confirm a[class^=btn-]:first-child {
+    float: left
+}
+
+#d-wrap .confirm a[class^=btn-]:last-child {
+    float: right
+}
+
+#d-wrap .icon-confirm {
+    background-repeat: no-repeat;
+}
+
+#d-wrap .d-close {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 21px;
+    height: 21px;
+    background-repeat: no-repeat;
+}
+
+.d-btns {
+    width: 100%
+}
+
+.d-ext {
+    padding-top: 12px;
+    font-size: 1.2rem;
+    color: #999
+}
+
+.loading-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 43px;
+    height: 34px;
+    margin-left: -22px;
+    background-repeat: no-repeat;
+    background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.3/i-loading.gif);
+    background-size: 43px 34px
+}
+
+#d-wrap .d-close {
+    background-position: 0px 0px
+}
+
+#d-wrap .d-close {
+    background-image: url(//shield.xiaojukeji.com/c/DDFE-dialog/0.1.3/dialog_z.png)
+}
+
+#d-wrap .tip .icon-tip {
+    background-position: 0px 0px
+}
+
+#d-wrap .alert .icon-alert {
+    background-position: -50px 0px
+}
+
+#d-wrap .icon-confirm {
+    background-position: -50px 0px
+}
+
+#d-wrap .tip .icon-tip, #d-wrap .alert .icon-alert, #d-wrap .icon-confirm {
+    background-size: 100px 45px;
+    background-image: url(./alert.png)
+}
+
+/*地图部分*/
+#chooseMap{
+    background: #fff;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    overflow: hidden
+}
+
+.suggest {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: 20;
+    background-color: #fafafa;
+    transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out
+}
+
+.suggest .option {
+    z-index: 20;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    background-color: #fafafa;
+    font-size: 1.4rem
+}
+
+.suggest .option:before, .suggest .option:after {
+    display: block;
+    position: absolute;
+    border-top: 1px solid #e5e5e5;
+    left: 0;
+    width: 100%;
+    content: ' '
+}
+
+.suggest .option:before {
+    display: none;
+    top: 0
+}
+
+.suggest .option:after {
+    display: block;
+    bottom: 0
+}
+
+.suggest .option .cancel {
+    float: right;
+    margin-right: 16px;
+    color: #fa8919
+}
+
+.suggest .option input {
+    width: 100%;
+    line-height: 18px;
+    outline: 0;
+    opacity: .98;
+    background-color: #fafafa;
+    color: #666
+}
+
+.suggest .option input::-webkit-input-placeholder {
+    color: #ccc
+}
+
+.suggest .option .city-select {
+    display: inline-block;
+    position: absolute;
+    padding: 0 4px 0 16px;
+    vertical-align: top
+}
+
+.suggest .option .city-select .cityname {
+    vertical-align: top
+}
+
+.suggest .option .city-select .i-arrow-down {
+    display: inline-block;
+    vertical-align: top;
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    color: #ccc
+}
+
+.suggest .option .city-select .city-input {
+    padding: 16px 0
+}
+
+.suggest .option .address-select {
+    display: inline-block;
+    position: absolute;
+    right: 50px;
+    line-height: 18px;
+    margin-top: 16px;
+    padding-left: 10px;
+    overflow: hidden;
+    transition: all .1s ease-out;
+    -webkit-transition: all .1s ease-out;
+    vertical-align: top;
+    border-left: 1px solid #e5e5e5
+}
+
+.suggest .option .address-select .address-input[type=text] {
+    border-radius: 0
+}
+
+.suggest .pos-wrapper {
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    bottom: 0
+}
+
+.amap-sug-result .pos-wrapper li {
+    padding-left: 16px;
+    height: 60px
+}
+
+.suggest .pos-wrapper li:active {
+    background-color: #f0f0f0
+}
+
+.suggest .pos-wrapper li .name {
+    padding-top: 22px;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1.6rem;
+    color: #333
+}
+
+.suggest .pos-wrapper li .address {
+    display: block;
+    padding-bottom: 13px;
+    font-size: 1.2rem;
+    color: #adadad;
+    position: relative
+}
+
+.suggest .pos-wrapper li .address:before, .suggest .pos-wrapper li .address:after {
+    display: block;
+    position: absolute;
+    border-top: 1px solid #e5e5e5;
+    left: 0;
+    width: 100%;
+    content: ' '
+}
+
+.suggest .pos-wrapper li .address:before {
+    display: none;
+    top: 0
+}
+
+.suggest .pos-wrapper li .address:after {
+    display: block;
+    bottom: 0
+}
+
+.suggest .pos-wrapper li.has-address .name {
+    padding-top: 13px
+}
+
+.suggest .pos-wrapper .poi-fail {
+    text-align: center;
+    padding: 20px;
+    color: #adadad
+}
+
+.suggest .pos-wrapper .poi-fail .title {
+    font-size: 1.6rem;
+    margin-bottom: 8px
+}
+
+.suggest .pos-wrapper .poi-fail .desc {
+    font-size: 1.2rem
+}
+
+.suggest .pos-wrapper .tip-loading {
+    padding-top: 8px;
+    font-size: 1.4rem
+}
+
+.suggest .pos-wrapper .no-click {
+    color: #ccc
+}
+
+.suggest .pos-wrapper .no-click:after {
+    display: none
+}
+
+.suggest .pos-wrapper .no-click:active {
+    background-color: #fafafa
+}
+
+.suggest .pos-wrapper .no-result {
+    padding-top: 50px;
+    margin-left: -16px;
+    text-align: center;
+    font-size: 1.4rem
+}
+
+.suggest .pos-wrapper .loading {
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    opacity: .2;
+    background-image: url(//shield.xiaojukeji.com/c/webapp-homepage/0.0.16/suggest/loading.gif);
+    background-repeat: no-repeat;
+    background-size: contain
+}
+.suggest .pos-footer{
+    z-index: 99999;
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    line-height: 50px;
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 0 auto;
+}
+.suggest .pos-footer ul{
+    margin: 10px;
+    background: #fff;
+    border-radius: 5px ;
+    height:50px;
+    border: 1px solid gainsboro;
+}
+.amap-touch-toolbar .amap-zoomcontrol{
+    bottom: -35px;
+}
+
+.suggest .pos-footer li{
+    float: left;
+    width: 24%;
+    border-left:1px solid gainsboro;
+    margin: 10px 0px;
+    height: 30px;
+    line-height: 30px;
+}
+.suggest .pos-footer li:first-child{
+    border-left:0px solid darkgray;
+}
+.suggest .pos-footer a{
+    color: #333;
+    border-radius: 6px;
+    border: none;
+    font-size: 1.7rem;
+    background: #fff;
+    font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}
 
 
 
-
-
+.mapBox{
+    position: relative;
+    height: 100%;
+}
+.mapBox #AMap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.mapBox .AMap_tip{
+    position: relative;
+    margin: 20px auto;
+}
+.amap-sug-result{
+    z-index: 999999;
+    top: 50px!important;
+    width: 100%!important;
+    border: none!important;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition-duration: 0ms;
+    transform: translate(0px, 0px) translateZ(0px);
+}
+.amap-sug-result .auto-item {
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 0px;
+    line-height: 18px;
+    border-bottom: 1px solid #d1d1d1;
+    opacity: .7;
+    color: #666;
+}
+.amap-geo{
+    display: none;
+}
 
 
 

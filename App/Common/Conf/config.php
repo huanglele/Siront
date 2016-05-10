@@ -22,6 +22,6 @@ return array(
     'DEFAULT_MODULE'       =>    'Home',
 
     //设置session的方式
-    'SESSION_TYPE'=>'File',
+//    'SESSION_TYPE'=>'File',
 
 );
