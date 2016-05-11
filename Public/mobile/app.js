@@ -195,6 +195,11 @@ function aMap(){
     var marker = null;
     var map = null;
     var container = 'container';
+    var geocoder = new AMap.Geocoder({
+        radius: 1000,
+        extensions: "all"
+    });
+
     this.setLon = function(lon){
         lon = lon;
     }
@@ -228,13 +233,24 @@ function aMap(){
             }
         })
 
-        AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
-        function select(e) {
+        AMap.event.addListener(auto, "select", searchPlace);//注册监听，当选中某条记录时会触发
+
+
+        //输入文字自动搜索回掉事件
+        function searchPlace(e) {
             if (e.poi && e.poi.location) {
                 map.setZoom(15);
                 map.setCenter(e.poi.location);
+                lat = e.poi.location.lat;
+                lon = e.poi.location.lng;
+                clearMark();
+                addMark();
+                getPlaceFormLonLat();
             }
         }
+
+
+
     }
 
     //使用浏览器定位
@@ -261,8 +277,25 @@ function aMap(){
     this.clearMark = function(){
         clearMark();
     }
+
     this.getMarkPosition = function(){
         return marker.get('position');
+    }
+
+    this.getMark = function(){
+        return marker;
+    }
+
+    //拖拽mark回掉
+    function markDragend(e){
+        var p = e.get
+    }
+
+    function updateMark(){
+        var p = marker.getPosition();
+        lat = p.lat;
+        lon = p.lng;
+        getPlaceFormLonLat();
     }
 
     /**
@@ -279,6 +312,7 @@ function aMap(){
                 raiseOnDrag: true
             });
             marker.setMap(map);
+            AMap.event.addListener(marker, "dragend", updateMark);//注册监听，当选中某条记录时会触发
         }
     }
 
@@ -296,12 +330,23 @@ function aMap(){
         lon = data.position.getLng();
         lat = data.position.getLat();
         addMark();
+        getPlaceFormLonLat();
     }
+
     //解析定位错误信息
     function onError(data) {
         log('定位失败');
     }
 
+    function getPlaceFormLonLat(){
+        geocoder.getAddress([lon,lat], function(status, result) {
+            if (status === 'complete' && result.info === 'OK') {
+                var address = result.regeocode.formattedAddress; //返回地址描述
+                log(address);
+                $('input[name="workPlace"]').val(address);
+            }
+        });
+    }
 
     //获取用户所在城市信息
     function showCityInfo() {

@@ -1273,18 +1273,19 @@ body {
     color: #ccc
 }
 
-.suggest .option .city-select {
+.suggest .option .back {
     display: inline-block;
     position: absolute;
     padding: 0 4px 0 16px;
     vertical-align: top
 }
 
-.suggest .option .city-select .cityname {
-    vertical-align: top
+.suggest .option .back .back-span {
+    vertical-align: top;
+    color: #00a65a;
 }
 
-.suggest .option .city-select .i-arrow-down {
+.suggest .option .back .i-arrow-down {
     display: inline-block;
     vertical-align: top;
     width: 16px;
@@ -1293,16 +1294,15 @@ body {
     color: #ccc
 }
 
-.suggest .option .city-select .city-input {
+.suggest .option .back .city-input {
     padding: 16px 0
 }
 
 .suggest .option .address-select {
     display: inline-block;
-    position: absolute;
-    right: 50px;
     line-height: 18px;
     margin-top: 16px;
+    margin-left: 50px;
     padding-left: 10px;
     overflow: hidden;
     transition: all .1s ease-out;
@@ -1421,47 +1421,6 @@ body {
     background-repeat: no-repeat;
     background-size: contain
 }
-.suggest .pos-footer{
-    z-index: 99999;
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
-    line-height: 50px;
-    font-size: 1.4rem;
-    text-align: center;
-    margin: 0 auto;
-}
-.suggest .pos-footer ul{
-    margin: 10px;
-    background: #fff;
-    border-radius: 5px ;
-    height:50px;
-    border: 1px solid gainsboro;
-}
-.amap-touch-toolbar .amap-zoomcontrol{
-    bottom: -35px;
-}
-
-.suggest .pos-footer li{
-    float: left;
-    width: 24%;
-    border-left:1px solid gainsboro;
-    margin: 10px 0px;
-    height: 30px;
-    line-height: 30px;
-}
-.suggest .pos-footer li:first-child{
-    border-left:0px solid darkgray;
-}
-.suggest .pos-footer a{
-    color: #333;
-    border-radius: 6px;
-    border: none;
-    font-size: 1.7rem;
-    background: #fff;
-    font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
-}
-
 
 
 .mapBox{
