@@ -142,22 +142,7 @@ class TaskController extends CommonController
      *更新分类缓存信息
      */
     public function updateCacheCategory(){
-        $list = M('category')->select();
-        if(!$list) $list = array();
-        $menu = array();
-        $name = array();
-        foreach($list as $v){
-            $menu[$v['cid']][$v['id']] = $v;
-            $name[$v['id']] = $v['name'];
-        }
-        //防止一级目录下没有二级子目录为空
-        foreach($menu['0'] as $v){
-            if(!array_key_exists($v['id'],$menu)){
-                $menu[$v['id']] = array();
-            }
-        }
-        S('CatMap',$menu);
-        S('CatName',$name);
+        getCat(true);
     }
 
     public function delEmptyCat(){

@@ -17,7 +17,9 @@
     <script src="__PUBLIC__/js/function.js" type="text/javascript" ></script>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/mobile/style.css">
     <script src="//cdn.bootcss.com/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1462933572_9058003.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1462951035_3919814.css">
+
+    <link rel="stylesheet" type="text/css" href="//static.xiaojukeji.com/webapp/css/merged-schedule-7075d2cede.css">
 </head>
 <body>
 <div id="wrap">
@@ -42,6 +44,7 @@
                     <span><i class="iconfont icon-smile"></i></span>
                 </p>
             </div>
+
             <!--位置-->
             <div id="location">
                 <div class="location">
@@ -52,11 +55,32 @@
                 </div>
             </div>
 
+            <!--工种类别-->
+            <div id="workType">
+                <div class="location">
+                    <div class="wrapper wrapper-from-hook border-1px">
+                        <i class="i-from i-circle iconfont icon-tags"></i>
+                        <input name="workType" placeholder="内容" class="txt-from txt-from-hook default" />
+                        <input name="workCat" type="hidden" value="">
+                    </div>
+                </div>
+            </div>
+
+            <!--设置时间-->
+            <div id="workTime">
+                <div class="location">
+                    <div class="wrapper wrapper-from-hook border-1px">
+                        <i class="i-from i-circle iconfont icon-time"></i>
+                        <input name="workTime" placeholder="预约时间" class="txt-from txt-from-hook default" />
+                    </div>
+                    <a id="a_time" dd-events="click10"><i></i><span>什么时候出发</span></a>
+                </div>
+            </div>
+
+
             <div id="rule"></div>
             <div id="order"></div>
         </div>
-
-
     </div>
 </div>
 
@@ -127,10 +151,10 @@
 
     <div class="suggest">
         <div class="border-1px option">
-            <div id="choosePoi" class="cancel cancel-hook">确定</div>
+            <div class="cancel cancel-hook closeMap">确定</div>
             <div class="back back-wrapper-hook">
                 <div class="back-hook">
-                    <span class="back-span"  id="closeMap">
+                    <span class="back-span closeMap" >
                         <i class="iconfont icon-back"></i>
                     </span>
                 </div>
@@ -144,8 +168,45 @@
                 <div id="AMap"></div>
             </div>
         </div>
+    </div>
+</div>
 
-    </div><!-- /.modal-content -->
+<!--选择求助类型-->
+<div id="chooseType">
+    <div class="suggest">
+        <div class="border-1px option">
+            <div class="back back-wrapper-hook">
+                <div class="back-hook">
+                    <span class="back-span closeType" >
+                        <i class="iconfont icon-back"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="address-select address-select-hook">
+                <p id="chooseTypeTitle">选择求助类型</p>
+            </div>
+        </div>
+
+        <div class="pos-wrapper pos-wrapper-hook">
+            <volist name="CatMap[0]" id="cat">
+                <eq name="cat.status" value="1">
+                    <div class="catItem">
+                        <div class="catFirstTitle">
+                            <span><{$cat.name}></span>
+                            <i class="iconfont icon-menuup"></i>
+                        </div>
+                        <ul class="catSecUl">
+                            <volist name="CatMap[$cat['id']]" id="v">
+                                <eq name="v.status" value="1">
+                                    <li data-cid="<{$v.id}>" class="cat"><{$v.name}></li>
+                                </eq>
+                            </volist>
+                        </ul>
+                    </div>
+                </eq>
+            </volist>
+        </div>
+    </div>
 </div>
 <!--错误提示框-->
 <div id="d-wrap">
@@ -162,5 +223,8 @@
        // swingText('hello');
     })
 </script>
+
+<script type="text/javascript" src="//static.xiaojukeji.com/webapp/js/merged-core-common-dialog-1d6d69e579.js"></script>
+<script type="text/javascript" src="//static.xiaojukeji.com/webapp/js/merged-schedule-2d352ed8ba.js"></script>
 </body>
 </html>

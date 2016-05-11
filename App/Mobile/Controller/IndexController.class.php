@@ -10,8 +10,17 @@ class IndexController extends Controller {
         }else{
             $this->assign('isLogin',0);
         }
-        $this->display('index');
+
+        $this->assign('CatMap',getCat());
+        $this->display();
     }
+
+    public function cat(){
+        $Cat = S('CatMap');
+        var_dump($Cat);
+    }
+
+
 
     /**
      * 用户注册

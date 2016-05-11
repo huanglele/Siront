@@ -1204,7 +1204,7 @@ body {
 }
 
 /*地图部分*/
-#chooseMap{
+#chooseMap,#chooseType{
     background: #fff;
     position: fixed;
     top: 0;
@@ -1458,11 +1458,43 @@ body {
     opacity: .7;
     color: #666;
 }
-.amap-geo{
-    display: none;
+
+
+#chooseTypeTitle{
+    font-size: 1.76rem;
+    color: #333;
+    font-weight: 700;
+    font-family: PingFang SC, STHeitiSC-Light, Helvetica-Light, arial, sans-serif;
+}
+.catItem{
+    border-bottom: 1px #e5e5e5 solid;
+    padding: 0px 10px;
+}
+.catItem .catFirstTitle{
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.7rem;
+    padding: 0px 5px;
+}
+.catItem .catFirstTitle .iconfont{
+    position: relative;
+    float: right;
+    color: gainsboro;
 }
 
-
+.catItem .catSecUl{
+    display: none;
+    list-style: none;
+    background: #f3f5f4;
+    margin-bottom: 10px;
+}
+.catItem .catSecUl .cat{
+    display: inline-block;
+    margin: 5px;
+    background: #fff;
+    border: 1px #e6e8e7 solid;
+    padding: 5px 10px;
+}
 
 
 

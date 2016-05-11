@@ -81,14 +81,7 @@ $(window).ready(function(){
     map.setContainer('AMap');
     map.init();
     map.findPositionByBrowser();
-    $('#autoMark').click(function(){
-        map.clearMark();
-        map.addMark();
-    })
 
-    $('#clearMark').click(function(){
-        map.clearMark();
-    })
 
     /**
      * 选择工作地点
@@ -104,11 +97,55 @@ $(window).ready(function(){
     /**
      * 关闭选择地址
      */
-    $('#closeMap').click(function(){
+    $('.closeMap').click(function(){
         $('#chooseMap').animate({
             'display':'none',
             'right':'-100%'
         });
+    })
+
+    /**
+     * 选择需求类型
+     */
+    $('input[name="workType"]').click(function(){
+        //bgShow('show');
+        $('#chooseType').animate({
+            'display':'block',
+            'right':0
+        });
+
+    })
+    //调整 选择类型位置
+    $('#chooseTypeTitle').css('margin-left',($(window).width()-$('#chooseTypeTitle').width())/2-50);
+
+    /**
+     * 关闭选择需求
+     */
+    $('.closeType').click(function(){
+        $('#chooseType').animate({
+            'display':'none',
+            'right':'-100%'
+        });
+    })
+
+    //选择帮助类型收缩、展开
+    $('.catFirstTitle').click(function(){
+        var ul = $(this).next('.catSecUl');
+        var i = $('.iconfont',$(this));
+        ul.toggle('show');
+        if(i.hasClass('icon-menuup')){
+            i.removeClass('icon-menuup').addClass('icon-menudown');
+        }else {
+            i.removeClass('icon-menudown').addClass('icon-menuup');
+        }
+    })
+
+    $('.cat').click(function(){
+        $('input[name="workType"]').val($(this).html());
+        $('input[name="workCat"]').val($(this).attr('data-cid'));
+        $('.cat').css('color','');
+        $('.closeType').click();
+        $(this).css('color','#41b07b');
     })
 
 })
