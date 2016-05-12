@@ -92,7 +92,7 @@ $(window).ready(function(){
             'display':'block',
             'right':0
         });
-
+        $(this).blur().preventDefault();
     })
     /**
      * 关闭选择地址
@@ -113,7 +113,7 @@ $(window).ready(function(){
             'display':'block',
             'right':0
         });
-
+        $(this).blur().preventDefault();
     })
     //调整 选择类型位置
     $('#chooseTypeTitle').css('margin-left',($(window).width()-$('#chooseTypeTitle').width())/2-50);
@@ -149,7 +149,7 @@ $(window).ready(function(){
     })
 
     $('input[name="workTime"]').click(function(){
-
+        $(this).blur().preventDefault();
     })
 
 })
