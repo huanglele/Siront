@@ -10,6 +10,7 @@
         isLogin = <eq name='isLogin' value='1'>true<else />false</eq>;
         baseUrl = "__APP__";
         timeJson = <{$timeJson}>
+        var appId = api.appId; //比如: A6980386445546
     </script>
 
 
@@ -237,6 +238,7 @@
 <script>
     $(window).ready(function(){
        // swingText('hello');
+        alert(appId);
     })
 </script>
 
