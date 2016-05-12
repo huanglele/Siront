@@ -425,7 +425,7 @@ function aMap(){
         var workTimeInput = doc.getElementById('workTimeInput');
         workTimeInput.addEventListener('tap', function(event) {
             timePicker.show(function(items) {
-                workTimeInput.value =  (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+                workTimeInput.value =  (items[0] || {}).text + " " + (items[1] || {}).text + "点 " + (items[2] || {}).text+"分";
                 //返回 false 可以阻止选择框的关闭
                 //return false;
             });

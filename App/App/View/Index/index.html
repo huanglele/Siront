@@ -57,6 +57,7 @@
                     <span>么</span>
                     <span>可</span>
                     <span>以</span>
+                    <span>帮</span>
                     <span>您</span>
                     <span>的</span>
                     <span><i class="iconfont icon-smile"></i></span>
@@ -239,7 +240,21 @@
 <script>
     $(window).ready(function(){
        // swingText('hello');
-        alert(typeof api.appId);
+        if(typeof api.appId){
+            alert(typeof api.appId);
+        }else {
+            alert(api.appId);
+        }
+        api.alert({
+            title: 'testtitle',
+            msg: 'testmsg',
+        }, function(ret, err){
+            if( ret ){
+                alert( JSON.stringify( ret ) );
+            }else{
+                alert( JSON.stringify( err ) );
+            }
+        });
     })
 </script>
 
