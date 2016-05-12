@@ -925,7 +925,7 @@ body {
 }
 .content {
     width: 86%;
-    margin: 0 7%;
+    margin: 30px 7%;
 }
 #navigator {
      margin-left: 43px;
@@ -993,7 +993,8 @@ body {
 }
 
 .location .wrapper .txt-from.default, .location .wrapper .txt-to.default {
-    color: #fa8919
+    color: #fa8919;
+    background-color: #FAFAFA;
 }
 
 .location .wrapper .txt-from .fail-tip, .location .wrapper .txt-to .fail-tip {

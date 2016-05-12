@@ -3,6 +3,13 @@ namespace Mobile\Controller;
 use Think\Controller;
 class IndexController extends Controller {
 
+    public function _initialize(){
+        header('Content-Type:text/html; charset=utf-8;');
+        if($_SERVER['HTTP_HOST']=='xyc.91yiso.com'){
+            C('SHOW_PAGE_TRACE',false);
+        }
+    }
+
     public function index(){
         $uid = session('uid');
         if($uid){
@@ -24,7 +31,7 @@ class IndexController extends Controller {
         $data = array();
         $today['text'] = '今天';
         $today['value'] = date('Y-m-d');
-        $today['children'] = $this->createTime(date('h'),date('s'));
+        $today['children'] = $this->createTime(date('H'),date('s'));
         $data[] = $today;
         $nextday['text'] = '明天';
         $nextday['value'] = date('Y-m-d',time()+24*3600);
@@ -36,6 +43,7 @@ class IndexController extends Controller {
     public function test(){
         $data = $this->time();
         var_dump($data);
+//        echo date('H');
     }
 
     public function createTime($house,$second){
