@@ -247,17 +247,8 @@
         if(typeof $api=='undefined'){
             alert(typeof $api);
         }else {
-            $api.alert($api.appId);
-            $api.alert({
-                title: 'testtitle',
-                msg: 'testmsg',
-            }, function(ret, err){
-                if( ret ){
-                    alert( JSON.stringify( ret ) );
-                }else{
-                    alert( JSON.stringify( err ) );
-                }
-            });
+            api.alert($api.appId);
+
         }
 
     })
