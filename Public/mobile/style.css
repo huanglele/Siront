@@ -1001,6 +1001,7 @@ body {
 }
 .location input{
     border: 0px;
+    text-overflow: ellipsis;
     outline: none;
 }
 

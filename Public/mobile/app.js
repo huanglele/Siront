@@ -148,6 +148,10 @@ $(window).ready(function(){
         $(this).css('color','#41b07b');
     })
 
+    $('input[name="workTime"]').click(function(){
+
+    })
+
 })
 
 /**
@@ -409,3 +413,25 @@ function aMap(){
         console.log(str);
     }
 }
+
+
+(function($, doc) {
+    $.init();
+    $.ready(function() {
+
+        //   //级联示例
+        var timePicker = new $.PopPicker({
+            layer: 3
+        });
+        timePicker.setData(timeJson);
+        var workTimeInput = doc.getElementById('workTimeInput');
+        workTimeInput.addEventListener('tap', function(event) {
+            timePicker.show(function(items) {
+                workTimeInput.value =  (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+                //返回 false 可以阻止选择框的关闭
+                //return false;
+            });
+        }, false);
+    });
+})(mui, document);
+

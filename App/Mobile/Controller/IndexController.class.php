@@ -10,7 +10,7 @@ class IndexController extends Controller {
         }else{
             $this->assign('isLogin',0);
         }
-
+        $this->assign('timeJson',json_encode($this->time()));
         $this->assign('CatMap',getCat());
         $this->display();
     }
@@ -20,7 +20,44 @@ class IndexController extends Controller {
         var_dump($Cat);
     }
 
+    public function time(){
+        $data = array();
+        $today['text'] = '今天';
+        $today['value'] = date('Y-m-d');
+        $today['children'] = $this->createTime(date('h'),date('s'));
+        $data[] = $today;
+        $nextday['text'] = '明天';
+        $nextday['value'] = date('Y-m-d',time()+24*3600);
+        $nextday['children'] = $this->createTime(0,0);
+        $data[] = $nextday;
+        return $data;
+    }
 
+    public function test(){
+        $data = $this->time();
+        var_dump($data);
+    }
+
+    public function createTime($house,$second){
+        $second = intval($second/5)*5;
+        $day = array();
+        $h['text'] = $h['value'] = $house;
+        for($j=$second;$j<61;$j+=5){
+            $m['text'] = $m['value'] = $j.' ';
+            $h['children'][] = $m;
+        }
+        $day[] = $h;
+        $house++;
+        for($house;$house<24;$house++){
+            $h['text'] = $h['value'] = $house;
+            for($j=0;$j<61;$j+=5){
+                $m['text'] = $m['text'] = $j;
+                $h['children'][] = $m;
+            }
+            $day[] = $h;
+        }
+        return $day;
+    }
 
     /**
      * 用户注册
