@@ -271,7 +271,6 @@ function aMap(){
             map.addControl(toolBar);
         });
         map.on('mapmove', function(e) {
-            log(map.getCenter());
             var p = map.getCenter();
             lat = p.lat;
             lon = p.lng;
@@ -293,9 +292,6 @@ function aMap(){
                 getPlaceFormLonLat();
             }
         }
-
-
-
     }
 
     //使用浏览器定位
@@ -344,7 +340,6 @@ function aMap(){
      */
     function addMark(){
         if(!marker){
-            log('创建了一个标记');
             marker = new AMap.Marker({
                 icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
                 position: [lon, lat],
@@ -360,7 +355,6 @@ function aMap(){
 
     function clearMark(){
         if(marker){
-            log('清除了标记')
             marker.setMap(null);
             marker = null;
         }
@@ -368,7 +362,6 @@ function aMap(){
 
     //解析定位结果
     function onComplete(data) {
-        log('定位成功');
         lon = data.position.getLng();
         lat = data.position.getLat();
         addMark();
@@ -384,7 +377,6 @@ function aMap(){
         geocoder.getAddress([lon,lat], function(status, result) {
             if (status === 'complete' && result.info === 'OK') {
                 var address = result.regeocode.formattedAddress; //返回地址描述
-                log(address);
                 $('input[name="workPlace"]').val(address);
             }
         });
