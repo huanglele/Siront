@@ -341,7 +341,7 @@ function aMap(){
     function addMark(){
         if(!marker){
             marker = new AMap.Marker({
-                icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+                icon: "http://www.easyicon.net/api/resizeApi.php?id=1182024&size=32",
                 position: [lon, lat],
                 draggable: true,
                 cursor: 'move',
@@ -376,8 +376,10 @@ function aMap(){
     function getPlaceFormLonLat(){
         geocoder.getAddress([lon,lat], function(status, result) {
             if (status === 'complete' && result.info === 'OK') {
-                var address = result.regeocode.formattedAddress; //返回地址描述
+                var address = result.regeocode.addressComponent.district+result.regeocode.addressComponent.township+result.regeocode.addressComponent.street+result.regeocode.addressComponent.streetNumber; //返回地址描述
+                log(result);
                 $('input[name="workPlace"]').val(address);
+                $('input[name="cityCode"]').val(result.regeocode.addressComponent.citycode);
             }
         });
     }
