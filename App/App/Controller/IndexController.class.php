@@ -5,6 +5,7 @@ class IndexController extends Controller {
 
     public function _initialize(){
         header('Content-Type:text/html; charset=utf-8;');
+        header("Cache-Control: no-cache, must-revalidate");
         if($_SERVER['HTTP_HOST']=='xyc.91yiso.com'){
             C('SHOW_PAGE_TRACE',false);
         }
