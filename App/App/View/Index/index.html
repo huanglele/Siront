@@ -240,21 +240,21 @@
 <script>
     $(window).ready(function(){
        // swingText('hello');
-        if(typeof api.appId){
-            alert(typeof api.appId);
-        }else {
-            alert(api.appId);
-        }
-        api.alert({
-            title: 'testtitle',
-            msg: 'testmsg',
-        }, function(ret, err){
-            if( ret ){
-                alert( JSON.stringify( ret ) );
-            }else{
-                alert( JSON.stringify( err ) );
-            }
-        });
+//        if(typeof api.appId){
+//            alert(typeof api.appId);
+//        }else {
+//            api.alert(api.appId);
+//        }
+//        api.alert({
+//            title: 'testtitle',
+//            msg: 'testmsg',
+//        }, function(ret, err){
+//            if( ret ){
+//                alert( JSON.stringify( ret ) );
+//            }else{
+//                alert( JSON.stringify( err ) );
+//            }
+//        });
     })
 </script>
 
