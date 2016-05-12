@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>许愿池用户注册</title>
+    <meta name="keywords" content="许愿池|许愿|许愿池用户登录|SIRONT">
+    <meta name="description" content="许愿池网络科技有限公司用户登录界面">
+    <meta name="author" content="SIRONT">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="applicable-device" content="mobile">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/mobile/login_reg.css">
+    <script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/pageDialog.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/function.js"></script>
+</head>
+<body>
+<header>
+    <span class="title">注册</span>
+    <a href="<{:U('index/login')}>" class="reg_btn">登录</a>
+</header>
+<section class="login_wrap">
+    <form action="" method="post" class="form_con" id="login_submit">
+
+        <div class="user">
+            <span class="icon"><img src="__PUBLIC__/mobile/user.png" alt=""></span>
+            <div class="user_code">
+                <input id="phone" type="text" name="phone" placeholder="手机号码" value="" subform="login_sub">
+            </div>
+        </div>
+
+        <div class="code_con">
+            <span class="icon">
+                <img src="__PUBLIC__/mobile/code.png" alt="">
+            </span>
+            <div class="code">
+                <input autocomplete="off" type="text" name="telCode" placeholder="验证码" value="" maxlength="6">
+                <div class="verification_code">
+                    <a href="javascript:void(0)" class="code_btn" id="sendSms" >获取验证码</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pwd">
+            <span class="icon"><img src="__PUBLIC__/mobile/pwd.png" alt=""></span>
+            <div class="pwd_code">
+                <input id="password" type="password" name="password" placeholder="设置密码" value="" subform="login_sub">
+            </div>
+        </div>
+
+        <div class="find_pwd">
+            <div class="find_btn">
+                <a href="<{:U('index/findPwd')}>">找回密码</a>
+            </div>
+        </div>
+
+        <div class="login_btn" id="login_sub">
+            <a href="javascript:void(0)">登录</a>
+        </div>
+    </form>
+    </div>
+</section>
+
+<script>
+    var sendSmsStatus = false;
+    $(window).ready(function() {
+        $('#sendSms').click(function(){
+            if(sendSmsStatus){
+                var no = $('#phone').val();
+                if(no){
+                    if(isMobil(no)){
+                        $.ajax({
+                            'url':"<{:U('index/sendSms')}>",
+                            'type':"POST",
+                            'data':{
+                                'no':no
+                            },
+                            'success':function(data){
+                                if(data=='success'){
+                                    $.PageDialog.ok('发送成功');
+                                    countDown(3);
+                                }else{
+                                    $.PageDialog.fail(data);
+                                }
+                            }
+                        })
+                    }else{
+                        $.PageDialog.fail('手机号格式不正确');
+                    }
+                }else {
+                    $.PageDialog.fail('电话号码不能为空');
+                }
+            }
+        })
+
+        //检测手机号是否可以输入的
+        $('#phone').on('input',function(){
+            if(isMobil($('#phone').val())){
+                sendSmsStatus = true;
+                $('#sendSms').css('background','');
+            }else{
+                sendSmsStatus = false;
+                console.log('input');
+                $('#sendSms').css('background','gray');
+            }
+        })
+
+        //ajax提交注册按钮
+        $('#login_sub').click(function(){
+            var no = $('#phone').val();
+            if(!isMobil(no)){
+                $.PageDialog.fail('请输入手机号');
+                return false;
+            }
+            var telCode = $('input[name="telCode"]').val();
+            if(!isTelCode(telCode)){
+                $.PageDialog.fail('短信验证码格式不对');
+                return false;
+            }
+            var password = $('input[name="password"]').val();
+            if(!checkPwd(password)){
+                $.PageDialog.fail('密码需要6-16非空字符');
+                return false;
+            }
+            $.ajax({
+                'url':"<{:U('ajax/ajaxReg')}>",
+                'type':"POST",
+                'data':{
+                    'no':no,
+                    'telCode':telCode,
+                    'password':password
+                },
+                'success':function(data){
+                    if(data['status']=='success'){
+                        $.PageDialog.ok(data.msg);
+                        window.location.href = "<{:U('index/index')}>";
+                    }else if(data['status']=='error'){
+                        $.PageDialog.fail(data.msg);
+                    }else{
+                        $.PageDialog.fail('注册失败，请重试');
+                    }
+                }
+            })
+        })
+    })
+
+
+
+    function countDown(i) {
+        if(i){
+            sendSmsStatus = false;
+            $('#sendSms').css('background','gray');
+            setTimeout(function() {
+                countDown(i-1);
+            },1000);
+            $('#sendSms').html(i+'S后重试');
+        }else {
+            $('#sendSms').html('获取验证码');
+            sendSmsStatus = true;
+            $('#sendSms').css('background','');
+        }
+    }
+</script>
+
+</body>
+</html>
