@@ -92,7 +92,8 @@ $(window).ready(function(){
             'display':'block',
             'right':0
         });
-        $(this).blur().preventDefault();
+        $(this).blur();
+        event.preventDefault();
     })
     /**
      * 关闭选择地址
@@ -113,7 +114,8 @@ $(window).ready(function(){
             'display':'block',
             'right':0
         });
-        $(this).blur().preventDefault();
+        $(this).blur();
+        event.preventDefault();
     })
     //调整 选择类型位置
     $('#chooseTypeTitle').css('margin-left',($(window).width()-$('#chooseTypeTitle').width())/2-50);
@@ -149,7 +151,8 @@ $(window).ready(function(){
     })
 
     $('input[name="workTime"]').click(function(){
-        $(this).blur().preventDefault();
+        $(this).blur();
+        event.preventDefault();
     })
 
 })
@@ -260,18 +263,19 @@ function aMap(){
             resizeEnable: true,
             zoom: 13
         });
+        addMark();
         //地图中添加地图操作ToolBar插件
         map.plugin(['AMap.ToolBar'], function() {
             //设置地位标记为自定义标记
             var toolBar = new AMap.ToolBar();
             map.addControl(toolBar);
         });
-        map.on('click', function(e) { //为地图注册click事件获取鼠标点击出的经纬度坐标
-            if(!marker){
-                lon = e.lnglat.getLng();
-                lat = e.lnglat.getLat();
-                addMark();
-            }
+        map.on('mapmove', function(e) {
+            log(map.getCenter());
+            var p = map.getCenter();
+            lat = p.lat;
+            lon = p.lng;
+            marker.setPosition(p);
         })
 
         AMap.event.addListener(auto, "select", searchPlace);//注册监听，当选中某条记录时会触发
@@ -327,10 +331,6 @@ function aMap(){
         return marker;
     }
 
-    //拖拽mark回掉
-    function markDragend(e){
-        var p = e.get
-    }
 
     function updateMark(){
         var p = marker.getPosition();
@@ -356,6 +356,7 @@ function aMap(){
             AMap.event.addListener(marker, "dragend", updateMark);//注册监听，当选中某条记录时会触发
         }
     }
+
 
     function clearMark(){
         if(marker){
