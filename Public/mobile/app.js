@@ -275,6 +275,9 @@ function aMap(){
             lat = p.lat;
             lon = p.lng;
             marker.setPosition(p);
+        });
+        map.on('moveend',function(){
+            getPlaceFormLonLat();
         })
 
         AMap.event.addListener(auto, "select", searchPlace);//注册监听，当选中某条记录时会触发
