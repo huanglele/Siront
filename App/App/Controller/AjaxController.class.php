@@ -6,7 +6,7 @@
  * Description:
  */
 
-namespace Mobile\Controller;
+namespace App\Controller;
 use Think\Controller;
 
 class AjaxController extends Controller
