@@ -245,10 +245,10 @@
     $(window).ready(function(){
        // swingText('hello');
         if(typeof api=='undefined'){
-            alert(typeof api);
+            alert(typeof $api);
         }else {
-            api.alert(api.appId);
-            api.alert({
+            $api.alert($api.appId);
+            $api.alert({
                 title: 'testtitle',
                 msg: 'testmsg',
             }, function(ret, err){
