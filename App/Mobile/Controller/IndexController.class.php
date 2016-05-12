@@ -41,7 +41,7 @@ class IndexController extends Controller {
     public function createTime($house,$second){
         $second = intval($second/5)*5;
         $day = array();
-        $h['text'] = $h['value'] = $house;
+        $h['text'] = $h['value'] = $house.' ';
         for($j=$second;$j<61;$j+=5){
             $m['text'] = $m['value'] = $j.' ';
             $h['children'][] = $m;
@@ -49,9 +49,9 @@ class IndexController extends Controller {
         $day[] = $h;
         $house++;
         for($house;$house<24;$house++){
-            $h['text'] = $h['value'] = $house;
+            $h['text'] = $h['value'] = $house.' ';
             for($j=0;$j<61;$j+=5){
-                $m['text'] = $m['text'] = $j;
+                $m['text'] = $m['text'] = $j.' ';
                 $h['children'][] = $m;
             }
             $day[] = $h;
