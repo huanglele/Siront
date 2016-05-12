@@ -67,7 +67,6 @@
         });
 
         $('#login_sub').click(function(){
-            log('我被点击了');
             if(checkInput()){
                 $.ajax({
                     'url':"<{:U('ajax/ajaxLogin')}>",
@@ -81,7 +80,7 @@
                             $.PageDialog.success(data.msg);
                         }
                         if(data.status=='success'){
-                            //window.location.href = "<{:U('index/index')}>";
+                            window.location.href = "<{:U('index/index')}>";
                         }
                     }
                 })
