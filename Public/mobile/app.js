@@ -77,6 +77,7 @@ $(window).ready(function(){
         }
     })
 
+
     map = new aMap();
     map.setContainer('AMap');
     map.init();

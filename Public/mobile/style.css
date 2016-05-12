@@ -868,6 +868,10 @@ body {
     background-color: #009966;
     color: #fff
 }
+.pop-valid .login-btn a{
+    display: block;
+    text-decoration: none;
+}
 
 .pop-valid .login-btn.disable {
     background-color: #e5e5e5
