@@ -34,6 +34,15 @@
         |- addCompany   添加一个企业用户
         |- updateUserStatus 更新用户的信息
 
+    Task    任务管理
+        |- index        显示所以得任务
+        |- item (?tid)  //查看某一个任务
+        |- category     显示一级分类
+        |- showCat      显示二级分类
+        |- addCat       添加分类
+        |- updateCat    更新分类
+        |- del          删除分类
+        |- updateCacheCategory  更换分类缓存数据
 
 用户手机端(Mobile)
     Index

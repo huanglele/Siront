@@ -12,14 +12,63 @@ namespace Admin\Controller;
 class TaskController extends CommonController
 {
 
+    public function _initialize(){
+        parent::_initialize();
+        $taskStatusColor =array(
+            '0' => '',
+            '1' => 'bg-green',    // 发布中,
+            '2' => 'bg-light-blue',  //已接单
+            '3' => 'bg-blue',   //已完成
+            '4' => 'bg-navy',      //已评价
+            '5' => 'bg-black',      //放弃
+        );
+        $this->assign('TaskStatusColor',$taskStatusColor);
+    }
+
+    /**
+     * 处理搜索
+     */
+    private function searchToMap(){
+
+    }
+
     /**
      * 显示所有的任务
      */
     public function index(){
-
+        $map = array();
+        $status = I('get.status',-1,'number_int');
+        if($status!='-1'){
+            $map['status'] = $status;
+        }
+        $this->assign('status',$status);
+        $field = 'tid,from_uid as fuid,title,cid,create_time as ctime,operate_time as otime,status';
+        $uidArr = array(0);
+        $list = $this->getData(M('Task'),$map,'tid desc',$field);
+        if(is_array($list)){
+            foreach($list as $u){
+                $uidArr[] = $u['fuid'];
+            }
+            $userInfo = M('user')->where(array('uid'=>array('in',$uidArr)))->getField('uid,nickname,phone');
+            $this->assign('userInfo',$userInfo);
+        }
+        $this->assign('CatName',S('CatName'));
+        $this->assign('TaskStatus',C('TaskStatus'));
+        $this->display('index');
     }
 
-
+    /**
+     * 查看一个任务详情
+     */
+    public function item(){
+        $tid = I('get.tid',0,'number_int');
+        $info = M('task')->find($tid);
+        if($info){
+            var_dump($info);
+        }else{
+            $this->error('页面不存在');
+        }
+    }
 
     /**
      * 显示一级分类
@@ -145,8 +194,5 @@ class TaskController extends CommonController
         getCat(true);
     }
 
-    public function delEmptyCat(){
-        $map['name'] = '';
-        M('category')->where($map)->delete();
-    }
+
 }
