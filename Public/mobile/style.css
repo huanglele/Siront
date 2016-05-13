@@ -1000,6 +1000,37 @@ body {
     color: #fa8919;
     background-color: #FAFAFA;
 }
+#workDesc .desc .wrapper:after {
+    display: block;
+    bottom: 0;
+    position: absolute;
+    border-top: 1px solid #ccc;
+    left: 0;
+    width: 100%;
+    content: ' '
+}
+
+#workDesc .desc .textarea-from{
+    width: 100%;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+    color: #fa8919;
+    background-color: #FAFAFA;
+}
+.sub_task{
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    margin-top: 16px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #009966;
+    color: #fff;
+}
+
+
 
 .location .wrapper .txt-from .fail-tip, .location .wrapper .txt-to .fail-tip {
     color: #adadad
@@ -1312,7 +1343,8 @@ body {
     transition: all .1s ease-out;
     -webkit-transition: all .1s ease-out;
     vertical-align: top;
-    border-left: 1px solid #e5e5e5
+    border-left: 1px solid #e5e5e5;
+    height: 50px;
 }
 
 .suggest .option .address-select .address-input[type=text] {

@@ -93,6 +93,26 @@
                 </div>
             </div>
 
+            <!--填写标题-->
+            <div id="workTitle">
+                <div class="location">
+                    <div class="wrapper wrapper-from-hook border-1px">
+                        <i class="i-from i-circle iconfont icon-content-management"></i>
+                        <input id="workTitleInput" name="workTitle" placeholder="求助" class="txt-from txt-from-hook default" />
+                    </div>
+                </div>
+            </div>
+
+            <!--填写描述-->
+            <div id="workDesc">
+                <div class="desc">
+                    <div class="wrapper wrapper-from-hook">
+                        <textarea id="workDescInput" rows="3" name="workDesc" placeholder="详细描述问题" class="textarea-from txt-from-hook default" ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sub_task" class="sub_task">求助</div>
 
             <div id="rule"></div>
             <div id="order"></div>
@@ -154,6 +174,9 @@
         </div>
         <div id="login_sub" class="login-btn disable login-btn-hook">登录</div>
         <div id="login_tip" class="login_tip"></div>
+        <div id="reg_sub" class="login-btn disable login-btn-hook">
+            <a href="<{:U('index/reg')}>">没有账号</a>
+        </div>
         <div class="link"><span class="law-hook">同意《法律声明及隐私政策》</span></div>
     </div>
     <div id="closeLogin" class="close"></div>
