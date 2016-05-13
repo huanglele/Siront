@@ -1,253 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no"/>
-    <title>许愿池</title>
-    <script>
-        isLogin = <eq name='isLogin' value='1'>true<else />false</eq>;
-        baseUrl = "__APP__";
-        timeJson = <{$timeJson}>;
-    </script>
+    <meta charset="utf-8">
+    <title>Hello MUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!--标准mui.css-->
-    <!--<link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">-->
-    <link href="__PUBLIC__/mui/mui.picker.css" rel="stylesheet" />
-    <link href="__PUBLIC__/mui/mui.poppicker.css" rel="stylesheet" />
-
-    <script src="__PUBLIC__/js/jquery.min.js" type="text/javascript" ></script>
-    <script src="__PUBLIC__/js/jquery-ui-1.10.3.min.js" type="text/javascript" ></script>
-
-    <script type="text/javascript" src="__PUBLIC__/js/pageDialog.js"></script>
-    <script src="__PUBLIC__/js/function.js" type="text/javascript" ></script>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/mobile/style.css">
-    <script src="//cdn.bootcss.com/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1462951035_3919814.css">
-
-
-    <script src="__PUBLIC__/mui/mui.min.js"></script>
-     <!--<script src="../js/mui.picker.min.js"></script>-->
-    <script src="__PUBLIC__/mui/mui.picker.js"></script>
-    <script src="__PUBLIC__/mui/mui.poppicker.js"></script>
-
-
-    <script src="__PUBLIC__/mobile/app.js" type="text/javascript" ></script>
-
+    <link rel="stylesheet" href="__PUBLIC__/app/css/mui.min.css">
+    <style>
+        html,
+        body {
+            background-color: #efeff4;
+        }
+        p {
+            text-indent: 22px;
+        }
+        span.mui-icon {
+            font-size: 14px;
+            color: #007aff;
+            margin-left: -15px;
+            padding-right: 10px;
+        }
+        .mui-off-canvas-left {
+            color: #fff;
+        }
+        .title {
+            margin: 35px 15px 10px;
+        }
+        .title+.content {
+            margin: 10px 15px 35px;
+            color: #bbb;
+            text-indent: 1em;
+            font-size: 14px;
+            line-height: 24px;
+        }
+        input {
+            color: #000;
+        }
+    </style>
 </head>
+
 <body>
-<div id="wrap">
-    <div id="main" class="clearfix">
-        <div id="navigator"></div>
-        <div id="operation"></div>
-        <div id="subMenu"></div>
-        <div class="content">
-            <!--问候语-->
-            <div>
-                <p id="hello" class="hello">
-                    <span>您</span>
-                    <span>好</span>
-                    <span>,</span>
-                    <span>有</span>
-                    <span>什</span>
-                    <span>么</span>
-                    <span>可</span>
-                    <span>以</span>
-                    <span>帮</span>
-                    <span>您</span>
-                    <span>的</span>
-                    <span><i class="iconfont icon-smile"></i></span>
-                </p>
-            </div>
+<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+    <!--侧滑菜单部分-->
+    <aside id="offCanvasSide" class="mui-off-canvas-left">
+        <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <div class="title">侧滑导航</div>
+                <div class="content">
+                    这是可拖动式侧滑菜单示例，你可以在这里放置任何内容；关闭侧滑菜单有多种方式： 1.在手机屏幕任意位置向左拖动(drag)；2.点击本侧滑菜单页之外的任意位置; 3.点击如下红色按钮
+							<span class="android-only">；4.Android手机按back键；5.Android手机按menu键
+							</span>。
+                    <p style="margin: 10px 15px;">
+                        <button id="offCanvasHide" type="button" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 20px;">关闭侧滑菜单</button>
+                    </p>
 
-            <!--位置-->
-            <div id="location">
-                <div class="location">
-                    <div class="wrapper wrapper-from-hook border-1px">
-                        <i class="i-from i-circle iconfont icon-place"></i>
-                        <input name="workPlace" placeholder="设置地点" class="txt-from txt-from-hook default" />
-                        <input name="cityCode" type="hidden" value="">
+                </div>
+                <div class="title" style="margin-bottom: 25px;">侧滑列表示例</div>
+                <ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">
+                            Item 1
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">
+                            Item 2
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">
+                            Item 3
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">
+                            Item 4
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">
+                            Item 5
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right">
+                            Item 6
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <!--主界面部分-->
+    <div class="mui-inner-wrap">
+        <header class="mui-bar mui-bar-nav">
+            <a href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+            <a class="mui-action-back mui-btn mui-btn-link mui-pull-right">关闭</a>
+            <h1 class="mui-title">div模式右滑菜单</h1>
+        </header>
+        <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <div class="mui-content-padded">
+                    <p>这是可拖动式右滑导航示例，主页面和菜单在一个HTML文件中， 优点是支持拖动手势（跟手），缺点是不支持菜单内容在多页面的复用； 当前页面为主界面，你可以在主界面放置任何内容； 打开侧滑菜单有多种方式： 1、在当前页面向右拖动； 2、点击页面左上角的
+                        <span class="mui-icon mui-icon-bars"></span> 图标； 3、通过JS API触发（例如点击如下蓝色按钮体验）；
+                        <span class="android-only">4、Android手机按menu键；</span>
+                    </p>
+                    <p style="padding: 5px 20px;margin-bottom: 5px;">
+                        <button id="offCanvasShow" type="button" class="mui-btn mui-btn-primary mui-btn-block" style="padding: 10px;">
+                            显示侧滑菜单
+                        </button>
+                    </p>
+                    <p>侧滑菜单的移动动画，支持多种效果，切换如下选项体验不同动画效果：</p>
+
+                </div>
+
+                <form class="mui-input-group" style="margin-bottom: 15px;">
+                    <div class="mui-input-row mui-radio">
+                        <label>主界面移动、菜单不动</label>
+                        <input name="style" type="radio" checked="" value="main-move">
                     </div>
-                </div>
-            </div>
-
-            <!--工种类别-->
-            <div id="workType">
-                <div class="location">
-                    <div class="wrapper wrapper-from-hook border-1px">
-                        <i class="i-from i-circle iconfont icon-tags"></i>
-                        <input name="workType" placeholder="内容" class="txt-from txt-from-hook default" />
-                        <input name="workCat" type="hidden" value="">
+                    <div class="mui-input-row mui-radio">
+                        <label>主界面不动、菜单移动</label>
+                        <input name="style" type="radio" value="menu-move">
                     </div>
-                </div>
-            </div>
-
-            <!--设置时间-->
-            <div id="workTime">
-                <div class="location">
-                    <div class="wrapper wrapper-from-hook border-1px">
-                        <i class="i-from i-circle iconfont icon-time"></i>
-                        <input id="workTimeInput" name="workTime" placeholder="预约时间" class="txt-from txt-from-hook default" />
+                    <div class="mui-input-row mui-radio mui-hidden" id="move-togger">
+                        <label>整体移动</label>
+                        <input name="style" type="radio" value="all-move">
                     </div>
-                </div>
-            </div>
-
-
-            <div id="rule"></div>
-            <div id="order"></div>
-        </div>
-    </div>
-</div>
-
-<!--点击个人中心按钮-->
-<div id="btnMenu" style="display: block;">
-    <div class="user-menu">
-        <i class="iconfont icon-user"></i>
-    </div>
-</div>
-
-<!--菜单导航-->
-<div id="menu" class="menu hidden">
-    <div class="l list-hook">
-        <ul>
-            <li class="phone item" idx="0">
-                <a>
-                    <i class="iconfont icon-user"></i>
-                </a>
-            </li>
-            <li class="trip item" idx="1">
-                <a>
-                    <i class="iconfont icon-list"></i>我的求助
-                </a>
-            </li>
-            <li class="settings item" idx="2">
-                <a>
-                    <i class="iconfont icon-setting"></i>设置
-                </a>
-            </li>
-            <li class="advertisement item" idx="3">
-                <a>
-                    <i class="iconfont icon-join"></i>我的技能
-                </a>
-            </li>
-
-            <li class="advertisement item" idx="3">
-                <a>
-                    <i class="iconfont icon-join"></i>我的技能
-                </a>
-            </li>
-
-        </ul>
-    </div>
-    <div class="r close-hook visible">
-        <a class="closeMenu"><i></i></a>
-    </div>
-</div>
-
-<!--登录-->
-<div class="login-popup" id="loginBox" style="display: none">
-    <div class="pop-valid">
-        <div class="title">登录</div>
-        <div class="phone border-1px phone-wrapper-hook ">
-            <input class="input-val phone-hook" type="phone" name="phone" placeholder="输入手机号" maxlength="11">
-            <div class="error phone-error-hook"></div>
-        </div>
-        <div class="code border-1px code-wrapper-hook">
-            <input class="input-val code-hook" type="password" name="password" placeholder="密码" maxlength="16" minlength="6">
-
-            <div class="error code-error-hook"></div>
-        </div>
-        <div id="login_sub" class="login-btn disable login-btn-hook">登录</div>
-        <div id="login_tip" class="login_tip"></div>
-        <div id="reg_sub" class="login-btn disable login-btn-hook">
-            <a href="<{:U('index/reg')}>">没有账号</a>
-        </div>
-        <div class="link"><span class="law-hook">同意《法律声明及隐私政策》</span></div>
-    </div>
-    <div id="closeLogin" class="close"></div>
-</div>
-
-<!--选择地址-->
-<div id="chooseMap" >
-    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
-    <script type="text/javascript"
-            src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&plugin=AMap.Autocomplete,AMap.Geocoder"></script>
-
-    <div class="suggest">
-        <div class="border-1px option">
-            <div class="cancel cancel-hook closeMap">确定</div>
-            <div class="back back-wrapper-hook">
-                <div class="back-hook">
-                    <span class="back-span closeMap" >
-                        <i class="iconfont icon-back"></i>
-                    </span>
-                </div>
-            </div>
-            <div class="address-select address-select-hook">
-                <input type="text"  id="tipinput" class="address-input address-input-hook" placeholder="选择位置">
-            </div>
-        </div>
-        <div class="pos-wrapper pos-wrapper-hook">
-            <div class="mapBox">
-                <div id="AMap"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--选择求助类型-->
-<div id="chooseType">
-    <div class="suggest">
-        <div class="border-1px option">
-            <div class="back back-wrapper-hook">
-                <div class="back-hook">
-                    <span class="back-span closeType" >
-                        <i class="iconfont icon-back"></i>
-                    </span>
-                </div>
-            </div>
-            <div class="address-select address-select-hook">
-                <p id="chooseTypeTitle">选择求助类型</p>
-            </div>
-        </div>
-
-        <div class="pos-wrapper pos-wrapper-hook">
-            <volist name="CatMap[0]" id="cat">
-                <eq name="cat.status" value="1">
-                    <div class="catItem">
-                        <div class="catFirstTitle">
-                            <span><{$cat.name}></span>
-                            <i class="iconfont icon-menuup"></i>
-                        </div>
-                        <ul class="catSecUl">
-                            <volist name="CatMap[$cat['id']]" id="v">
-                                <eq name="v.status" value="1">
-                                    <li data-cid="<{$v.id}>" class="cat"><{$v.name}></li>
-                                </eq>
-                            </volist>
-                        </ul>
+                    <div class="mui-input-row mui-radio">
+                        <label>缩放式侧滑（类手机QQ）</label>
+                        <input name="style" type="radio" value="main-move-scalable">
                     </div>
-                </eq>
-            </volist>
+                </form>
+
+            </div>
         </div>
+        <!-- off-canvas backdrop -->
+        <div class="mui-off-canvas-backdrop"></div>
     </div>
 </div>
-<!--错误提示框-->
-<div id="d-wrap">
-    <div class="alert"><p class="d-icon icon-alert"></p>
-        <div class="d-tip" style="color:#333;font-size:1.6rem;"></div>
-        <div class="d-btns clearfix"><a class="btn-orange" id="d-btn-close">我知道了</a></div>
-    </div>
-</div>
-
-<div id="grayBox" class="grayBox"></div>
-
+<script src="__PUBLIC__/app/js/mui.min.js"></script>
 <script>
-    $(window).ready(function(){
-
-    })
+    mui.init();
+    //侧滑容器父节点
+    var offCanvasWrapper = mui('#offCanvasWrapper');
+    //主界面容器
+    var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+    //菜单容器
+    var offCanvasSide = document.getElementById("offCanvasSide");
+    if (!mui.os.android) {
+        document.getElementById("move-togger").classList.remove('mui-hidden');
+        var spans = document.querySelectorAll('.android-only');
+        for (var i = 0, len = spans.length; i < len; i++) {
+            spans[i].style.display = "none";
+        }
+    }
+    //移动效果是否为整体移动
+    var moveTogether = false;
+    //侧滑容器的class列表，增加.mui-slide-in即可实现菜单移动、主界面不动的效果；
+    var classList = offCanvasWrapper[0].classList;
+    //变换侧滑动画移动效果；
+    mui('.mui-input-group').on('change', 'input', function() {
+        if (this.checked) {
+            offCanvasSide.classList.remove('mui-transitioning');
+            offCanvasSide.setAttribute('style', '');
+            classList.remove('mui-slide-in');
+            classList.remove('mui-scalable');
+            switch (this.value) {
+                case 'main-move':
+                    if (moveTogether) {
+                        //仅主内容滑动时，侧滑菜单在off-canvas-wrap内，和主界面并列
+                        offCanvasWrapper[0].insertBefore(offCanvasSide, offCanvasWrapper[0].firstElementChild);
+                    }
+                    break;
+                case 'main-move-scalable':
+                    if (moveTogether) {
+                        //仅主内容滑动时，侧滑菜单在off-canvas-wrap内，和主界面并列
+                        offCanvasWrapper[0].insertBefore(offCanvasSide, offCanvasWrapper[0].firstElementChild);
+                    }
+                    classList.add('mui-scalable');
+                    break;
+                case 'menu-move':
+                    classList.add('mui-slide-in');
+                    break;
+                case 'all-move':
+                    moveTogether = true;
+                    //整体滑动时，侧滑菜单在inner-wrap内
+                    offCanvasInner.insertBefore(offCanvasSide, offCanvasInner.firstElementChild);
+                    break;
+            }
+            offCanvasWrapper.offCanvas().refresh();
+        }
+    });
+    //主界面‘显示侧滑菜单’按钮的点击事件
+    document.getElementById('offCanvasShow').addEventListener('tap', function() {
+        offCanvasWrapper.offCanvas('show');
+    });
+    //菜单界面，‘关闭侧滑菜单’按钮的点击事件
+    document.getElementById('offCanvasHide').addEventListener('tap', function() {
+        offCanvasWrapper.offCanvas('close');
+    });
+    //主界面和侧滑菜单界面均支持区域滚动；
+    mui('#offCanvasSideScroll').scroll();
+    mui('#offCanvasContentScroll').scroll();
+    //实现ios平台原生侧滑关闭页面；
+    if (mui.os.plus && mui.os.ios) {
+        mui.plusReady(function() { //5+ iOS暂时无法屏蔽popGesture时传递touch事件，故该demo直接屏蔽popGesture功能
+            plus.webview.currentWebview().setStyle({
+                'popGesture': 'none'
+            });
+        });
+    }
 </script>
-
 </body>
+
 </html>
