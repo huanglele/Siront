@@ -28,7 +28,7 @@ class AppController extends Controller
         }
         $this->assign('timeJson',json_encode($this->time()));
         $this->assign('CatMap',getCat());
-        $this->display();
+        $this->display('Index/index');
     }
 
     public function cat(){
