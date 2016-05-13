@@ -921,15 +921,14 @@ body {
 
 #wrap {
     height: auto;
-    min-height: 99%;
+    max-height: 99%;
 }
 #main {
     width: 100%;
-    padding-bottom: 140px;
 }
 .content {
     width: 86%;
-    margin: 30px 7%;
+    margin: 30px 7% 0px;
 }
 #navigator {
      margin-left: 43px;

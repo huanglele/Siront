@@ -136,3 +136,24 @@ function getCat($cache = false){
     }
     return $r;
 }
+
+/**
+ * 验证是不是电话号码包括手机号和座机。
+ * @param s
+ */
+function isTel($s){
+    $patrn = '/^(0\d{2,3})?\d{7,8}$/';
+    if (preg_match($patrn,$s) || isMobil($s)) return true;
+    return false;
+}
+
+/**
+ * 验证是不是手机号
+ * @param s
+ * @returns {boolean}
+ */
+function isMobil($s) {
+    $patrn = '/^(13[0-9]|14[5|7]|15[0-9]|17[0-9])\d{8}$/';
+    if (!preg_match($patrn,$s)) return false;
+    return true;
+}

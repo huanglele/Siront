@@ -67,7 +67,9 @@
                     <div class="wrapper wrapper-from-hook border-1px">
                         <i class="i-from i-circle iconfont icon-place"></i>
                         <input name="workPlace" placeholder="设置地点" class="txt-from txt-from-hook default" />
-                        <input name="cityCode" type="hidden" value="">
+                        <input name="cityCode" type="hidden" value="0">
+                        <input name="lon" type="hidden" value="">
+                        <input name="lat" type="hidden" value="">
                     </div>
                 </div>
             </div>
@@ -89,6 +91,17 @@
                     <div class="wrapper wrapper-from-hook border-1px">
                         <i class="i-from i-circle iconfont icon-time"></i>
                         <input id="workTimeInput" name="workTime" placeholder="预约时间" class="txt-from txt-from-hook default" />
+                        <input id="time" type="hidden" name="time" value=""/>
+                    </div>
+                </div>
+            </div>
+
+            <!--设置时间-->
+            <div id="">
+                <div class="location">
+                    <div class="wrapper wrapper-from-hook border-1px">
+                        <i class="i-from i-circle iconfont icon-time"></i>
+                        <input name="tel" placeholder="联系方式" class="txt-from txt-from-hook default" />
                     </div>
                 </div>
             </div>

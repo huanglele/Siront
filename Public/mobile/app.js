@@ -156,6 +156,40 @@ $(window).ready(function(){
         event.preventDefault();
     })
 
+    //提交任务
+    $('#sub_task').click(function(){
+        if(isLogin){
+            var data = checkTaskInput();
+            if(data){
+                $.ajax({
+                    'url':baseUrl+'/Ajax/addTask',
+                    'type':"POST",
+                    'dataType':'json',
+                    'data':data,
+                    beforeSend:function(){
+                        bgShow('show');
+                    },
+                    success:function(res){
+                        if(res.status=='success'){
+                            myAlert('发布成功');
+                            $('input').val('');
+                            $('textarea').val('');
+                        }else if(res=='error'){
+                            myAlert(res.msg);
+                        }else {
+                            myAlert('未知错误');
+                        }
+                    },
+                    complete: function(){
+                        bgShow();
+                    }
+                })
+            }
+        }else {
+            $('#btnMenu').click();
+        }
+    })
+
 })
 
 /**
@@ -187,6 +221,50 @@ function checkLoginInput(){
 }
 
 /**
+ * 验证发布任务的数据
+ * @returns boolean|json  失败返回false，成功返回需要发送的数据
+ */
+function checkTaskInput(){
+    var place = $('input[name="workPlace"]').val();
+    var cityCode =  $('input[name="cityCode"]').val();
+    var lon =  $('input[name="lon"]').val();
+    var lat =  $('input[name="lat"]').val();
+    if(cityCode==''){
+        myAlert('请设置位置');return false;
+    }
+    var type =  $('input[name="workCat"]').val();
+    if(type==''){
+        myAlert('请设置求助类型');return false;
+    }
+    var time = $('input[name="time"]').val();
+    if(time==''){
+        myAlert('请设置时间');return false;
+    }
+    var title = $('#workTitleInput').val();
+    var tel = $('input[name="tel"]').val();
+    if(!isMobil(tel)){
+        myAlert('填写正确的联系方式');return false;
+    }
+    var desc = $('#workDescInput').val();
+    if(desc==''){
+        myAlert('请描述一下问题');return false;
+    }
+
+    var data = {
+        'place':place,
+        'lon' : lon,
+        'lat':lat,
+        'cityCode':cityCode,
+        'type':type,
+        'time':time,
+        'title':title,
+        'tel':tel,
+        'desc':desc
+    }
+    return data;
+}
+
+/**
  *提示弹出框
  */
 function myAlert(s){
@@ -194,7 +272,8 @@ function myAlert(s){
     $('.d-tip').html(s);
     $('#d-wrap').css({
         'display':'block',
-        'top':($(window).height()-300)/2
+        'top':($(window).height()-300)/2,
+        'left':($(window).width()-280)/2
     })
     $('#d-btn-close').on('click',function(){
         $('#d-wrap').css({
@@ -356,7 +435,6 @@ function aMap(){
         }
     }
 
-
     function clearMark(){
         if(marker){
             marker.setMap(null);
@@ -382,6 +460,8 @@ function aMap(){
             if (status === 'complete' && result.info === 'OK') {
                 var address = result.regeocode.addressComponent.district+result.regeocode.addressComponent.township+result.regeocode.addressComponent.street+result.regeocode.addressComponent.streetNumber; //返回地址描述
                 log(result);
+                $('input[name="lat"]').val(lat);
+                $('input[name="lon"]').val(lon);
                 $('input[name="workPlace"]').val(address);
                 $('input[name="cityCode"]').val(result.regeocode.addressComponent.citycode);
             }
@@ -413,6 +493,26 @@ function aMap(){
     }
 }
 
+/**
+ * 验证是不是电话号码包括手机号和座机。
+ * @param s
+ */
+function isTel(s){
+    var patrn=/^0\d{2,3}-?\d{7,8}$/;
+    if (patrn.exec(s) || isMobil(s)) return true;
+    return false;
+}
+
+/**
+ * 验证是不是手机号
+ * @param s
+ * @returns {boolean}
+ */
+function isMobil(s) {
+    var patrn=/^(13[0-9]|14[5|7]|15[0-9]|17[0-9])\d{8}$/;
+    if (!patrn.exec(s)) return false;
+    return true;
+}
 
 (function($, doc) {
     $.init();
@@ -427,6 +527,7 @@ function aMap(){
         workTimeInput.addEventListener('tap', function(event) {
             timePicker.show(function(items) {
                 workTimeInput.value =  (items[0] || {}).text + " " + (items[1] || {}).text + "点 " + (items[2] || {}).text+"分";
+                doc.getElementById('time').value = items[0].value + " " + items[1].value+ ":" + items[2].value;
                 //返回 false 可以阻止选择框的关闭
                 //return false;
             });

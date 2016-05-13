@@ -119,4 +119,83 @@ class AjaxController extends Controller
         }
     }
 
+    /**
+     * 发布任务
+     */
+    public function addTask(){
+        $ret['status'] = 'error';
+        $uid = session('uid');
+        if(!$uid){
+            $ret['msg'] = '请重新登录';
+        }else{
+            $r = $this->checkTaskData();
+            if($r['status']){
+                $data = $r['data'];
+                $data['from_uid'] = $uid;
+                $data['create_time'] = time();
+                $data['status'] = 1;
+                if(M('task')->add($data)){
+                    $ret['status'] = 'success';
+                }else{
+                    $ret['msg'] = '服务器错误';
+                }
+            }else{
+                $ret['msg'] = $r['msg'];
+            }
+        }
+        $this->ajaxReturn($ret);
+    }
+
+    /**
+     * 检测发布任务的数据是否正确
+     */
+    private function checkTaskData(){
+        $ret['status'] = false;
+        //发布时间
+        $operate_time = strtotime(I('post.time'));
+        if($operate_time){
+            $data['operate_time'] = $operate_time;
+            //位置信息
+            $lat = I('post.lat',0,'float');
+            $lon = I('post.lon',0,'float');
+            if($lat && $lon){
+                $data['lat'] = $lat;
+                $data['lon'] = $lon;
+                $data['cityCode'] = I('post.cityCode');
+                $data['address'] = I('post.place');
+
+                //发布类型
+                $type = I('post.type',0,'number_int');
+                if($type){
+                    $data['cid'] = $type;
+
+                    //联系方式
+                    $tel = I('post.tel');
+                    if(isTel($tel)){
+                        $data['tel'] = $tel;
+                        //简单描述
+                        $desc = I('post.desc');
+                        if($desc){
+                            $data['desc'] = $desc;
+                            $data['title'] = I('post.title');
+
+                            $ret['status'] = true;
+                            $ret['data'] = $data;
+                        }else{
+                            $ret['msg'] = '请简单描述问题';
+                        }
+                    }else{
+                        $ret['msg'] = '联系方式错误';
+                    }
+                }else{
+                    $ret['msg'] = '帮助类型错误';
+                }
+            }else{
+                $ret['msg'] = '位置错误';
+            }
+        }else{
+            $ret['msg'] = '发布时间错误';
+        }
+        return $ret;
+    }
 }
