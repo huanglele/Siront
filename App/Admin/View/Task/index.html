@@ -76,7 +76,7 @@
                                         <tr>
                                             <td><{$vo.tid}></td>
                                             <td>
-                                                <a href="<{:U('user/userInfo')}>?uid=<{$vo.fuid}>"><{$userInfo[$vo['fuid']]['phone']|default=$userInfo[$vo['fuid']]['nickname']}></a>
+                                                <a href="<{:U('user/userInfo')}>?uid=<{$vo.fuid}>"><{$userInfo[$vo['fuid']]['nickname']|default=$userInfo[$vo['fuid']]['phone']}></a>
                                             </td>
                                             <td>
                                                 <{$vo.title}>
