@@ -50,5 +50,34 @@ class ServerController extends Controller
         $this->display('login');
     }
 
+    /**
+     * 许愿池
+     * 匹配标签
+     * 距离排序
+     */
+    public function listHelp(){
+        //获取服务商的标签
+        $type = session('type');
+        $uid = session('uid');
+        if($type=='p'){
+            $M = M('person_info');
+        }else{
+            $M = M('company_info');
+        }
+        $userInfo = $M->find($uid);
+        if($userInfo['cid']){
+            $cidArr = json_decode($userInfo['cid'], true);
+        }else{
+            $cidArr = array();
+        }
+        $lon = $userInfo['lon']*10000000;
+        $lat = $userInfo['lat']*10000000;
+
+        $map['status'] = 1;
+//        $map['cid'] = array('in',$cidArr);
+        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis";
+        $list = M('task')->where($map)->field($filed)->select();
+        var_dump($list);
+    }
 
 }
