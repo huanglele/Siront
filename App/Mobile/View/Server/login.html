@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>服务商登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">
+    <script src="__PUBLIC__/mui/mui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <style>
+        .mui-input-group:first-child {
+            margin-top: 20px;
+        }
+        .mui-input-group label {
+            width: 22%;
+        }
+        .mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea {
+             width: 78%;
+        }
+        .mui-content-padded {
+            margin-top: 25px;
+        }
+        .mui-btn {
+            padding: 10px;
+        }
+        .link-area {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .spliter {
+            color: #bbb;
+            padding: 0px 8px;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">登录</h1>
+</header>
+<div class="mui-content">
+    <form id='login-form' class="mui-input-group">
+        <div class="mui-input-row">
+            <label>账号</label>
+            <input id='account' type="text" name="phone" class="mui-input-clear mui-input" placeholder="请输入账号">
+        </div>
+        <div class="mui-input-row">
+            <label>密码</label>
+            <input id='password' type="password" name="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+        </div>
+    </form>
+    <div class="mui-content-padded">
+        <button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+        <div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+        </div>
+    </div>
+</div>
+<script src="__PUBLIC__/mui/mui.min.js"></script>
+<script>
+    (function($, doc) {
+        $.init({
+            statusBarBackground: '#f7f7f7'
+        });
+    }(mui, document));
+    $(window).ready(function(){
+        //登录
+        $('#login').click(function(){
+            login();
+        })
+    })
+
+    /**
+     * 登录
+     */
+    function login(){
+        var phone = $('input[name="phone"]').val();
+        var pwd = $('input[name="password"]').val();
+        var patrn=/^(13[0-9]|14[5|7]|15[0-9]|17[0-9])\d{8}$/;
+        if(patrn.exec(phone)){
+            if(pwd.length>5){
+                $.ajax({
+                    url:"<{:U('ajax/loginServer')}>",
+                    type:'post',
+                    dataType:'json',
+                    data:{
+                        phone:phone,
+                        pwd:pwd
+                    },
+                    success:function(data){
+                        if(data.status=='success'){
+                            window.location.href = "<{:U('server/index')}>"
+                        }else if(data.msg){
+                            mui.toast(data.msg);
+                        }
+                    }
+                })
+            }else {
+                mui.toast('密码格式不对');
+            }
+        }else {
+            mui.toast('手机号格式不对');
+        }
+    }
+</script>
+</body>
+</html>

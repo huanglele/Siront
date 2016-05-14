@@ -20,6 +20,8 @@ return array(
 
     /*任务管理部分*/
     //'task.index' => array(),      //显示所有的任务
+    //'task.item' => array(),       //查询一个任务
+    //'task.delTask' => array(),    //删除一个任务
     //'task.addcat' => array(),     //添加分类
     //'task.updatecat => array(),    //更新分类
     //'task.delcat => array(),      //删除一个分类

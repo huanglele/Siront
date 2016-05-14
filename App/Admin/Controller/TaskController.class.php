@@ -64,9 +64,31 @@ class TaskController extends CommonController
         $tid = I('get.tid',0,'number_int');
         $info = M('task')->find($tid);
         if($info){
-            var_dump($info);
+            //获取双方的信息
+            $usersUid[] = $info['from_uid'];
+            if($info['work_uid']){
+                $usersUid[] = $info['work_uid'];
+            }
+            $this->assign('CatName',S('CatName'));
+            $this->assign('TaskStatus',C('TaskStatus'));
+            $usersInfo = M('user')->where(array('uid'=>array('in',$usersUid)))->getField('uid,nickname,phone');
+            $this->assign('usersInfo',$usersInfo);
+            $this->assign('info',$info);
+            $this->display('item');
         }else{
             $this->error('页面不存在');
+        }
+    }
+
+    /**
+     * 删除一个任务
+     */
+    public function delTask(){
+        $tid = I('get.tid');
+        if(M('task')->where(array('tid'=>$tid))->setField('status',6)){
+            $this->success('删除成功');
+        }else{
+            $this->error('删除失败');
         }
     }
 

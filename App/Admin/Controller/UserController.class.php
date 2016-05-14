@@ -212,7 +212,7 @@ class UserController extends CommonController
             $data['lon'] = $data['lat'] = $data['score'] = 0;
             $data['cid'] = $data['phone'] = $data['sfzurl'] = '';
             $data['status'] = $s;
-            $Per->save($data);
+            $Per->add($data);
         }elseif($s>0 && !is_null($personInfo)){ //已经存在个体户，现在更新状态
             $Per->where($map)->setField('status',$s);
         }
@@ -236,7 +236,7 @@ class UserController extends CommonController
             $data['lon'] = $data['lat'] = $data['score'] = 0;
             $data['cid'] = $data['phone'] = $data['sfzurl'] = '';
             $data['status'] = $s;
-            $Company->save($data);
+            $Company->add($data);
         }elseif($s>0 && !is_null($companyInfo)){ //已经存在企业用户，现在更新状态
             $Company->where($map)->setField('status',$s);
         }

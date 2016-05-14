@@ -147,6 +147,39 @@ class AjaxController extends Controller
     }
 
     /**
+     * 服务商登录
+     */
+    public function loginServer(){
+        if(IS_POST){
+            $ret['status'] = 'error';
+            $phone = I('post.phone',0,'number_int');
+            $map['phone'] = $phone;
+            $map['person_status|company_status'] = array('neq',0);
+            $info = M('user')->field('uid,password,person_status as pStatus,company_status as cStatus')->where($map)->find();
+            if($info){
+                if(md5(I('post.pwd'))==$info['password']){
+                    //先判断是否是有正常的状态
+                    if($info['pstatus']==2 || $info['cstatus']==2){
+                        $type = ($info['cstatus']==2)?'c':'p';
+                        session('uid',$info['uid']);
+                        session('type',$type);
+                        $ret['status'] = 'success';
+                    }else{
+                        $UserStatus = array('0'=>'用户不存在','1' => '账户待认证', '3' => '账户被限制',);
+                        $s = $info['cstatus']?$info['cstatus']:$info['pstatus'];
+                        $ret['msg'] = $UserStatus[$s];
+                    }
+                }else{
+                    $ret['msg'] = '密码错误';
+                }
+            }else{
+                $ret['msg'] = '用户不存在';
+            }
+            $this->ajaxReturn($ret);
+        }
+    }
+
+    /**
      * 检测发布任务的数据是否正确
      */
     private function checkTaskData(){
@@ -159,8 +192,8 @@ class AjaxController extends Controller
             $lat = I('post.lat',0,'float');
             $lon = I('post.lon',0,'float');
             if($lat && $lon){
-                $data['lat'] = $lat;
-                $data['lon'] = $lon;
+                $data['lat'] = $lat*10000000;
+                $data['lon'] = $lon*10000000;
                 $data['cityCode'] = I('post.cityCode');
                 $data['address'] = I('post.place');
 

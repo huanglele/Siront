@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>服务商</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">
+    <script src="__PUBLIC__/mui/mui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <style>
+        .mui-bar-nav{
+            background-color: #EA4F23;
+             -webkit-box-shadow: 0 1px 6px #EA4F23;
+             box-shadow: 0 1px 6px #EA4F23;
+        }
+        .mui-bar-nav .mui-title{
+            color: #f7f7f7;
+            font-weight: bold;
+        }
+        .info-head-box{
+            background-color: #EA4F23;
+            text-align: center;
+            color:floralwhite;
+            margin-top: 44px;
+            padding: 20px 0px 10px;
+            position: relative;
+        }
+        .info-head-box .info-img{
+            margin: 10px auto 0px;
+        }
+        .headimg{
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+        }
+        .info-count{
+            font-family: sans-serif;
+            font-weight: bolder;
+        }
+        .info-count .mui-grid-view.mui-grid-9{
+            background-color: #fff;
+        }
+        .info-count .mui-grid-view.mui-grid-9 .mui-table-view-cell {
+            padding: 0px 15px;
+        }
+        .mui-bar-nav~.mui-content{
+            padding-top: 10px;
+        }
+        .mui-slider-item img{
+            height: 60px;
+        }
+        .menu {
+            margin-top: 10px;
+            background: #fff;
+        }
+        .menu .mui-grid-view.mui-grid-9{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-bars mui-pull-left mui-plus-visible"></a>
+    <a id="info" class="mui-icon mui-icon-gear mui-pull-right"style="color: #Ffffff;"></a>
+    <h1 class="mui-title"><{$info.nickname}></h1>
+</header>
+<div class="info-head-box">
+    <div class="info-img">
+        <img class="headimg" src="<{$info.headimgurl|headImgUrl}>" />
+    </div>
+    <div class="info-score">
+       评分：<{$info.score}>分
+    </div>
+</div>
+<div class="info-count">
+    <ul class="mui-table-view mui-grid-view mui-grid-9">
+        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+            <a href="#">
+            <span>5</span>
+            <div class="">今日订单</div></a>
+        </li>
+        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+            <a href="#">
+                <span>3</span>
+                <div class="">账户余额</div></a>
+        </li>
+        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+            <a href="#">
+                <span>9</span>
+                <div class="">积分</div></a>
+        </li>
+    </ul>
+</div>
+<div class="mui-content">
+    <!--广告幻灯片-->
+    <div id="slider" class="mui-slider" >
+        <div class="mui-slider-group mui-slider-loop">
+            <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#">
+                    <img src="__PUBLIC__/images/yuantiao.jpg">
+                </a>
+            </div>
+            <!-- 第一张 -->
+            <div class="mui-slider-item">
+                <a href="#">
+                    <img src="__PUBLIC__/images/shuijiao.jpg">
+                </a>
+            </div>
+            <!-- 第二张 -->
+            <div class="mui-slider-item">
+                <a href="#">
+                    <img src="__PUBLIC__/images/muwu.jpg">
+                </a>
+            </div>
+            <!-- 第三张 -->
+            <div class="mui-slider-item">
+                <a href="#">
+                    <img src="__PUBLIC__/images/cbd.jpg">
+                </a>
+            </div>
+            <!-- 第四张 -->
+            <div class="mui-slider-item">
+                <a href="#">
+                    <img src="__PUBLIC__/images/yuantiao.jpg">
+                </a>
+            </div>
+            <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#">
+                    <img src="__PUBLIC__/images/shuijiao.jpg">
+                </a>
+            </div>
+        </div>
+        <div class="mui-slider-indicator">
+            <div class="mui-indicator mui-active"></div>
+            <div class="mui-indicator"></div>
+            <div class="mui-indicator"></div>
+            <div class="mui-indicator"></div>
+        </div>
+    </div>
+
+    <!--九宫格菜单-->
+    <div class="menu">
+        <ul class="mui-table-view mui-grid-view mui-grid-9">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-paperplane"></span>
+                <div class="mui-media-body">许愿池</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-gear"></span>
+                <div class="mui-media-body">设置</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-flag"><span class="mui-badge mui-badge-warning">5</span></span>
+                <div class="mui-media-body">任务</div></a></li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

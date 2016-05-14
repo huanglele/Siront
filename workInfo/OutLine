@@ -5,6 +5,8 @@
 
 公共变量说
     telCode     发送的短信验证码
+    uid         用户uid
+    type        服务商类型（p=>个体，s=>商家）
 
 缓存数据说明
  S缓存
@@ -37,11 +39,12 @@
     Task    任务管理
         |- index        显示所以得任务
         |- item (?tid)  //查看某一个任务
+        |- delTask      删除一个任务（修改状态）
         |- category     显示一级分类
         |- showCat      显示二级分类
         |- addCat       添加分类
         |- updateCat    更新分类
-        |- del          删除分类
+        |- delCat       删除分类
         |- updateCacheCategory  更换分类缓存数据
 
 用户手机端(Mobile)

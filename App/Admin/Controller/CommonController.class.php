@@ -22,6 +22,7 @@ class CommonController extends Controller
         $this->aid = session('aid');
         $this->role = session('role');
         $this->status = session('status');
+        header('Content-Type:text/html; charset=utf-8');
         $ac = strtolower(ACTION_NAME);
         if(!in_array($ac,array('login','logout'))){ //排除登录登出操作
             if(!$this->aid){ //没有登录

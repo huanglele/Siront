@@ -50,7 +50,7 @@ class IndexController extends Controller {
         $day = array();
         $h['text'] = $house.' ';
         $h['value'] = $house;
-        for($j=$second;$j<61;$j+=5){
+        for($j=$second;$j<60;$j+=5){
             $m['text'] = $j.' ';
             $m['value'] = $j;
             $h['children'][] = $m;
@@ -60,7 +60,7 @@ class IndexController extends Controller {
         for($house;$house<24;$house++){
             $h['text'] = $house.' ';
             $h['value'] = $house;
-            for($j=0;$j<61;$j+=5){
+            for($j=0;$j<60;$j+=5){
                 $m['text'] = $j.' ';
                 $m['value'] = $j;
                 $h['children'][] = $m;
