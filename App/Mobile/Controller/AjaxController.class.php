@@ -192,8 +192,8 @@ class AjaxController extends Controller
             $lat = I('post.lat',0,'float');
             $lon = I('post.lon',0,'float');
             if($lat && $lon){
-                $data['lat'] = $lat*10000000;
-                $data['lon'] = $lon*10000000;
+                $data['lat'] = $lat;
+                $data['lon'] = $lon;
                 $data['cityCode'] = I('post.cityCode');
                 $data['address'] = I('post.place');
 

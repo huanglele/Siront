@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>许愿池</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">
+    <script src="__PUBLIC__/mui/mui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <style>
+        .mui-bar-nav{
+            background-color: #EA4F23;
+            -webkit-box-shadow: 0 1px 6px #EA4F23;
+            box-shadow: 0 1px 6px #EA4F23;
+        }
+        .mui-bar-nav .mui-title{
+            color: #f7f7f7;
+            font-weight: bold;
+        }
+        .info-head-box{
+            background-color: #EA4F23;
+            text-align: center;
+            color:floralwhite;
+            margin-top: 44px;
+            padding: 20px 0px 10px;
+            position: relative;
+        }
+        .info-head-box .info-img{
+            margin: 10px auto 0px;
+        }
+        .headimg{
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+        }
+        .info-count{
+            font-family: sans-serif;
+            font-weight: bolder;
+        }
+        .info-count .mui-grid-view.mui-grid-9{
+            background-color: #fff;
+        }
+        .info-count .mui-grid-view.mui-grid-9 .mui-table-view-cell {
+            padding: 0px 15px;
+        }
+        .mui-bar-nav~.mui-content{
+            padding-top: 10px;
+        }
+        .mui-slider-item img{
+            height: 60px;
+        }
+        .menu {
+            margin-top: 10px;
+            background: #fff;
+        }
+        .menu .mui-grid-view.mui-grid-9{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-bars mui-pull-left" href="<{:U('server/index')}>"></a>
+    <a id="info" class="mui-icon mui-icon-gear mui-pull-right"style="color: #Ffffff;"></a>
+    <h1 class="mui-title">许愿池</h1>
+</header>
+<div class="mui-content">
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <script type="text/javascript"
+            src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&plugin=AMap.Autocomplete,AMap.Geocoder"></script>
+    <style>
+        .mapBox{
+            height: 400px;
+        }
+        .mapBox #AMap{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <div class="col-sm-12 mapBox">
+        <div id="AMap"></div>
+        <script>
+            var lon = <{$mePosition['lon']}>;
+            var lat = <{$mePosition['lat']}>;
+            var data = <{$data}>;
+            var num = data.length;
+            var place = "我的位置";
+            var taskMark = new Array();
+            center = new AMap.LngLat(lon,lat);
+            var map = new AMap.Map('AMap', {
+                resizeEnable: true,
+                zoom: 13,
+            });
+            map.setCenter(center);
+            var marker = new AMap.Marker({
+                icon: "http://www.easyicon.net/api/resizeApi.php?id=1182024&size=32",
+                position: [lon, lat],
+                draggable: false,
+                title:place,
+                raiseOnDrag: true
+            });
+            marker.setMap(map);
+
+
+            $.each(data,function(i,v){
+                makeTaskMarker(v.lon, v.lat, v.title, i);
+                console.log(i);
+            })
+
+            function makeTaskMarker(lon,lat,title,i){
+                var m = new AMap.Marker({
+                    icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+                    position: [lon, lat],
+                    draggable: false,
+                    title:title,
+                    raiseOnDrag:true
+                });
+                m.setMap(map);
+                m.setTitle(title);
+                m.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
+                    offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
+                    content: title
+                });
+                taskMark.i = m;
+
+            }
+
+            function setTaskMarkerListener(i){
+                console.log('点击了第'+i+'个任务');
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>

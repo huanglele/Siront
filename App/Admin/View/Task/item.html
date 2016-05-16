@@ -159,8 +159,8 @@
                                 <div class="col-sm-12 mapBox">
                                     <div id="AMap"></div>
                                     <script>
-                                        var lon = <{$info['lon']/10000000}>;
-                                        var lat = <{$info['lat']/10000000}>;
+                                        var lon = <{$info['lon']}>;
+                                        var lat = <{$info['lat']}>;
                                         var place = "<{$info.address}>";
                                         center = new AMap.LngLat(lon,lat);
                                         var map = new AMap.Map('AMap', {

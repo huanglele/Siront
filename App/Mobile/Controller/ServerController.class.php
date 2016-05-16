@@ -70,14 +70,37 @@ class ServerController extends Controller
         }else{
             $cidArr = array();
         }
-        $lon = $userInfo['lon']*10000000;
-        $lat = $userInfo['lat']*10000000;
+        $lon = $userInfo['lon'];
+        $lat = $userInfo['lat'];
 
         $map['status'] = 1;
 //        $map['cid'] = array('in',$cidArr);
-        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis";
-        $list = M('task')->where($map)->field($filed)->select();
-        var_dump($list);
+        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis,tid,lon,lat,title";
+        $list = M('task')->where($map)->order('dis asc')->field($filed)->select();
+//        var_dump($list);
+        $origins = '';
+        foreach($list as $v){
+            $origins .= $v['lon'].','.$v['lat'].'|';
+        }
+        $origins = rtrim($origins,'|');
+        $destination = $lon.','.$lat;
+        $key = '4d6777df67a2c81ec8ec6a8480821a73';
+        $url = 'http://restapi.amap.com/v3/distance?origins='.$origins.'&destination='.$destination.'&output=json&key='.$key;
+        $res = myCurl($url);
+        $res = json_decode($res,true);
+        $data = array();
+        if($res['info']=='OK'){
+            foreach($res['results'] as $k=>$v){
+                $t = $list[$k];
+                $t['distance'] = $v['distance'];
+                $t['time'] = $v['duration'];
+                $data[] = $t;
+            }
+        }
+//        var_dump($data);
+        $this->assign('data',json_encode($data));
+        $this->assign('mePosition',array('lon'=>$lon,'lat'=>$lat));
+        $this->display('listHelp');
     }
 
 }

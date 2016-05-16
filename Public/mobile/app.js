@@ -174,7 +174,7 @@ $(window).ready(function(){
                             myAlert('发布成功');
                             $('input').val('');
                             $('textarea').val('');
-                        }else if(res=='error'){
+                        }else if(res.status=='error'){
                             myAlert(res.msg);
                         }else {
                             myAlert('未知错误');
@@ -514,6 +514,15 @@ function isMobil(s) {
     return true;
 }
 
+/**
+ *去除字符串两端空格
+ * @param s
+ * @returns {string|void|XML|*|{by}}
+ */
+function trim(s){
+    return s.replace(/(^\s*)|(\s*$)/g, "");
+}
+
 (function($, doc) {
     $.init();
     $.ready(function() {
@@ -527,7 +536,7 @@ function isMobil(s) {
         workTimeInput.addEventListener('tap', function(event) {
             timePicker.show(function(items) {
                 workTimeInput.value =  (items[0] || {}).text + " " + (items[1] || {}).text + "点 " + (items[2] || {}).text+"分";
-                doc.getElementById('time').value = items[0].value + " " + items[1].value+ ":" + items[2].value;
+                doc.getElementById('time').value = trim(items[0].value) + " " + trim(items[1].value)+ ":" + trim(items[2].value);
                 //返回 false 可以阻止选择框的关闭
                 //return false;
             });
