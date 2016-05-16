@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">
     <script src="__PUBLIC__/mui/mui.min.js"></script>
     <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1463387863_8651822.css"/>
     <style>
         .mui-bar-nav{
             background-color: #EA4F23;
@@ -20,51 +21,13 @@
             color: #f7f7f7;
             font-weight: bold;
         }
-        .info-head-box{
-            background-color: #EA4F23;
-            text-align: center;
-            color:floralwhite;
-            margin-top: 44px;
-            padding: 20px 0px 10px;
-            position: relative;
-        }
-        .info-head-box .info-img{
-            margin: 10px auto 0px;
-        }
-        .headimg{
-            height: 100px;
-            border: 1px solid #ddd;
-            border-radius: 50px;
-        }
-        .info-count{
-            font-family: sans-serif;
-            font-weight: bolder;
-        }
-        .info-count .mui-grid-view.mui-grid-9{
-            background-color: #fff;
-        }
-        .info-count .mui-grid-view.mui-grid-9 .mui-table-view-cell {
-            padding: 0px 15px;
-        }
-        .mui-bar-nav~.mui-content{
-            padding-top: 10px;
-        }
-        .mui-slider-item img{
-            height: 60px;
-        }
-        .menu {
-            margin-top: 10px;
-            background: #fff;
-        }
-        .menu .mui-grid-view.mui-grid-9{
-            background-color: #fff;
-        }
+
     </style>
 </head>
 <body>
 <header class="mui-bar mui-bar-nav">
-    <a class="mui-icon mui-icon-bars mui-pull-left" href="<{:U('server/index')}>"></a>
-    <a id="info" class="mui-icon mui-icon-gear mui-pull-right"style="color: #Ffffff;"></a>
+    <a class="mui-icon mui-icon-back mui-pull-left" style="color: #Ffffff;" href="<{:U('server/index')}>"></a>
+    <a id="info" class="mui-icon mui-icon-gear mui-pull-right" style="color: #Ffffff;"></a>
     <h1 class="mui-title">许愿池</h1>
 </header>
 <div class="mui-content">
@@ -73,7 +36,8 @@
             src="http://webapi.amap.com/maps?v=1.3&key=071efb9a3812629caa92130bbae4a659&plugin=AMap.Autocomplete,AMap.Geocoder"></script>
     <style>
         .mapBox{
-            height: 400px;
+            position: relative;
+            min-height: 400px;
         }
         .mapBox #AMap{
             position: absolute;
@@ -85,59 +49,115 @@
             height: 100%;
         }
     </style>
-    <div class="col-sm-12 mapBox">
+    <div class="mapBox">
         <div id="AMap"></div>
-        <script>
-            var lon = <{$mePosition['lon']}>;
-            var lat = <{$mePosition['lat']}>;
-            var data = <{$data}>;
-            var num = data.length;
-            var place = "我的位置";
-            var taskMark = new Array();
-            center = new AMap.LngLat(lon,lat);
-            var map = new AMap.Map('AMap', {
-                resizeEnable: true,
-                zoom: 13,
-            });
-            map.setCenter(center);
-            var marker = new AMap.Marker({
-                icon: "http://www.easyicon.net/api/resizeApi.php?id=1182024&size=32",
-                position: [lon, lat],
-                draggable: false,
-                title:place,
-                raiseOnDrag: true
-            });
-            marker.setMap(map);
-
-
-            $.each(data,function(i,v){
-                makeTaskMarker(v.lon, v.lat, v.title, i);
-                console.log(i);
-            })
-
-            function makeTaskMarker(lon,lat,title,i){
-                var m = new AMap.Marker({
-                    icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-                    position: [lon, lat],
-                    draggable: false,
-                    title:title,
-                    raiseOnDrag:true
-                });
-                m.setMap(map);
-                m.setTitle(title);
-                m.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
-                    offset: new AMap.Pixel(20, 20),//修改label相对于maker的位置
-                    content: title
-                });
-                taskMark.i = m;
-
-            }
-
-            function setTaskMarkerListener(i){
-                console.log('点击了第'+i+'个任务');
-            }
-        </script>
+    </div>
+    <div class="listHelp">
+        <ul class="mui-table-view">
+            <volist name="data" id="vo">
+                <li class="mui-table-view-cell taskItem"  data-itemId="<{$vo.tid}>">
+                    <!--滑动菜单-->
+                    <div class="mui-slider-right mui-disabled">
+                        <a class="mui-btn mui-btn-grey mui-icon mui-icon-person">接单</a>
+                        <!--<a class="mui-btn mui-btn-yellow mui-icon mui-icon-phone"></a>-->
+                        <!--<a class="mui-btn mui-btn-red mui-icon mui-icon-email"></a>-->
+                    </div>
+                    <!--任务信息-->
+                    <div class="mui-slider-handle">
+                        <div class="mui-table">
+                            <div class="mui-table-cell mui-col-xs-10">
+                                <h4 class="mui-ellipsis"><{$vo.title}></h4>
+                                <h5>工作时间：<{$vo.otime|taskTime}></h5>
+                                <p class="mui-h6 mui-ellipsis"><{$vo.desc}></p>
+                            </div>
+                            <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+                                <span class="mui-h5">
+                                    <{$vo.ctime|taskTime}><br/>
+                                    <i class="iconfont icon-slide-left"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </volist>
+        </ul>
     </div>
 </div>
+<script>
+
+    $(window).ready(function(){
+        $('.taskItem').click(function(){
+            var tid = $(this).attr('data-itemId');
+            changeMainTask(tid);
+        })
+    })
+
+    $('.mapBox').css('height',$(window).height()/2);
+    var lon = <{$mePosition['lon']}>;
+    var lat = <{$mePosition['lat']}>;
+    var data = <{$data|json_encode}>;
+    var num = data.length;
+    var place = "我的位置";
+    var taskMark = new Array();
+    var lastMark = false;
+    center = new AMap.LngLat(lon,lat);
+    var map = new AMap.Map('AMap', {
+        resizeEnable: true,
+        zoom: 13,
+    });
+    map.setCenter(center);
+    var marker = new AMap.Marker({
+        icon: "http://www.easyicon.net/api/resizeApi.php?id=1182024&size=32",
+        position: [lon, lat],
+        draggable: false,
+        title:place,
+        raiseOnDrag: true
+    });
+    marker.setMap(map);
+
+    $.each(data,function(i,v){
+        makeTaskMarker(v.lon, v.lat, v.title, v.tid);
+        console.log(i);
+    })
+
+    function makeTaskMarker(lon,lat,title,tid){
+        var m = new AMap.Marker({
+            icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+            position: [lon, lat],
+            draggable: false,
+            title:title,
+            raiseOnDrag:true,
+            extData:tid
+        });
+        m.setMap(map);
+        m.setTitle(title);
+        m.setLabel({//label默认蓝框白底左上角显示，样式className为：amap-marker-label
+            offset: new AMap.Pixel(-50, -50),//修改label相对于maker的位置
+            content: title
+        });
+        taskMark[tid] = m;
+        m.on('click',function(){
+            setTaskMarkerListener(tid);
+        })
+    }
+
+    function setTaskMarkerListener(i){
+        changeMainTask(i);
+    }
+
+    function changeMainTask(i){
+        if(lastMark){
+            taskMark[lastMark].setzIndex(0);
+            taskMark[lastMark].setAnimation('AMAP_ANIMATION_NONE');
+            taskMark[lastMark].setIcon('http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png');
+
+        }
+        taskMark[i].setzIndex(num+1);
+        taskMark[i].setAnimation('AMAP_ANIMATION_DROP');
+        taskMark[i].setIcon('http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/img/marker.png');
+        lastMark = i;
+    }
+
+</script>
 </body>
 </html>

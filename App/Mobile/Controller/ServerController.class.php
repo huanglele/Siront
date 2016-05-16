@@ -75,7 +75,7 @@ class ServerController extends Controller
 
         $map['status'] = 1;
 //        $map['cid'] = array('in',$cidArr);
-        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis,tid,lon,lat,title";
+        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis,tid,lon,lat,desc,title,tid,create_time as ctime,operate_time as otime";
         $list = M('task')->where($map)->order('dis asc')->field($filed)->select();
 //        var_dump($list);
         $origins = '';
@@ -98,7 +98,7 @@ class ServerController extends Controller
             }
         }
 //        var_dump($data);
-        $this->assign('data',json_encode($data));
+        $this->assign('data',$data);
         $this->assign('mePosition',array('lon'=>$lon,'lat'=>$lat));
         $this->display('listHelp');
     }

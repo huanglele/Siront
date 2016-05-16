@@ -34,6 +34,21 @@ function myDate($timestamp){
     }
 }
 
+function taskTime($timestamp){
+    $todayStamp = mktime('0,0,0,'.date('m,d,Y'));
+    if($timestamp>$todayStamp){
+        $day = '今天';
+    }else{
+        $leftDay = intval($todayStamp-$timestamp);
+        if($leftDay<4){
+            $day = $leftDay.'天前';
+        }else{
+            $day = date('m-d',$timestamp);
+        }
+    }
+    return $day.' '.date('H:s',$timestamp);
+}
+
 /**
  * 发送短信
  * @param int $tel 接受者电话
