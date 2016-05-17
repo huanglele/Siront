@@ -14,6 +14,11 @@ class AjaxController extends Controller
 
     public function _initialize(){
         if(!IS_AJAX){
+            $uid = session('uid');
+            if(isset($_POST['deviceId']) && $uid){
+                $Mem = new \Memcache();
+                $Mem->set($uid,$_POST['deviceId']);
+            }
             $this->error('页面不存在');
         }
     }

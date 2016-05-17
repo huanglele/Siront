@@ -49,6 +49,31 @@ function taskTime($timestamp){
     return $day.' '.date('H:s',$timestamp);
 }
 
+function createTime($house,$second){
+    $second = intval($second/5)*5;
+    $day = array();
+    $h['text'] = $house.' ';
+    $h['value'] = $house;
+    for($j=$second;$j<60;$j+=5){
+        $m['text'] = $j.' ';
+        $m['value'] = $j;
+        $h['children'][] = $m;
+    }
+    $day[] = $h;
+    $house++;
+    for($house;$house<24;$house++){
+        $h['text'] = $house.' ';
+        $h['value'] = $house;
+        for($j=0;$j<60;$j+=5){
+            $m['text'] = $j.' ';
+            $m['value'] = $j;
+            $h['children'][] = $m;
+        }
+        $day[] = $h;
+    }
+    return $day;
+}
+
 /**
  * 发送短信
  * @param int $tel 接受者电话

@@ -31,11 +31,11 @@ class IndexController extends Controller {
         $data = array();
         $today['text'] = '今天';
         $today['value'] = date('Y-m-d');
-        $today['children'] = $this->createTime(date('H'),date('s'));
+        $today['children'] = createTime(date('H'),date('s'));
         $data[] = $today;
         $nextday['text'] = '明天';
         $nextday['value'] = date('Y-m-d',time()+24*3600);
-        $nextday['children'] = $this->createTime(0,0);
+        $nextday['children'] = createTime(0,0);
         $data[] = $nextday;
         return $data;
     }
@@ -43,31 +43,6 @@ class IndexController extends Controller {
     public function test(){
         $s = '546521146';
         var_dump(isTel($s));
-    }
-
-    public function createTime($house,$second){
-        $second = intval($second/5)*5;
-        $day = array();
-        $h['text'] = $house.' ';
-        $h['value'] = $house;
-        for($j=$second;$j<60;$j+=5){
-            $m['text'] = $j.' ';
-            $m['value'] = $j;
-            $h['children'][] = $m;
-        }
-        $day[] = $h;
-        $house++;
-        for($house;$house<24;$house++){
-            $h['text'] = $house.' ';
-            $h['value'] = $house;
-            for($j=0;$j<60;$j+=5){
-                $m['text'] = $j.' ';
-                $m['value'] = $j;
-                $h['children'][] = $m;
-            }
-            $day[] = $h;
-        }
-        return $day;
     }
 
     /**
