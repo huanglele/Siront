@@ -10,7 +10,7 @@
         </fileTransfer>
       </webServer>
       <webServer id="db2bc1b5-08e5-4043-aebd-235678c7d0d2" name="公司siront" url="http://xyc.91yiso.com">
-        <fileTransfer host="120.76.78.77" port="21" password="dfd9dfc3dfd8dfc5dfc4dfdedf9bdf98df99" username="siront">
+        <fileTransfer host="xyc.91yiso.com" port="21" password="dfd9dfc3dfd8dfc5dfc4dfdedf9bdf98df99" username="siront">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
