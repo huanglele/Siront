@@ -39,6 +39,7 @@ class ApiController extends Controller
 
     public function cache(){
         $k = I('get.k');
+
         var_dump(S($k));
     }
 
