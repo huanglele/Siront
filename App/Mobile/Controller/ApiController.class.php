@@ -50,7 +50,7 @@ class ApiController extends Controller
         $pwd = I('password');
         $res['status'] = 'error';
         $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,password,user_status as status')->find();
-        S('Post',$_POST);
+        S('post',$_POST);
         if($info){
             if($info['password']==md5($pwd)){
                 if($info['status']!=3){
