@@ -37,14 +37,20 @@ class ApiController extends Controller
         }
     }
 
+    public function S(){
+        $k = I('get.k');
+        var_dump(S($k));
+    }
+
     /**
      * 登录
      */
     public function login(){
-        $phone = I('post.phone');
-        $pwd = I('post.password');
+        $phone = I('phone');
+        $pwd = I('password');
         $res['status'] = 'error';
         $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,password,user_status as status')->find();
+        S('Post',$_POST);
         if($info){
             if($info['password']==md5($pwd)){
                 if($info['status']!=3){
@@ -73,7 +79,7 @@ class ApiController extends Controller
         }else{
             $res['msg'] = '用户不存在';
         }
-        $res['phone'] = I('post.phone');
+        $res['phone'] = I('phone');
         $this->ajaxReturn($res);
     }
 
