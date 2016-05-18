@@ -73,6 +73,7 @@ class ApiController extends Controller
         }else{
             $res['msg'] = '用户不存在';
         }
+        $res['post'] = I('post');
         $this->ajaxReturn($res);
     }
 
