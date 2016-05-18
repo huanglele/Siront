@@ -37,10 +37,10 @@ class ToolController extends Controller
         $html = '';
         foreach($CatMap[0] as $cat){
             if($cat['status']==1){
-                $html .= '<div class="catItem"><div class="catFirstTitle"><span>'+$cat['name']+'</span><i class="iconfont icon-menuup"></i></div><ul class="catSecUl">';
+                $html .= '<div class="catItem"><div class="catFirstTitle"><span>'.$cat['name'].'</span><i class="iconfont icon-menuup"></i></div><ul class="catSecUl">';
                 $h = '';
                 foreach($CatMap[$cat['id']] as $v){
-                    $h .= '<li data-cid="'+$v['id']+'" class="cat">'+$v['name']+'</li>';
+                    $h .= '<li data-cid="'.$v['id'].'" class="cat">'.$v['name'].'</li>';
                 }
                 $html .= $h.'</ul></div>';
             }
