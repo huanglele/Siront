@@ -39,7 +39,6 @@ class ApiController extends Controller
 
     public function cache(){
         $k = I('get.k');
-
         var_dump(S($k));
     }
 
@@ -52,6 +51,7 @@ class ApiController extends Controller
         $res['status'] = 'error';
         $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,password,user_status as status')->find();
         S('post',$_POST);
+        var_dump(S('post'));
         if($info){
             if($info['password']==md5($pwd)){
                 if($info['status']!=3){
