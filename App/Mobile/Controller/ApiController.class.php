@@ -66,6 +66,7 @@ class ApiController extends Controller
                     $data['deviceId'] = $this->deviceId;
                     $this->uid = $info['uid'];
                     $data['token'] = session_id();
+
                     $Mem = new \Memcache();
                     $Mem->set($info['uid'],$data);
                     $res['status'] = 'success';
