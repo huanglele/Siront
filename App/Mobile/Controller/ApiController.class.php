@@ -51,8 +51,6 @@ class ApiController extends Controller
         $res['status'] = 'error';
         $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,password,user_status as status')->find();
         S('post',$_POST);
-        var_dump(S('post'));
-
         if($info){
             if($info['password']==md5($pwd)){
                 if($info['status']!=3){
@@ -67,7 +65,7 @@ class ApiController extends Controller
                     $data['uid'] = $info['uid'];
                     $data['deviceId'] = $this->deviceId;
                     $this->uid = $info['uid'];
-                    $data['token'] = session('id');
+                    $data['token'] = session_id();
                     $Mem = new \Memcache();
                     $Mem->set($info['uid'],$data);
                     $res['status'] = 'success';
@@ -81,7 +79,6 @@ class ApiController extends Controller
         }else{
             $res['msg'] = '用户不存在';
         }
-        $res['phone'] = I('phone');
         $this->ajaxReturn($res);
     }
 
