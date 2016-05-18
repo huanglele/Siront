@@ -52,6 +52,7 @@ class ApiController extends Controller
         $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,password,user_status as status')->find();
         S('post',$_POST);
         var_dump(S('post'));
+
         if($info){
             if($info['password']==md5($pwd)){
                 if($info['status']!=3){
