@@ -20,8 +20,8 @@ class ApiController extends Controller
 
     public function _initialize(){
         C('SHOW_PACE_TRACE',false);
-        $this->uid = I('post.uid');
-        $this->deviceId = I('post.deviceId');
+        $this->uid = I('uid');
+        $this->deviceId = I('deviceId');
         $token = I('post.token');
         if($this->uid && $this->token){
             $Mem = new \Memcache();
