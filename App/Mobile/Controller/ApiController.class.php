@@ -19,6 +19,7 @@ class ApiController extends Controller
     private $uid = '';
 
     public function _initialize(){
+        C('SHOW_PACE_TRACE',false);
         $this->uid = I('post.uid');
         $this->deviceId = I('post.deviceId');
         $token = I('post.token');
