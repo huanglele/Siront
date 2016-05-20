@@ -8,8 +8,6 @@
  */
 
 namespace Mobile\Controller;
-
-
 use Think\Controller;
 
 class ApiController extends Controller
@@ -24,15 +22,11 @@ class ApiController extends Controller
         $this->deviceId = I('deviceId');
         $token = I('token');
         if($this->uid && $this->token){
-            $Mem = new \Memcache();
-            $info = $Mem->get($this->uid);
-            if($info){
-                if($info['token']==$token && $info['deviceId']==$this->deviceId){
-                    $this->isLogin = true;
-                }else{
-                    //登录失效
-                    $Mem->set($this->uid,null);
-                }
+            if(session('token')==$token && session('deviceId')==$this->deviceId){
+                $this->isLogin = true;
+            }else{
+                //登录失效
+                session($this->uid,null);
             }
         }
     }
@@ -67,8 +61,7 @@ class ApiController extends Controller
                     $this->uid = $info['uid'];
                     $data['token'] = session_id();
                     $data['deviceId'] = $this->deviceId;
-                    $Mem = new \Memcache();
-                    $Mem->set($info['uid'],$data);
+                    session($info['uid'],$data);
                     $res['status'] = 'success';
                     $res['data'] = $data;
                 }else{

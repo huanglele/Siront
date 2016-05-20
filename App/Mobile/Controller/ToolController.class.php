@@ -57,4 +57,11 @@ class ToolController extends Controller
         var_dump($M->get($k));
     }
 
+    public function test(){
+        $M = new \Memcache();
+        $w = $M->set('k','hello');
+        $r = $M->get('k');
+        var_dump($w,$r);
+    }
+
 }
