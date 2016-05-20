@@ -21,12 +21,13 @@ class ApiController extends Controller
         $this->uid = I('uid');
         $this->deviceId = I('deviceId');
         $token = I('token');
-        if($this->uid && $this->token){
-            if(session_id()==$token && session('deviceId')==$this->deviceId){
+        if($this->uid && $token){
+            $info = S($token);
+            if($info['uid']==$this->uid && session('deviceId')==$this->deviceId){
                 $this->isLogin = true;
             }else{
                 //登录失效
-                session($this->uid,null);
+                S($token,null);
             }
         }
     }
@@ -59,10 +60,9 @@ class ApiController extends Controller
                     $data['uid'] = $info['uid'];
                     $data['deviceId'] = $this->deviceId;
                     $this->uid = $info['uid'];
-                    $data['token'] = session_id();
+                    $token = $data['token'] = session_id();
                     $data['deviceId'] = $this->deviceId;
-                    session('uid',$info['uid']);
-                    session('deviceId',$this->deviceId);
+                    S($token,$data);
                     $res['status'] = 'success';
                     $res['data'] = $data;
                 }else{
