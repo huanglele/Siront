@@ -54,7 +54,7 @@ class ApiController extends Controller
         if($info){
             if($info['password']==md5($pwd)){
                 if($info['status']!=3){
-                    $data['msg'] = '登录成功';
+                    $res['msg'] = '登录成功';
                     if($info['nickname']){
                         $res['user'] = $info['nickname'];
                     }else{
