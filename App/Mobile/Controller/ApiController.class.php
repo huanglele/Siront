@@ -23,7 +23,7 @@ class ApiController extends Controller
         $token = I('token');
         if($this->uid && $token){
             $info = S($token);
-            if($info['uid']==$this->uid && session('deviceId')==$this->deviceId){
+            if($info['uid']==$this->uid && $info['deviceId']==$this->deviceId){
                 $this->isLogin = true;
             }else{
                 //登录失效
