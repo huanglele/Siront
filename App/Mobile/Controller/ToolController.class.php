@@ -50,4 +50,11 @@ class ToolController extends Controller
         $this->ajaxReturn($ret);
     }
 
+    public function getMem()
+    {
+        $k = I('key');
+        $M = new \Memcache();
+        var_dump($M->get($k));
+    }
+
 }
