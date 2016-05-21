@@ -7,11 +7,8 @@ $(window).ready(function(){
     $('#btnMenu').click(function(){
         log('发送点击');
         if(isLogin){
-            //已经登录显示侧边菜单
-            //$('#menu').animate({
-            //    'left':0
-            //});
-            $('#menu').addClass('hidden');
+            $('#menu').addClass('hidden').removeClass('visible');
+            $('.closeMenu').addClass('visible');
         }else{
             //没有登录，弹出登录界面
             bgShow('show');
@@ -24,11 +21,8 @@ $(window).ready(function(){
 
     //关闭菜单按钮
     $('.closeMenu').click(function(){
-        //$('#menu').css({'left':'-100%'});
-        //$('list-hook',$('#menu')).animate({
-        //    width:'65%'
-        //})
-        $('#menu').removeClass('hidden');
+        $('#menu').removeClass('hidden').addClass('visible');
+        $('.closeMenu').removeClass('visible');
     })
 
     //关闭登录界面
@@ -72,7 +66,7 @@ $(window).ready(function(){
                     }
                     if(data.status=='success'){
                         isLogin = true;
-                        $('.icon-user',$('#menu')).html(data.user);
+                        getUserInfo();
                         $('#closeLogin').click();
                     }
                 }
@@ -517,13 +511,15 @@ function isMobil(s) {
     return true;
 }
 
+
+
 /**
  *去除字符串两端空格
  * @param s
  * @returns {string|void|XML|*|{by}}
  */
 function trim(s){
-    return s.replace(/(^\s*)|(\s*$)/g, "");
+    return String(s).replace(/(^\s*)|(\s*$)/g, "");
 }
 
 (function($, doc) {

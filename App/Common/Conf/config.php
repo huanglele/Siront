@@ -24,4 +24,16 @@ return array(
     //设置session的方式
 //    'SESSION_TYPE'=>'File',
 
+    'IconCssLink' => '//at.alicdn.com/t/font_1463812658_166627.css',
+
+    //任务状态
+    'TaskStatus' => array(
+        '-1' => '全部',
+        '1' => '发布中',
+        '2' => '已接单',
+        '3' => '已完成',
+        '4' => '已评价',
+        '5' => '放弃',
+        '6' => '删除',
+    )
 );

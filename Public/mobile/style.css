@@ -137,7 +137,6 @@ body {
 }
 
 .menu.visible {
-    left: 0;
     animation: menuMoveShow .1s;
     -webkit-animation: menuMoveShow .1s
 }
@@ -183,7 +182,7 @@ body {
     top: 2px;
     margin-right: 8px;
     font-size: 1.6rem;
-    color: #3399ff
+    color: #70A3D6
 }
 
 .menu .item {
@@ -1076,12 +1075,15 @@ body {
 }
 
 #workDesc .desc .textarea-from{
-    width: 100%;
+    width: 90%;
     outline: none;
-    border: none;
-    margin-top: 10px;
+    margin: 10px auto;
     color: #fa8919;
     background-color: #FAFAFA;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
 }
 .sub_task{
     width: 100%;

@@ -35,7 +35,7 @@ function myDate($timestamp){
 }
 
 function taskTime($timestamp){
-    $todayStamp = mktime('0,0,0,'.date('m,d,Y'));
+    $todayStamp = mktime('0','0','0',date('m'),date('d'),date('Y'));
     if($timestamp>$todayStamp){
         $day = '今天';
     }else{
