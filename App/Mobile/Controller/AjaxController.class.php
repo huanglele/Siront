@@ -61,18 +61,26 @@ class AjaxController extends Controller
             $telCode = I('post.telCode');
             $res['status'] = 'error';
             if(session('telCode')==$telCode){
-                $data['phone'] = I('post.phone');
+                $data['phone'] = I('post.no');
                 $data['password'] = md5(I('post.password'));
                 $data['money'] = $data['coin'] = $data['person_status'] = $data['company_status'] = 0;
                 $data['user_status'] =2;        //注册通过验证
                 $data['create_time'] = time();
-                $data['headimgurl'] = $data[''] = '';
+                $data['headimgurl'] =  '';
+                $data['nickname'] = I('post.nickname');
                 $M = D('user');
-                if($M->save($data)){
-                    $data['status'] = 'success';
-                    $data['msg'] = '登录成功';
+                if($M->create($data)){
+                    $r = $M->add($data);
+                    if($r){
+                        session('phone',$data['phone']);
+                        session('uid',$r);
+                        $data['status'] = 'success';
+                        $res['msg'] = '注册成功';
+                    }else{
+                        $res['msg'] = '注册失败请重试';
+                    }
                 }else{
-                    $data['msg'] = '登录失败';
+                    $res['msg'] = $M->getError();
                 }
             }else{
                 $res['msg'] = '短信验证码错误';
@@ -174,6 +182,23 @@ class AjaxController extends Controller
     }
 
     /**
+     * 获取用户的基本信息
+     */
+    public function getUserInfo(){
+        $uid = session('uid');
+        if($uid){
+            $info = M('user')->field('uid,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find($uid);
+            $info['img'] = headImgUrl($info['img']);
+            $ret['status'] = 'success';
+            $ret['info'] = $info;
+        }else{
+            $ret['status'] = 'error';
+            $ret['msg'] = '请先登录';
+        }
+        $this->ajaxReturn($ret);
+    }
+
+    /**
      * 检测发布任务的数据是否正确
      */
     private function checkTaskData(){
@@ -204,8 +229,7 @@ class AjaxController extends Controller
                         $desc = I('post.desc');
                         if($desc){
                             $data['desc'] = $desc;
-                            $data['title'] = I('post.title');
-
+                            $data['title'] = I('post.title')?I('post.title'):substr($desc,0,10);
                             $ret['status'] = true;
                             $ret['data'] = $data;
                         }else{

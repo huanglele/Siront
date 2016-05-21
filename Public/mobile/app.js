@@ -212,7 +212,7 @@ function checkLoginInput(){
         res = true;
     }
     if(res){
-        $('#login_sub').css('background','#009966');
+        $('#login_sub').css('background','#3399ff');
     }else{
         $('#login_sub').css('background','#e5e5e5');
     }

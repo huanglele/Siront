@@ -156,7 +156,7 @@ body {
 
 .menu .l {
     left: 0;
-    width: 85%;
+    width: 65%;
     background: #fff;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch
@@ -164,8 +164,8 @@ body {
 
 .menu .r {
     right: 0;
-    width: 15%;
-    background: #000;
+    width: 35%;
+    background: #ADADAD;
     opacity: 0;
     animation: menuOpacity2 .1s;
     -webkit-animation: menuOpacity2 .1s
@@ -234,26 +234,6 @@ body {
     color: #777
 }
 
-
-.menu .closeMenu {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    z-index: 11;
-    padding: 10px;
-    margin-left: -26px
-}
-
-.menu .closeMenu i {
-    display: block;
-    width: 34px;
-    height: 34px;
-    background-image: url(./move_icon.png);
-    background-repeat: no-repeat;
-    background-position: -5px -5px;
-    background-size: 278px 44px;
-    background-position: -239px -5px
-}
 
 @-webkit-keyframes menuMoveShow {
     0% {
@@ -700,7 +680,8 @@ body {
     line-height: 22px;
     text-align: center;
     font-size: 18px;
-    color: #333
+    color: #333;
+    font-weight: bold;
 }
 
 .pop-valid .input-val {
@@ -746,7 +727,7 @@ body {
 .pop-valid .phone.active:after, .pop-valid .phone.active:before {
     display: block;
     position: absolute;
-    border-top: 1px solid #009966;
+    border-top: 1px solid #3399ff;
     left: 0;
     width: 100%;
     content: ' '
@@ -773,7 +754,7 @@ body {
     text-align: center;
     border-radius: 4px;
     color: #fff;
-    background-color: #009966;
+    background-color: #3399ff;
     border: 1px solid #fff;
     outline: 0
 }
@@ -829,7 +810,7 @@ body {
 .pop-valid .code.active:after, .pop-valid .code.active:before {
     display: block;
     position: absolute;
-    border-top: 1px solid #009966;
+    border-top: 1px solid #3399ff;
     left: 0;
     width: 100%;
     content: ' '
@@ -865,7 +846,7 @@ body {
     border-radius: 4px;
     text-align: center;
     font-size: 16px;
-    background-color: #009966;
+    background-color: #3399ff;
     color: #fff
 }
 .pop-valid .login-btn a{
@@ -880,6 +861,15 @@ body {
     margin-top: 14px;
     font-size: 12px;
     color: #fa8919
+}
+
+.index_reg_link,.index_findPwd_link{
+    color:#3399ff;
+    font-size: 12px;
+    text-decoration: none;
+}
+.index_findPwd_link{
+    float: right;
 }
 
 .pop-valid .link {
@@ -936,10 +926,12 @@ body {
      overflow: hidden;
 }
 .hello{
-    color: #009966;
-    font-size: 3em;
+    color: #3399ff;
+    font-size: 3.5em;
     text-align: center;
     position: relative;
+    font-weight: bolder;
+    padding-bottom: 60px;
 }
 .hello span{
     position: relative;
@@ -978,7 +970,7 @@ body {
 }
 
 .location .wrapper .i-from:before {
-    color: #41b07b
+    color: #3399ff
 }
 
 .location .wrapper .i-to:before {
@@ -1025,7 +1017,7 @@ body {
     border-radius: 4px;
     text-align: center;
     font-size: 16px;
-    background-color: #009966;
+    background-color: #3399ff;
     color: #fff;
 }
 
@@ -1163,7 +1155,7 @@ body {
 }
 
 #d-wrap .btn-orange {
-    background-color: #41b07b;
+    background-color: #3399ff;
     color: #fff
 }
 
@@ -1318,7 +1310,7 @@ body {
 
 .suggest .option .back .back-span {
     vertical-align: top;
-    color: #00a65a;
+    color: #3399ff;
 }
 
 .suggest .option .back .i-arrow-down {
@@ -1562,7 +1554,7 @@ body {
 }
 .mui-poppicker-btn-ok{
     color: #fff;
-    border: 1px solid #009966;
-    background-color: #41b07b;
+    border: 1px solid #3399ff;
+    background-color: #3399ff;
 }
 

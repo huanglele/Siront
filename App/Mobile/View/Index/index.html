@@ -47,17 +47,7 @@
             <!--问候语-->
             <div>
                 <p id="hello" class="hello">
-                    <span>您</span>
-                    <span>好</span>
-                    <span>,</span>
-                    <span>有</span>
-                    <span>什</span>
-                    <span>么</span>
-                    <span>可</span>
-                    <span>以</span>
-                    <span>帮</span>
-                    <span>您</span>
-                    <span>的</span>
+                    您好，有什么可以帮你的
                 </p>
             </div>
 
@@ -139,16 +129,31 @@
         <i class="iconfont icon-user"></i>
     </div>
 </div>
+<style>
+    .userInfo{
+        margin: 30px auto 20px;
+        text-align: center;
+        color:grey;
+    }
+    .userInfo img{
+        width: 45%;
+        border-radius:50%;
+    }
+    .userInfo p{
+        margin: 10px auto;
+    }
+</style>
 
 <!--菜单导航-->
 <div id="menu" class="menu hidden">
     <div class="l list-hook">
+        <div class="userInfo">
+            <img id="userHeadImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAQAAACWCLlpAAAACXBIWXMAABwgAAAcIAHND5ueAAADGWlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjaY2BgnuDo4uTKJMDAUFBUUuQe5BgZERmlwH6egY2BmYGBgYGBITG5uMAxIMCHgYGBIS8/L5UBA3y7xsDIwMDAcFnX0cXJlYE0wJpcUFTCwMBwgIGBwSgltTiZgYHhCwMDQ3p5SUEJAwNjDAMDg0hSdkEJAwNjAQMDg0h2SJAzAwNjCwMDE09JakUJAwMDg3N+QWVRZnpGiYKhpaWlgmNKflKqQnBlcUlqbrGCZ15yflFBflFiSWoKAwMD1A4GBgYGXpf8EgX3xMw8BUNTVQYqg4jIKAX08EGIIUByaVEZhMXIwMDAIMCgxeDHUMmwiuEBozRjFOM8xqdMhkwNTJeYNZgbme+y2LDMY2VmzWa9yubEtoldhX0mhwBHJycrZzMXM1cbNzf3RB4pnqW8xryH+IL5nvFXCwgJrBZ0E3wk1CisKHxYJF2UV3SrWJw4p/hWiRRJYcmjUhXSutJPZObIhsoJyp2V71HwUeRVvKA0RTlKRUnltepWtUZ1Pw1Zjbea+7QmaqfqWOsK6b7SO6I/36DGMMrI0ljS+LfJPdPDZivM+y0qLBOtfKwtbFRtRexY7L7aP3e47XjB6ZjzXpetruvdVrov9VjkudBrgfdCn8W+y/xW+a8P2Bq4N+hY8PmQW6HPwr5EMEUKRilFG8e4xUbF5cW3JMxO3Jx0Nvl5KlOaXLpNRlRmVdas7D059/KY8tULfAqLi2YXHy55WyZR7lJRWDmv6mz131q9uvj6SQ3HGn83G7Skt85ru94h2Ond1d59uJehz76/bsK+if8nO05pnXpiOu+M4JmzZj2aozW3ZN6+BVwLwxYtXvxxqcOyCcsfrjRe1br65lrddU3rb2402NSx+cFWq21Tt3/Y6btr1R6Oven7jh9QP9h56PURv6Obj4ufqD355LT3mS3nZM+3X/h0Ke7yqasW15bdEL3ZeuvrnfS7N+/7PDjwyPTx6qeKz2a+EHzZ9Zr5Td3bn+9LP3z6VPD53de8b+9+5P/88Lv4z7d/Vf//AwAqvx2K829RWwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAA50lEQVR42uzQQREAAAQAMETUvwsVvN0WYdkTHJUCWbJkyZIlS4EsWbJkyZKlQJYsWbJkyVIgS5YsWbJkKZAlS5YsWbIUyJIlS5YsWQpkyZIlS5YsBbJkyZIlS5YCWbJkyZIlS4EsWbJkyZKlQJYsWbJkyVIgS5YsWbJkKZAlS5YsWbIUyJIlS5YsWQpkyZIlS5YsBbJkyZIlS5YCWbJkyZIlS4EsWbJkyZKlQJYsWbJkyVIgS5YsWbJkKZAlS5YsWbIUyJIlS5YsWQpkyZIlS5YsBbJkyZIlS5YCWbJkyfppAQAA//8DAESQAn2eOK1HAAAAAElFTkSuQmCC"/>
+            <p id="userNickname">许愿池</p>
+            <p id="userPhone">188****8888</p>
+        </div>
         <ul>
-            <li class="phone item" idx="0">
-                <a>
-                    <i class="iconfont icon-user"></i>
-                </a>
-            </li>
+
             <li class="trip item" idx="1">
                 <a>
                     <i class="iconfont icon-list"></i>我的求助
@@ -167,8 +172,8 @@
 
         </ul>
     </div>
-    <div class="r close-hook visible">
-        <a class="closeMenu"><i></i></a>
+    <div class="r close-hook visible closeMenu">
+
     </div>
 </div>
 
@@ -187,8 +192,9 @@
         </div>
         <div id="login_sub" class="login-btn disable login-btn-hook">登录</div>
         <div id="login_tip" class="login_tip"></div>
-        <div id="reg_sub" class="login-btn disable login-btn-hook">
-            <a href="<{:U('index/reg')}>">没有账号</a>
+        <div class="">
+            <a href="<{:U('index/reg')}>" class="index_reg_link">没有账号</a>
+            <a href="<{:U('index/findPwd')}>" class="index_findPwd_link">找回密码</a>
         </div>
         <div class="link"><span class="law-hook">同意《法律声明及隐私政策》</span></div>
     </div>
@@ -272,8 +278,24 @@
 
 <script>
     $(window).ready(function(){
-       // swingText('hello');
+        getUserInfo();
     })
+
+    function getUserInfo (){
+        if(isLogin){
+            $.ajax({
+                url:"<{:U('ajax/getUserInfo')}>",
+                success:function(ret){
+                    if(ret.success=='success'){
+                        $('#userHeadImg').attr('src',ret.info.img);
+                        $('$userNickname').html(ret.info.nickname);
+                        $('$userPhone').html(ret.info.phone);
+                    }
+                }
+            })
+        }
+    }
+
 </script>
 
 </body>
