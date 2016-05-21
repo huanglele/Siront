@@ -9,10 +9,8 @@
     <script>
         isLogin = <eq name='isLogin' value='1'>true<else />false</eq>;
         baseUrl = "__APP__";
-        timeJson = <{$timeJson}>
+        timeJson = <{$timeJson}>;
     </script>
-
-
     <!--标准mui.css-->
     <!--<link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">-->
     <link href="__PUBLIC__/mui/mui.picker.css" rel="stylesheet" />
@@ -26,16 +24,11 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/mobile/style.css">
     <script src="//cdn.bootcss.com/jquery-easing/1.3/jquery.easing.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1462951035_3919814.css">
-
-
     <script src="__PUBLIC__/mui/mui.min.js"></script>
-     <!--<script src="../js/mui.picker.min.js"></script>-->
+    <!--<script src="../js/mui.picker.min.js"></script>-->
     <script src="__PUBLIC__/mui/mui.picker.js"></script>
     <script src="__PUBLIC__/mui/mui.poppicker.js"></script>
-
-
     <script src="__PUBLIC__/mobile/app.js" type="text/javascript" ></script>
-
 </head>
 <body>
 <div id="wrap">
@@ -145,7 +138,7 @@
 </style>
 
 <!--菜单导航-->
-<div id="menu" class="menu hidden">
+<div id="menu" class="menu">
     <div class="l list-hook">
         <div class="userInfo">
             <img id="userHeadImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAQAAACWCLlpAAAACXBIWXMAABwgAAAcIAHND5ueAAADGWlDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjaY2BgnuDo4uTKJMDAUFBUUuQe5BgZERmlwH6egY2BmYGBgYGBITG5uMAxIMCHgYGBIS8/L5UBA3y7xsDIwMDAcFnX0cXJlYE0wJpcUFTCwMBwgIGBwSgltTiZgYHhCwMDQ3p5SUEJAwNjDAMDg0hSdkEJAwNjAQMDg0h2SJAzAwNjCwMDE09JakUJAwMDg3N+QWVRZnpGiYKhpaWlgmNKflKqQnBlcUlqbrGCZ15yflFBflFiSWoKAwMD1A4GBgYGXpf8EgX3xMw8BUNTVQYqg4jIKAX08EGIIUByaVEZhMXIwMDAIMCgxeDHUMmwiuEBozRjFOM8xqdMhkwNTJeYNZgbme+y2LDMY2VmzWa9yubEtoldhX0mhwBHJycrZzMXM1cbNzf3RB4pnqW8xryH+IL5nvFXCwgJrBZ0E3wk1CisKHxYJF2UV3SrWJw4p/hWiRRJYcmjUhXSutJPZObIhsoJyp2V71HwUeRVvKA0RTlKRUnltepWtUZ1Pw1Zjbea+7QmaqfqWOsK6b7SO6I/36DGMMrI0ljS+LfJPdPDZivM+y0qLBOtfKwtbFRtRexY7L7aP3e47XjB6ZjzXpetruvdVrov9VjkudBrgfdCn8W+y/xW+a8P2Bq4N+hY8PmQW6HPwr5EMEUKRilFG8e4xUbF5cW3JMxO3Jx0Nvl5KlOaXLpNRlRmVdas7D059/KY8tULfAqLi2YXHy55WyZR7lJRWDmv6mz131q9uvj6SQ3HGn83G7Skt85ru94h2Ond1d59uJehz76/bsK+if8nO05pnXpiOu+M4JmzZj2aozW3ZN6+BVwLwxYtXvxxqcOyCcsfrjRe1br65lrddU3rb2402NSx+cFWq21Tt3/Y6btr1R6Oven7jh9QP9h56PURv6Obj4ufqD355LT3mS3nZM+3X/h0Ke7yqasW15bdEL3ZeuvrnfS7N+/7PDjwyPTx6qeKz2a+EHzZ9Zr5Td3bn+9LP3z6VPD53de8b+9+5P/88Lv4z7d/Vf//AwAqvx2K829RWwAAACBjSFJNAAB6JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAA50lEQVR42uzQQREAAAQAMETUvwsVvN0WYdkTHJUCWbJkyZIlS4EsWbJkyZKlQJYsWbJkyVIgS5YsWbJkKZAlS5YsWbIUyJIlS5YsWQpkyZIlS5YsBbJkyZIlS5YCWbJkyZIlS4EsWbJkyZKlQJYsWbJkyVIgS5YsWbJkKZAlS5YsWbIUyJIlS5YsWQpkyZIlS5YsBbJkyZIlS5YCWbJkyZIlS4EsWbJkyZKlQJYsWbJkyVIgS5YsWbJkKZAlS5YsWbIUyJIlS5YsWQpkyZIlS5YsBbJkyZIlS5YCWbJkyfppAQAA//8DAESQAn2eOK1HAAAAAElFTkSuQmCC"/>
@@ -154,22 +147,36 @@
         </div>
         <ul>
 
-            <li class="trip item" idx="1">
-                <a>
+            <li class="trip item">
+                <a data-href="<{:U('user/task')}>">
                     <i class="iconfont icon-list"></i>我的求助
                 </a>
             </li>
-            <li class="settings item" idx="2">
-                <a>
-                    <i class="iconfont icon-setting"></i>设置
+            <li class="settings item">
+                <a data-href="<{:U('user/setting')}>">
+                    <i class="iconfont icon-setting"></i>设置中心
                 </a>
             </li>
-            <li class="advertisement item" idx="3">
-                <a href="<{:U('server/index')}>">
+            <li class="advertisement item">
+                <a data-href="<{:U('server/index')}>">
                     <i class="iconfont icon-join"></i>我的技能
                 </a>
             </li>
-
+            <li class="advertisement item">
+                <a data-href="<{:U('server/index')}>">
+                    <i class="iconfont icon-join"></i>关于驰援
+                </a>
+            </li>
+            <li class="advertisement item">
+                <a data-href="<{:U('server/index')}>">
+                    <i class="iconfont icon-join"></i>联系我们
+                </a>
+            </li>
+            <li class="advertisement item">
+                <a data-href="<{:U('server/index')}>">
+                    <i class="iconfont icon-join"></i>公告资讯
+                </a>
+            </li>
         </ul>
     </div>
     <div class="r close-hook visible closeMenu">
@@ -279,6 +286,17 @@
 <script>
     $(window).ready(function(){
         getUserInfo();
+        //左划关闭菜单
+        $('#menu').on('swipeleft',function(){
+            $(this).removeClass('hidden');
+        })
+        //左划关闭菜单
+        $('#wrap').on('swiperight',function(){
+            $('#btnMenu').click();
+        })
+//        document.getElementById('menu').addEventListener("swipeleft",function(){
+//            console.log("你正在向左滑动");
+//        });
     })
 
     function getUserInfo (){
@@ -286,10 +304,10 @@
             $.ajax({
                 url:"<{:U('ajax/getUserInfo')}>",
                 success:function(ret){
-                    if(ret.success=='success'){
+                    if(ret.status=='success'){
                         $('#userHeadImg').attr('src',ret.info.img);
-                        $('$userNickname').html(ret.info.nickname);
-                        $('$userPhone').html(ret.info.phone);
+                        $('#userNickname').html(ret.info.nickname);
+                        $('#userPhone').html(ret.info.phone);
                     }
                 }
             })

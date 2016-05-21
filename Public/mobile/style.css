@@ -143,9 +143,9 @@ body {
 }
 
 .menu.hidden {
-    left: -100%;
-    /*animation: menuMoveHide .1s;*/
-    /*-webkit-animation: menuMoveHide .1s*/
+    left: 0px;
+    animation: menuMoveHide .1s;
+    -webkit-animation: menuMoveHide .1s
 }
 
 .menu .l, .menu .r {
@@ -183,7 +183,7 @@ body {
     top: 2px;
     margin-right: 8px;
     font-size: 1.6rem;
-    color: #aaa
+    color: #3399ff
 }
 
 .menu .item {
@@ -249,13 +249,28 @@ body {
 
 @-webkit-keyframes menuMoveHide {
     0% {
-        left: 0
+        left: -100%
+    }
+    25% {
+        left: -70%
     }
     50% {
-        left: -10%
+        left: -50%
+    }
+    70%{
+        left: -35%
+    }
+    80%{
+        left: -25%;
+    }
+    85%{
+        left: -15%;
+    }
+    90%{
+        left: -8%;
     }
     100% {
-        left: -100%
+        left: -0%
     }
 }
 
@@ -351,61 +366,121 @@ body {
 
 @-moz-keyframes menuMoveHide {
     0% {
-        left: 0
+        left: -100%
     }
     50% {
-        left: -10%
+        left: -50%
+    }
+    70%{
+        left: -35%
+    }
+    80%{
+        left: -25%;
+    }
+    85%{
+        left: -15%;
+    }
+    90%{
+        left: -8%;
     }
     100% {
-        left: -100%
+        left: -0%
     }
 }
 
 @-webkit-keyframes menuMoveHide {
     0% {
-        left: 0
+        left: -100%
     }
     50% {
-        left: -10%
+        left: -50%
+    }
+    70%{
+        left: -35%
+    }
+    80%{
+        left: -25%;
+    }
+    85%{
+        left: -15%;
+    }
+    90%{
+        left: -8%;
     }
     100% {
-        left: -100%
+        left: -0%
     }
 }
 
 @-o-keyframes menuMoveHide {
     0% {
-        left: 0
+        left: -100%
     }
     50% {
-        left: -10%
+        left: -50%
+    }
+    70%{
+        left: -35%
+    }
+    80%{
+        left: -25%;
+    }
+    85%{
+        left: -15%;
+    }
+    90%{
+        left: -8%;
     }
     100% {
-        left: -100%
+        left: -0%
     }
 }
 
 @-ms-keyframes menuMoveHide {
     0% {
-        left: 0
+        left: -100%
     }
     50% {
-        left: -10%
+        left: -50%
+    }
+    70%{
+        left: -35%
+    }
+    80%{
+        left: -25%;
+    }
+    85%{
+        left: -15%;
+    }
+    90%{
+        left: -8%;
     }
     100% {
-        left: -100%
+        left: -0%
     }
 }
 
 @keyframes menuMoveHide {
     0% {
-        left: 0
+        left: -100%
     }
     50% {
-        left: -10%
+        left: -50%
+    }
+    70%{
+        left: -35%
+    }
+    80%{
+        left: -25%;
+    }
+    85%{
+        left: -15%;
+    }
+    90%{
+        left: -8%;
     }
     100% {
-        left: -100%
+        left: -0%
     }
 }
 
@@ -910,8 +985,7 @@ body {
 }
 
 #wrap {
-    height: auto;
-    max-height: 99%;
+    min-height: 99%;
 }
 #main {
     width: 100%;

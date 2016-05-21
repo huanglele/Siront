@@ -8,9 +8,10 @@ $(window).ready(function(){
         log('发送点击');
         if(isLogin){
             //已经登录显示侧边菜单
-            $('#menu').animate({
-                'left':0
-            });
+            //$('#menu').animate({
+            //    'left':0
+            //});
+            $('#menu').addClass('hidden');
         }else{
             //没有登录，弹出登录界面
             bgShow('show');
@@ -23,9 +24,11 @@ $(window).ready(function(){
 
     //关闭菜单按钮
     $('.closeMenu').click(function(){
-        $('#menu').animate({
-            'left':'-100%'
-        });
+        //$('#menu').css({'left':'-100%'});
+        //$('list-hook',$('#menu')).animate({
+        //    width:'65%'
+        //})
+        $('#menu').removeClass('hidden');
     })
 
     //关闭登录界面
