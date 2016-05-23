@@ -75,6 +75,7 @@ class UserController extends Controller
         $info = M('task')->find($id);
         if($uid==$info['from_uid']){
             $this->assign('info',$info);
+            $this->assign('CatName',S('CatName'));
             $this->display('taskDetail');
         }else{
             $this->error('任务不存在');
