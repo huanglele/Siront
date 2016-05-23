@@ -336,6 +336,7 @@
     apiready = function(){
         alert(api.appName);
 
+        baseUrl = 'http://xyc.91yiso.com/mobile.php/';
         jpush.init(function(ret, err) {
             if (ret && ret.status) {
                 alert('操作成功!');
