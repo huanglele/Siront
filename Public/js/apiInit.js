@@ -7,27 +7,7 @@ function getDeviceId (){
 }
 
 function initJPush() {
-    jpush.init(function(ret, err) {
-        if (ret && ret.status) {
-            alert('操作成功!');
-            jpush.getRegistrationId(function(ret) {
-                alert(ret.id);
-                sjpushDeviceId = ret.id;
-                api.ajax({
-                    url : baseUrl + '/api/serverinit',
-                    data : {
-                        values : {
-                            jpushDeviceId : sjpushDeviceId
-                        }
-                    }
-                }, function(ret, err) {
-                    alert(ret);
-                });
-            });
-        } else {
-            alert('操作失败!');
-        }
-    });
+
 }
 
 function apiInit(){
