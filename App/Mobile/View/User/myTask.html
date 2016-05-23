@@ -91,7 +91,7 @@
                         if(data.num>0){
                             var html = '';
                             $.each(data.list,function(i,vo){
-                                html += '<li class="mui-table-view-cell "> <a class="mui-navigate-right" href="<{:U('user/taskDetail')}>'+ vo.tid+'"> <div class="mui-table"> <div class="mui-table-cell mui-col-xs-10"> <h5>发布时间：'+vo.ctime+'</h5> <h4 class="mui-ellipsis">'+vo.title+'</h4> </div> <div class="mui-table-cell mui-col-xs-2 mui-text-right"> <span class="mui-h5"> '+vo.status+'<br/> </span> </div> </div> </a> </li>'
+                                html += '<li class="mui-table-view-cell "> <a class="mui-navigate-right" href="<{:U('user/taskDetail')}>?id='+ vo.tid+'"> <div class="mui-table"> <div class="mui-table-cell mui-col-xs-10"> <h5>发布时间：'+vo.ctime+'</h5> <h4 class="mui-ellipsis">'+vo.title+'</h4> </div> <div class="mui-table-cell mui-col-xs-2 mui-text-right"> <span class="mui-h5"> '+vo.status+'<br/> </span> </div> </div> </a> </li>'
                             })
                             $('#taskList').append(html);
                             if(data.num==10){

@@ -70,7 +70,15 @@ class UserController extends Controller
     }
 
     public function taskDetail(){
-
+        $id = I('id');
+        $uid = session('uid');
+        $info = M('task')->find($id);
+        if($uid==$info['from_uid']){
+            $this->assign('info',$info);
+            $this->display('taskDetail');
+        }else{
+            $this->error('任务不存在');
+        }
     }
 
     /**
