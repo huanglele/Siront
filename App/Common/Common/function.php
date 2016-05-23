@@ -197,3 +197,16 @@ function isMobil($s) {
     if (!preg_match($patrn,$s)) return false;
     return true;
 }
+
+function jpushByDeviceIds($ids,$options){
+    $url = 'https://api.jpush.cn/v3/push';
+
+    $notification['android'] = array('alert'=>'我是alert','title'=>'我是title','builder_id'=>3,'extras'=>array('device',$ids[0]));
+    $notification['ios'] = array('alert'=>'我是alert','title'=>'我是title','extras'=>array('device',$ids[0]));
+
+    $data['platform'] = 'all';
+    $data['audience'] = json_encode(array("registration_id"=>$ids));
+    $data['notification'] = json_encode($notification);
+    $data['options'] = json_encode($options);
+
+}

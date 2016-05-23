@@ -157,4 +157,21 @@ class ApiController extends Controller
         return $ret;
     }
 
+    /**
+     * 商家app测试单个推送
+     */
+    public function serverinit(){
+        $deviceId = I('jpushDeviceId');
+        $client = new \Org\Jpush\JPush(C('JPush.key'),C('JPush.secret'));
+        $result = $client->push()
+            ->setPlatform(array('ios', 'android'))
+            ->addRegistrationId($deviceId)
+            ->setNotificationAlert('Hi, JPush')
+            ->addAndroidNotification('Hi, android notification', 'notification title', 1, array("deviceId"=>$deviceId))
+            ->addIosNotification("Hi, iOS notification", 'iOS sound', JPush::DISABLE_BADGE, true, 'iOS category', array("key1"=>"value1", "key2"=>"value2"))
+            ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))
+            ->setOptions(100000, 3600, null, false)
+            ->send();
+    }
+
 }
