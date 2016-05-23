@@ -172,6 +172,7 @@ class ApiController extends Controller
             ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))
             ->setOptions(100000, 3600, null, false)
             ->send();
+        echo 'Result=' . json_encode($result);
     }
 
 }
