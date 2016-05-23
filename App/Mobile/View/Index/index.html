@@ -7,9 +7,14 @@
     <meta name="format-detection" content="telephone=no"/>
     <title>许愿池</title>
     <script>
-        isLogin = <eq name='isLogin' value='1'>true<else />false</eq>;
+        isLogin =; <eq; name='isLogin'; value='1'>true<else />false</eq>;;;;;;
         baseUrl = "__APP__";
-        timeJson = <{$timeJson}>;
+        timeJson =;
+        <
+        {
+            $timeJson
+        }
+        >
     </script>
     <!--标准mui.css-->
     <!--<link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">-->
@@ -300,11 +305,11 @@
         //左划关闭菜单
         $('#menu').on('swipeleft',function(){
             $(this).removeClass('hidden');
-        })
+        });
         //左划关闭菜单
         $('#wrap').on('swiperight',function(){
             $('#btnMenu').click();
-        })
+        });
 
         $('.item a',$('#menu')).click(function(){
             if(isLogin){
@@ -314,7 +319,7 @@
             }
         })
 
-    })
+    });
     /**
      * 获取用户的信息
      */
@@ -332,6 +337,21 @@
             })
         }
     }
+
+    apiready = function(){
+        alert(api);
+        jpush = api.require('ajpush');
+        api.addEventListener({name:'appintent'}, function(ret,err) {
+            alert('通知被点击，收到数据：\n' + JSON.stringify(ret));//监听通知被点击后收到的数据
+        });
+        api.addEventListener({name:'pause'}, function(ret,err) {
+            onPause();//监听应用进入后台，通知jpush暂停事件
+        });
+        api.addEventListener({name:'resume'}, function(ret,err) {
+            onResume();//监听应用恢复到前台，通知jpush恢复事件
+        })
+    }
+
 </script>
 
 </body>

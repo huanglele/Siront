@@ -1,11 +1,10 @@
 <?php
-namespace Org\Jpush;
+
 require_once("core/PushPayload.php");
 require_once("core/ReportPayload.php");
 require_once("core/DevicePayload.php");
 require_once("core/SchedulePayload.php");
 require_once("core/JPushException.php");
-
 class JPush {
     const DISABLE_SOUND = "_disable_Sound";
     const DISABLE_BADGE = 0x10000;
