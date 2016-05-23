@@ -69,4 +69,19 @@ class IndexController extends Controller {
         $this->display('findPwd');
     }
 
+    /**
+     * 查看一个任务
+     * 只有发布人者和接受任务的人能够看到
+     */
+    public function item(){
+        $id = I('id');
+        $uid = session('uid');
+        if($uid){
+            $info = M('task')->find($id);
+
+        }else{  //没有登录
+            $this->error('请先登录',U('index/login'));
+        }
+    }
+
 }

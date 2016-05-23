@@ -15,8 +15,8 @@ return array(
 
     //极光推送配置信息
     'JPush' => array(
-        'key' => 'b10aa5b539e044889ec34a2b',
-        'secret' => 'b588435999d3130505baf998',
+        'key' => '888a3e1c0ef375e4f0539d99',
+        'secret' => '6395364bdb8e5c31417e5b64',
     ),
 
 );

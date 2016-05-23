@@ -39,6 +39,7 @@ class JPush {
         } else {
             $this->retryTimes = 1;
         }
+        $logFile = LOG_PATH.'JPshu/'.date('Y-m-d').'.log';
         $this->logFile = $logFile;
     }
 
