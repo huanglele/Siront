@@ -12,6 +12,7 @@ return array(
     //后台管理员QQ号
     'SuperAdminQq' => '844649263',
 
+
     //极光推送配置信息
     'JPush' => array(
         'key' => 'b10aa5b539e044889ec34a2b',
