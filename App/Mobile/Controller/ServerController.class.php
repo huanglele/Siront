@@ -101,4 +101,41 @@ class ServerController extends Controller
         $this->display('listHelp');
     }
 
+    /**
+     * ajax接单
+     */
+    public function sureTask(){
+        $tid = I('post.tid');
+        $M = M('task');
+        $tStatsu = $M->where(array('tid'=>$tid))->getField('status');
+        if($tStatsu==1){
+            $data['tid'] = $tid;
+            $data['status'] = 2;
+            $data['work_uid'] = session('uid');
+            $data['sure_time'] = time();
+            if($M->save($data)){
+                $this->success('接单成功',U('server/taskDetail',array('tid'=>$tid)));
+            }else{
+                $this->error('操作失败，请重试');
+            }
+        }else{
+            $this->error('任务不存在');
+        }
+    }
+
+    /**
+     * 接单详情
+     */
+    public function taskDetail(){
+        $tid = I('get.tid');
+        $M = M('task');
+        $tInfo = $M->find($tid);
+        if($tInfo && $tInfo['work_uid']==session('uid')){
+            $this->assign('info',$tInfo);
+            $this->display('taskDetail');
+        }else{
+            $this->error('任务不存在');
+        }
+    }
+
 }

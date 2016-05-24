@@ -83,7 +83,7 @@
                         <li class="mui-table-view-cell">
                             <div class="mui-button-row">
                                 <div class=""></div>
-                                <button type="button" class="mui-btn half-btn btn-do mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
+                                <button type="button" data-itemId="<{$vo.tid}>" class="mui-btn half-btn btn-do mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
                                 <button type="button" class="mui-btn half-btn btn-undo mui-btn-danger" onclick="return false;">取消</button>
                             </div>
                         </li>
@@ -100,7 +100,9 @@
     }
 
     $(window).ready(function(){
-
+        mui.init({
+            swipeBack: true //启用右滑关闭功能
+        });
         //设置listHelp高度
         var listHelpHeight = $(window).height()/2;
 
@@ -108,11 +110,37 @@
         mui('#listHelp').scroll();
 //        $('.mui-table-view').css('height',listHelpHeight);
         $('.mapBox').css('height',$(window).height()-listHelpHeight-44);
-        mui.init();
+
         $('.taskItem').on('tap',function(){
             var tid = $(this).attr('data-itemId');
             log('点击了');
             changeMainTask(tid);
+        })
+
+        //点击确定
+        $('.btn-do').on('tap',function(){
+            var tid = $(this).attr('data-itemId');
+            var mask = mui.createMask(function(){
+                return false;
+            });
+            $.ajax({
+                'url':"<{:U('server/sureTask')}>",
+                'type':'post',
+                data:{
+                    'tid':tid
+                },
+                beforeSend:function(){
+                    mask.show();
+                },
+                success:function(data){
+                    mask.close();
+                    mui.toast(data.info);
+                    if(data.status){
+                        mui.toast(data.info);
+                        window.location.href = data.url;
+                    }
+                }
+            })
         })
 
         //点击取消按钮

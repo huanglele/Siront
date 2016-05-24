@@ -28,6 +28,9 @@ class UserController extends Controller
 
     }
 
+    /**
+     * 任务列表
+     */
     public function myTask(){
         $map = array();
         $map['from_uid'] = session('uid');
@@ -43,7 +46,7 @@ class UserController extends Controller
         $filter = I('filter');
         $p = I('p',1,'number_int');
         $M = M('task');
-//        $map['from_uid'] = session('uid');
+        $map['from_uid'] = session('uid');
         switch($filter){
             case 'undo':$map['status'] = array('in',array(1,2));break;
             case 'done':$map['status'] = array('in',array(3,4));break;
@@ -84,25 +87,79 @@ class UserController extends Controller
             $this->error('任务不存在');
         }
     }
+
     /**
      * 获取任务商家信息
      */
     public function getTaskWorker(){
         $tid = I('post.tid');
-        $tInfo = M('task')->field('work_uid,status,sure_time,done_time,money,phone')->find($tid);
+        $tInfo = M('task')->field('from_uid,work_uid,status,sure_time,done_time,money')->find($tid);
         $ret['status'] = 'ok';
-        if($tInfo['status']>1 && $tInfo['status']<5){
+        if($tInfo['status']>1 && $tInfo['status']<5 && $tInfo['from_uid']==session('uid')){
             //获取商家的信息
-            $uInfo = M('user')->field('nickname,headimgurl,person_status as p_status,company_status as c_status');
+            $uInfo = M('user')->field('nickname,headimgurl,person_status as p_status,company_status as c_status,phone')->find($tInfo['work_uid']);
             if($uInfo['c_status']==2){//企业用户
                 $wInfo = M('compay_info')->field('lon,lat,score,tel')->find($uInfo['uid']);
+                $info['type'] = '企业用户';
             }elseif($uInfo['p_status']==2){
-                $wInfo = M('compay_info')->field('lon,lat,score,tel')->find($uInfo['uid']);
+                $wInfo = M('company_info')->field('lon,lat,score,tel')->find($uInfo['uid']);
+                $info['type'] = '个体户';
             }else{
                 $ret['info']['status'] = 0;
+                $this->ajaxReturn($ret);die;
             }
+            $info['status'] = 1;
+            $info['img'] = headImgUrl($uInfo['headimgurl']);
+            $info['sure_time'] = taskTime($tInfo['sure_time']);
+            $info['done_time'] = taskTime($tInfo['done_time']);
+            $info['nickname'] = $uInfo['nickname'];
+            $info['score'] = $wInfo['score'];
+            $info['lon'] = $wInfo['lon'];
+            $info['lat'] = $wInfo['lat'];
+            $info['tel'] = $wInfo['tel'];
+            $info['money'] = $tInfo['money'];
+            $info['phone'] = $uInfo['phone'];
+            $ret['info'] = $info;
         }else{
             $ret['info']['status'] = $tInfo['status'];
+        }
+        $this->ajaxReturn($ret);
+    }
+
+    /**
+     * 再次发送通知到用户
+     */
+    public function postTaskAgain(){
+        $tid = I('post.tid');
+        $M = M('task');
+        $tInfo = $M->where(array('tid'=>$tid))->field('status,from_uid,del')->find();
+        if($tInfo['del']==0 && $tInfo['from_uid']==session('uid')){
+            if($tInfo['status']==1){
+                //
+                $this->success('已经通知了附近商家');
+            }else{
+                $this->error('任务匹配到商家');
+            }
+        }else{
+            $this->error('任务不存在');
+        }
+    }
+
+    /**
+     * 删除某个任务
+     */
+    public function delTask(){
+        $tid = I('post.tid');
+        $M = M('task');
+        $tInfo = $M->where(array('tid'=>$tid))->field('status,from_uid,del')->find();
+        if($tInfo['del']==0 && $tInfo['from_uid']==session('uid')){
+            if($M->where(array('tid'=>$tid))->setField('del',1)){
+                $this->success('删除成功');
+            }else{
+                $this->error('删除失败');
+            }
+        }else{
+            $this->error('任务不存在');
         }
     }
 
