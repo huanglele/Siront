@@ -24,7 +24,7 @@ return array(
     //设置session的方式
 //    'SESSION_TYPE'=>'File',
 
-    'IconCssLink' => '//at.alicdn.com/t/font_1463812658_166627.css',
+    'IconCssLink' => '//at.alicdn.com/t/font_1464057127_4802494.css',
 
     //任务状态
     'TaskStatus' => array(

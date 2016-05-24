@@ -69,6 +69,9 @@ class UserController extends Controller
         $this->ajaxReturn($ret);
     }
 
+    /**
+     * 任务详情
+     */
     public function taskDetail(){
         $id = I('id');
         $uid = session('uid');
@@ -79,6 +82,27 @@ class UserController extends Controller
             $this->display('taskDetail');
         }else{
             $this->error('任务不存在');
+        }
+    }
+    /**
+     * 获取任务商家信息
+     */
+    public function getTaskWorker(){
+        $tid = I('post.tid');
+        $tInfo = M('task')->field('work_uid,status,sure_time,done_time,money,phone')->find($tid);
+        $ret['status'] = 'ok';
+        if($tInfo['status']>1 && $tInfo['status']<5){
+            //获取商家的信息
+            $uInfo = M('user')->field('nickname,headimgurl,person_status as p_status,company_status as c_status');
+            if($uInfo['c_status']==2){//企业用户
+                $wInfo = M('compay_info')->field('lon,lat,score,tel')->find($uInfo['uid']);
+            }elseif($uInfo['p_status']==2){
+                $wInfo = M('compay_info')->field('lon,lat,score,tel')->find($uInfo['uid']);
+            }else{
+                $ret['info']['status'] = 0;
+            }
+        }else{
+            $ret['info']['status'] = $tInfo['status'];
         }
     }
 
