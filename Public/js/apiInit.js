@@ -34,7 +34,6 @@ function initJPush() {
 function updateInfo(){
     var param = {accuracy:100,filter:1,autoStop:true};
     var resultCallback = function(ret, err){
-        alert('定位成功');
         if(ret.status){
             $.ajax({
                 url:baseUrl+'server/updateInfo',
@@ -43,6 +42,9 @@ function updateInfo(){
                     lat:ret.latitude,
                     deviceId:jpushDeviceId,
                     time:ret.timestamp
+                },
+                success:function(data){
+                    alert(date);
                 }
             })
             //alert("经度：" + ret.longitude +"\n纬度："+ ret.latitude + "\n时间：" + ret.timestamp);

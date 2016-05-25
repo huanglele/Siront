@@ -60,24 +60,20 @@
 </div>
 <script src="__PUBLIC__/mui/mui.min.js"></script>
 <script>
-    (function($, doc) {
-        $.init({
-            statusBarBackground: '#f7f7f7'
-        });
-    }(mui, document));
+    jpush = null;
+    jpushDeviceId = null;
+    apiready = function(){
+        initJPush();
+    };
+
+
+
     $(window).ready(function(){
         //登录
         $('#login').click(function(){
             login();
         })
-    })
-
-    jpush = null;
-    jpushDeviceId = null;
-    apiready = function(){
-        initJPush();
-    }
-
+    });
 
     /**
      * 初始化极光推送
@@ -125,6 +121,12 @@
             mui.toast('手机号格式不对');
         }
     }
+
+    (function($, doc) {
+        $.init({
+            statusBarBackground: '#f7f7f7'
+        });
+    }(mui, document));
 </script>
 </body>
 </html>

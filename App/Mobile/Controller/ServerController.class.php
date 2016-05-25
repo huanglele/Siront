@@ -197,6 +197,7 @@ class ServerController extends Controller
         if($deviceId) $data['jPushDeviceId'] = $deviceId;
         if($time) $data['time'] = $time;
         $M->save($data);
+        echo $M->getLastSql();
     }
 
 
