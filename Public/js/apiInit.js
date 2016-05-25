@@ -20,12 +20,21 @@ function initJPush() {
     });
 }
 
+function clearCache(){
+    api.clearCache(function(){
+        api.toast({
+            msg:'清除完成'
+        });
+    });
+}
+
 /**
  * 更新自己的信息 位置、设备id
  */
 function updateInfo(){
     var param = {accuracy:10,filter:1,autoStop:true};
     var resultCallback = function(ret, err){
+        alert('定位成功');
         if(ret.status){
             $.ajax({
                 url:baseUrl+'server/updateInfo',
