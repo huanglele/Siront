@@ -8,14 +8,6 @@ jpushDeviceId = null;
 aMapLocation = null;
 
 
-apiready = function(){
-    initJPush();
-
-    aMapLocation = api.require('aMapLocation');
-}
-
-
-
 /**
  * 初始化极光推送
  */

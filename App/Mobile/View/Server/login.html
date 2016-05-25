@@ -97,6 +97,7 @@
         var patrn=/^(13[0-9]|14[5|7]|15[0-9]|17[0-9])\d{8}$/;
         if(patrn.exec(phone)){
             if(pwd.length>5){
+                alert('现在要登录了，获取到的设备id是'+jpushDeviceId)
                 $.ajax({
                     url:"<{:U('ajax/loginServer')}>",
                     type:'post',
