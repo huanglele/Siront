@@ -1,23 +1,53 @@
 /**
  * Created by Sun on 2016/5/23.
  */
+baseUrl = 'http://xyc.91yiso.com/mobile.php/';
+jpush = null;
+jpushDeviceId = null;
 
-function getDeviceId (){
+aMapLocation = null;
 
+
+apiready = function(){
+    initJPush();
+
+    aMapLocation = api.require('aMapLocation');
 }
 
+
+
+/**
+ * 初始化极光推送
+ */
 function initJPush() {
-
+    jpush = api.require('ajpush');
+    jpush.init();
+    //获取极光推送的设备id
+    jpush.getRegistrationId(function(ret) {
+        var jpushDeviceId = ret.id;
+    });
 }
 
-function apiInit(){
-    api.addEventListener({name:'appintent'}, function(ret,err) {
-        alert('通知被点击，收到数据：\n' + JSON.stringify(ret));//监听通知被点击后收到的数据
-    });
-    api.addEventListener({name:'pause'}, function(ret,err) {
-        onPause();//监听应用进入后台，通知jpush暂停事件
-    });
-    api.addEventListener({name:'resume'}, function(ret,err) {
-        onResume();//监听应用恢复到前台，通知jpush恢复事件
-    })
+/**
+ * 更新自己的信息 位置、设备id
+ */
+function updateInfo(){
+    var param = {accuracy:100,filter:1,autoStop:true};
+    var resultCallback = function(ret, err){
+        if(ret.status){
+            $.ajax({
+                url:baseUrl+'server/updateInfo',
+                data:{
+                    lon:ret.longitude,
+                    lat:ret.latitude,
+                    deviceId:jpushDeviceId,
+                    time:ret.timestamp
+                }
+            })
+            //alert("经度：" + ret.longitude +"\n纬度："+ ret.latitude + "\n时间：" + ret.timestamp);
+        } else {
+            //alert(err.code + ',' + err.msg);
+        }
+    }
+    amapLocation.startLocation(param,resultCallback);
 }

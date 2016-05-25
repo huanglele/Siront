@@ -11,6 +11,8 @@ use Think\Controller;
 
 class ServerController extends Controller
 {
+    private $InfoM = null;      //服务商的详细信息数据库对象
+
     public function _initialize(){
         header('Content-Type:text/html; charset=utf-8;');
         if($_SERVER['HTTP_HOST']=='xyc.91yiso.com'){
@@ -22,6 +24,11 @@ class ServerController extends Controller
         $type = session('type');
         if(($type && $uid) || in_array($acName,$noAcName)){
             $this->assign('uid',$uid);
+            if($type=='c'){
+                $this->InfoM = M('company_info');
+            }else{
+                $this->InfoM = M('person_info');
+            }
         }else{
             $this->login();die;
         }
@@ -30,13 +37,8 @@ class ServerController extends Controller
     public function index(){
 //        var_dump(session());
         $uid = session('uid');
-        $type = session('type');
         $info = M('user')->find($uid);
-        if($type=='c'){
-            $M = M('company_info');
-        }else{
-            $M = M('person_info');
-        }
+        $M = $this->InfoM;
         $sInfo = $M->find($uid);
         $info = array_merge($info,$sInfo);
         $this->assign('info',$info);
@@ -59,11 +61,7 @@ class ServerController extends Controller
         //获取服务商的标签
         $type = session('type');
         $uid = session('uid');
-        if($type=='p'){
-            $M = M('person_info');
-        }else{
-            $M = M('company_info');
-        }
+        $M = $this->InfoM;
         $userInfo = $M->find($uid);
         if($userInfo['cid']){
             $cidArr = json_decode($userInfo['cid'], true);
@@ -181,6 +179,24 @@ class ServerController extends Controller
         if($p==10)  $p++;
         $ret['page'] = $p;
         $this->ajaxReturn($ret);
+    }
+
+    /**
+     * 更新自己的位置设备信息
+     */
+    public function updateInfo(){
+        $lon = I('lon');
+        $lat = I('lat');
+        $deviceId = I('deviceId');
+        $time = I('time');
+        $uid = session('uid');
+        $M = $this->InfoM;
+        $data['uid'] = $uid;
+        if($lon) $data['lon'] = $lon;
+        if($lat) $data['lat'] = $lat;
+        if($deviceId) $data['jPushDeviceId'] = $deviceId;
+        if($time) $data['time'] = $time;
+        $M->save($data);
     }
 
 

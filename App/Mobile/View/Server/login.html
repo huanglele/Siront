@@ -72,6 +72,26 @@
         })
     })
 
+    jpush = null;
+    jpushDeviceId = null;
+    apiready = function(){
+        initJPush();
+    }
+
+
+    /**
+     * 初始化极光推送
+     */
+    function initJPush() {
+        jpush = api.require('ajpush');
+        jpush.init();
+        //获取极光推送的设备id
+        jpush.getRegistrationId(function(ret) {
+            var jpushDeviceId = ret.id;
+        });
+    }
+
+
     /**
      * 登录
      */
@@ -87,7 +107,8 @@
                     dataType:'json',
                     data:{
                         phone:phone,
-                        pwd:pwd
+                        pwd:pwd,
+                        deviceId:jpushDeviceId
                     },
                     success:function(data){
                         if(data.status=='success'){

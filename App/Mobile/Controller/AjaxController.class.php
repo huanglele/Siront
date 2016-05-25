@@ -172,6 +172,12 @@ class AjaxController extends Controller
                         session('type',$type);
                         $ret['status'] = 'success';
                         S($info['uid'].'deviceId',$deviceId);
+                        if($type=='c'){
+                            $M = M('company_info');
+                        }elseif($type=='p'){
+                            $M = M('person_info');
+                        }
+                        $M->where(array('uid'=>$info['uid']))->setField('jPushDeviceId',$deviceId);
                     }else{
                         $UserStatus = array('0'=>'用户不存在','1' => '账户待认证', '3' => '账户被限制',);
                         $s = $info['cstatus']?$info['cstatus']:$info['pstatus'];
@@ -268,4 +274,5 @@ class AjaxController extends Controller
             echo '没有登录';
         }
     }
+
 }

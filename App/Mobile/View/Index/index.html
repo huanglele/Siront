@@ -349,18 +349,9 @@
                 jpush.getRegistrationId(function(ret) {
                     deviceId = ret.id;
                     jpushDeviceId = ret.id;
-                    $.ajax({
-                        url:"<{:U('/ajax/setDeviceId')}>",
-                        data:{
-                            deviceId:ret.id
-                        },
-                        success:function(data){
-                            alert(data);
-                        }
-                    })
                 });
             } else {
-                alert('获取deviceId失败!');
+//                alert('获取deviceId失败!');
             }
         });
     }
