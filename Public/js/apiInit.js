@@ -50,7 +50,7 @@ function updateInfo(){
             })
             //alert("经度：" + ret.longitude +"\n纬度："+ ret.latitude + "\n时间：" + ret.timestamp);
         } else {
-            //alert(err.code + ',' + err.msg);
+            alert(err.code + ',' + err.msg);
         }
     }
     aMapLocation.startLocation(param,resultCallback);
