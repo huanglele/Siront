@@ -44,7 +44,7 @@ function updateInfo(){
                     time:ret.timestamp
                 },
                 success:function(data){
-                    alert(date);
+                    alert(data);
                 }
             })
             //alert("经度：" + ret.longitude +"\n纬度："+ ret.latitude + "\n时间：" + ret.timestamp);
