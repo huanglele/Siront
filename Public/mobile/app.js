@@ -171,6 +171,7 @@ $(window).ready(function(){
                             myAlert('发布成功');
                             $('input').val('');
                             $('textarea').val('');
+                            ajaxSend("<{:U('user/postTaskAgain')}>?tid="+res.taskId);
                         }else if(res.status=='error'){
                             myAlert(res.msg);
                         }else {
@@ -520,6 +521,27 @@ function isMobil(s) {
  */
 function trim(s){
     return String(s).replace(/(^\s*)|(\s*$)/g, "");
+}
+
+/**
+ * 发送ajax操作，
+ * @param url 请求地址
+ */
+function ajaxSend(url){
+    mask.show();
+    $.ajax({
+        'url':url,
+        'data':{
+            tid:tid
+        },
+        beforeSend:function(){
+            mask.show();
+        },
+        success:function(ret){
+            mui.toast(ret.info);
+            mask.close();
+        }
+    })
 }
 
 (function($, doc) {

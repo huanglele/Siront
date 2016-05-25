@@ -136,7 +136,9 @@ class AjaxController extends Controller
                 $data['from_uid'] = $uid;
                 $data['create_time'] = time();
                 $data['status'] = 1;
-                if(M('task')->add($data)){
+                $r = M('task')->add($data);
+                if($r){
+                    $ret['taskId'] = $r;
                     $ret['status'] = 'success';
                 }else{
                     $ret['msg'] = '服务器错误';

@@ -138,4 +138,50 @@ class ServerController extends Controller
         }
     }
 
+
+    /**
+     * 任务列表
+     */
+    public function myTask(){
+        $map = array();
+        $map['work_uid'] = session('uid');
+        $map['status'] = array('in',array(1,2));
+        $this->assign('leftTaskNum',M('task')->where($map)->where($map)->count('tid'));
+        $this->display('myTask');
+    }
+
+    /**
+     * ajax 拉取自己的任务列表
+     */
+    public function getTaskList(){
+        $filter = I('filter');
+        $p = I('p',1,'number_int');
+        $M = M('task');
+        $map['work_uid'] = session('uid');
+        switch($filter){
+            case 'undo':$map['status'] = array('in',array(1,2));break;
+            case 'done':$map['status'] = array('in',array(3,4));break;
+            case 'all':$map['status'] = array('in',array(1,2,3,4));break;
+            default: $map['status'] = array('in',array(1,2,3,4));
+        }
+        $count = $M->where($map)->where($map)->count();
+        $Page = new \Think\Page($count,10);
+        $list = $M->where($map)->limit($Page->firstRow,$Page->listRows)->field('tid,title,status,create_time as ctime')->select();
+        $num = count($list);
+        if($num){
+            $TaskStatus = C('TaskStatus');
+            for($i=0;$i<$num;$i++){
+                $list[$i]['ctime'] = taskTime($list[$i]['ctime']);  //发布时间
+                $list[$i]['status'] = $TaskStatus[$list[$i]['status']]; //当前状态
+            }
+        }
+        $ret['status'] = 'success';
+        $ret['num'] = $num;
+        $ret['list'] = $list;
+        if($p==10)  $p++;
+        $ret['page'] = $p;
+        $this->ajaxReturn($ret);
+    }
+
+
 }
