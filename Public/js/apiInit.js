@@ -50,5 +50,5 @@ function updateInfo(){
             //alert(err.code + ',' + err.msg);
         }
     }
-    amapLocation.startLocation(param,resultCallback);
+    aMapLocation.startLocation(param,resultCallback);
 }
