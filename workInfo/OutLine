@@ -12,6 +12,7 @@
  S缓存
     CatMap     分类二级数组
     CatName     分类键值对id=>name
+    $uid+deviceId  极光推送的用户的设备ID //1104a89792a99d1785a
 
 公共函数说明
     record      记录管理员操作，传入操作类容
