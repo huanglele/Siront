@@ -16,7 +16,7 @@ function initJPush() {
     jpush.init();
     //获取极光推送的设备id
     jpush.getRegistrationId(function(ret) {
-        var jpushDeviceId = ret.id;
+        jpushDeviceId = ret.id;
     });
 }
 
