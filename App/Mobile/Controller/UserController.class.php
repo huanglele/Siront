@@ -130,12 +130,14 @@ class UserController extends Controller
      * 再次发送通知到用户
      */
     public function postTaskAgain(){
-        $tid = I('post.tid');
+        $tid = I('tid');
         $M = M('task');
         $tInfo = $M->where(array('tid'=>$tid))->field('status,from_uid,del')->find();
         if($tInfo['del']==0 && $tInfo['from_uid']==session('uid')){
             if($tInfo['status']==1){
                 //
+                $Tool = A('Tool');
+                $Tool->matchServer($tid);
                 $this->success('已经通知了附近商家');
             }else{
                 $this->error('任务匹配到商家');

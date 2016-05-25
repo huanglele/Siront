@@ -50,11 +50,52 @@ class ToolController extends Controller
         $this->ajaxReturn($ret);
     }
 
-    public function getMem()
-    {
+    public function getMem(){
         $k = I('key');
         $M = new \Memcache();
         var_dump($M->get($k));
+    }
+
+    /**
+     * 匹配一个符合任务的商家
+     */
+    public function matchServer($tid){
+        $tInfo = M('task')->field('title,status,cid,lon,lat')->find($tid);
+        if(!$tInfo || $tInfo['status']!=1){
+            return 0;   //任务不存在或者已经结束了
+        }
+
+        $lon = $tInfo['lon'];
+        $lat = $tInfo['lat'];
+
+        $map['status'] = 2;
+//        $map['cid'] = array('like','%'.$tInfo['cid'].',%');
+        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis,uid,lon,lat";
+        $list1 = M('company_info')->where($map)->order('dis asc')->field($filed)->select();
+        $list2 = M('person_info')->where($map)->order('dis asc')->field($filed)->select();
+        $list = $list1+$list2;
+        $origins = '';
+        foreach($list as $v){
+            $origins .= $v['lon'].','.$v['lat'].'|';
+        }
+        $origins = rtrim($origins,'|');
+        $destination = $lon.','.$lat;
+        $key = '4d6777df67a2c81ec8ec6a8480821a73';
+        $url = 'http://restapi.amap.com/v3/distance?origins='.$origins.'&destination='.$destination.'&output=json&key='.$key;
+        $res = myCurl($url);
+        $res = json_decode($res,true);
+        $data = array();
+        if($res['info']=='OK'){
+            foreach($res['results'] as $k=>$v){
+                $t = $list[$k];
+                $t['distance'] = $v['distance'];
+                $t['time'] = $v['duration'];
+                $data[] = $t;
+            }
+        }
+//        echo M('person_info')->getLastSql();
+//        echo M('company_info')->getLastSql();
+        var_dump($data);$this->display('index');die;
     }
 
     /**
@@ -62,6 +103,10 @@ class ToolController extends Controller
      */
     public function sendAppNotify(){
 
+    }
+
+    public function test(){
+        echo json_encode(array(1,2,3,0));
     }
 
 }
