@@ -32,7 +32,7 @@ function clearCache(){
  * 更新自己的信息 位置、设备id
  */
 function updateInfo(){
-    var param = {accuracy:10,filter:1,autoStop:true};
+    var param = {accuracy:100,filter:1,autoStop:true};
     var resultCallback = function(ret, err){
         alert('定位成功');
         if(ret.status){
