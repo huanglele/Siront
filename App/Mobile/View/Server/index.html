@@ -170,16 +170,17 @@
     apiready = function(){
         initJPush();
         aMapLocation = api.require('aMapLocation');
-        alert('初始化完毕')
-    }
-
-    $(window).ready(function(){
 
         //每隔是1分钟上床一次自己的信息
         setInterval(function(){
             alert('开始定位');
             updateInfo();
-        },10000);
+        },30000);
+    }
+
+    $(window).ready(function(){
+
+
 
         $('#clearCache').click(function(){
             clearCache();

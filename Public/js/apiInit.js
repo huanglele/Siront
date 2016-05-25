@@ -34,7 +34,6 @@ function clearCache(){
 function updateInfo(){
     var param = {accuracy:100,filter:1,autoStop:true};
     var resultCallback = function(ret, err){
-        alert('定位成功');
         if(ret.status){
             data = {
                 lon:ret.longitude,
@@ -45,7 +44,7 @@ function updateInfo(){
             sendInfo(data)
             //alert("经度：" + ret.longitude +"\n纬度："+ ret.latitude + "\n时间：" + ret.timestamp);
         } else {
-            alert(err.code + ',' + err.msg);
+            //alert(err.code + ',' + err.msg);
             //采用系统定位
             api.startLocation({
                 accuracy: '10m',
