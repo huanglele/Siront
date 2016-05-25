@@ -36,22 +36,50 @@ function updateInfo(){
     var resultCallback = function(ret, err){
         alert('定位成功');
         if(ret.status){
-            $.ajax({
-                url:baseUrl+'server/updateInfo',
-                data:{
-                    lon:ret.longitude,
+            data = {
+                lon:ret.longitude,
                     lat:ret.latitude,
                     deviceId:jpushDeviceId,
                     time:ret.timestamp
-                },
-                success:function(data){
-                    alert(data);
-                }
-            })
+            };
+            sendInfo(data)
             //alert("经度：" + ret.longitude +"\n纬度："+ ret.latitude + "\n时间：" + ret.timestamp);
         } else {
             alert(err.code + ',' + err.msg);
+            //采用系统定位
+            api.startLocation({
+                accuracy: '10m',
+                filter: 1,
+                autoStop: true
+            }, function(ret, err){
+                if( ret ){
+                    alert('采用系统定位');
+                    data = {
+                        lon:ret.longitude,
+                        lat:ret.latitude,
+                        deviceId:jpushDeviceId,
+                        time:ret.timestamp
+                    };
+                    sendInfo(data)
+                }else{
+                    //定位失败
+                }
+            });
         }
     }
     aMapLocation.startLocation(param,resultCallback);
+}
+
+
+/**
+ *发送ajax 更新自己信息
+ */
+function sendInfo(data){
+    $.ajax({
+        url:baseUrl+'server/updateInfo',
+        data:data,
+        success:function(data){
+            alert(data);
+        }
+    })
 }
