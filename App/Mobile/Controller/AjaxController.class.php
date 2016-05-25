@@ -19,6 +19,7 @@ class AjaxController extends Controller
         if(IS_POST){
             $phone = I('post.phone');
             $pwd = I('post.password');
+            $deviceId = I('deviceId');
             $res['status'] = 'error';
             $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,password,user_status as status')->find();
             if($info){
@@ -32,6 +33,7 @@ class AjaxController extends Controller
                         }
                         session('phone',$phone);
                         session('uid',$info['uid']);
+                        S($info['uid'].'deviceId',$deviceId);
                         $res['status'] = 'success';
                     }else{
                         $res['msg'] = '账户被限制';
@@ -157,6 +159,7 @@ class AjaxController extends Controller
         if(IS_POST){
             $ret['status'] = 'error';
             $phone = I('post.phone',0,'number_int');
+            $deviceId = I('deviceId');
             $map['phone'] = $phone;
             $map['person_status|company_status'] = array('neq',0);
             $info = M('user')->field('uid,password,person_status as pStatus,company_status as cStatus')->where($map)->find();
@@ -168,6 +171,7 @@ class AjaxController extends Controller
                         session('uid',$info['uid']);
                         session('type',$type);
                         $ret['status'] = 'success';
+                        S($info['uid'].'deviceId',$deviceId);
                     }else{
                         $UserStatus = array('0'=>'用户不存在','1' => '账户待认证', '3' => '账户被限制',);
                         $s = $info['cstatus']?$info['cstatus']:$info['pstatus'];
@@ -188,7 +192,9 @@ class AjaxController extends Controller
      */
     public function getUserInfo(){
         $uid = session('uid');
+        $deviceId = I('deviceId');
         if($uid){
+            S($uid.'deviceId',$deviceId);
             $info = M('user')->field('uid,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find($uid);
             $info['img'] = headImgUrl($info['img']);
             $ret['status'] = 'success';
@@ -250,5 +256,16 @@ class AjaxController extends Controller
             $ret['msg'] = '发布时间错误';
         }
         return $ret;
+    }
+
+    public function setDeviceId(){
+        $uid = session('uid');
+        $deviceId = I('deviceId');
+        if($uid){
+            S($uid.'deviceId',$deviceId);
+            echo '设置成功'.$deviceId;
+        }else{
+            echo '没有登录';
+        }
     }
 }

@@ -295,6 +295,8 @@
 <div id="grayBox" class="grayBox"></div>
 
 <script>
+    jpush = null;
+    jpushDeviceId = null;
     $(window).ready(function(){
         getUserInfo();
         //左划关闭菜单
@@ -306,6 +308,7 @@
             $('#btnMenu').click();
         });
 
+        //导航跳转
         $('.item a',$('#menu')).click(function(){
             if(isLogin){
                 window.location.href = $(this).attr('data-href');
@@ -322,6 +325,9 @@
         if(isLogin){
             $.ajax({
                 url:"<{:U('ajax/getUserInfo')}>",
+                data:{
+                    deviceId:jpushDeviceId
+                },
                 success:function(ret){
                     if(ret.status=='success'){
                         $('#userHeadImg').attr('src',ret.info.img);
@@ -334,41 +340,27 @@
     }
 
     apiready = function(){
-        alert(api.appName);
-
-        api.addEventListener({name:'appintent'}, function(ret,err) {
-            alert('通知被点击，收到数据：\n' + JSON.stringify(ret));//监听通知被点击后收到的数据
-        })
-        api.addEventListener({name:'pause'}, function(ret,err) {
-            onPause();//监听应用进入后台，通知jpush暂停事件
-        })
-
-        api.addEventListener({name:'resume'}, function(ret,err) {
-            onResume();//监听应用恢复到前台，通知jpush恢复事件
-        })
+        jpush = api.require('jpush');
 
         baseUrl = 'http://xyc.91yiso.com/mobile.php/';
-        jpush = api.require('ajpush');
 
         jpush.init(function(ret, err) {
             if (ret && ret.status) {
-                alert('操作成功!');
                 jpush.getRegistrationId(function(ret) {
-                    alert(ret.id);
-                    sjpushDeviceId = ret.id;
-                    api.ajax({
-                        url : baseUrl + '/api/serverinit',
-                        data : {
-                            values : {
-                                jpushDeviceId : sjpushDeviceId
-                            }
+                    deviceId = ret.id;
+                    jpushDeviceId = ret.id;
+                    $.ajax({
+                        url:"<{:U('/ajax/setDeviceId')}>",
+                        data:{
+                            deviceId:ret.id
+                        },
+                        success:function(data){
+                            alert(data);
                         }
-                    }, function(ret, err) {
-                        alert(ret);
-                    });
+                    })
                 });
             } else {
-                alert('操作失败!');
+                alert('获取deviceId失败!');
             }
         });
     }
