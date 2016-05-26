@@ -115,8 +115,7 @@ class ToolController extends Controller
             $extra['cid'] = $CatName[$tInfo['cid']];
             $title = '有一个新任务';
             $content = $tInfo['title'];
-
-            return sendJPushNotify($deviceId, $title, $content, $extra);
+            sendJPushNotify($deviceId, $title, $content, $extra);
         }
         return $num;
     }
