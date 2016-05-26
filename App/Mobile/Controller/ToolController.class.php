@@ -111,7 +111,7 @@ class ToolController extends Controller
 
             return sendJPushNotify($deviceId, $title, $content, $extra);
         }else{
-            var_dump($list);
+            var_dump($list);die;
             return false;
         }
     }
