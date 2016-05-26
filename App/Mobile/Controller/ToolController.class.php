@@ -70,7 +70,7 @@ class ToolController extends Controller
 
         $map['status'] = 2;
 //        $map['cid'] = array('like','%'.$tInfo['cid'].',%');
-        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis,uid,lon,lat,jPushDeviceId";
+        $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis,uid,lon,lat,jPushDeviceId as deviceid";
         $list1 = M('company_info')->where($map)->order('dis asc')->field($filed)->select();
         $list2 = M('person_info')->where($map)->order('dis asc')->field($filed)->select();
         $list = $list1+$list2;
@@ -78,8 +78,8 @@ class ToolController extends Controller
 
         $deviceId = array();
         foreach($list as $v){
-            if(''!=$v['jpushdeviceid']){
-                $deviceId[] = $v['jpushdeviceid'];
+            if(''!=$v['deviceid']){
+                $deviceId[] = $v['deviceid'];
                 $origins .= $v['lon'].','.$v['lat'].'|';
             }
         }
