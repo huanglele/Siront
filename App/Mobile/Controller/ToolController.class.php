@@ -78,8 +78,10 @@ class ToolController extends Controller
 
         $deviceId = array();
         foreach($list as $v){
-            $origins .= $v['lon'].','.$v['lat'].'|';
-            $deviceId[] = $v['jPushDeviceId'];
+            if(''!=$v['jPushDeviceId']){
+                $deviceId[] = $v['jPushDeviceId'];
+                $origins .= $v['lon'].','.$v['lat'].'|';
+            }
         }
         $origins = rtrim($origins,'|');
         $destination = $lon.','.$lat;
@@ -103,7 +105,7 @@ class ToolController extends Controller
         $extra['address'] = $tInfo['address'];
         $title = '有一个新任务';
         $content = $tInfo['title'];
-
+var_dump($deviceId);die;
         return sendJPushNotify($deviceId,$title,$content,$extra);
     }
 
