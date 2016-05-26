@@ -83,30 +83,37 @@ class ToolController extends Controller
                 $origins .= $v['lon'].','.$v['lat'].'|';
             }
         }
-        $origins = rtrim($origins,'|');
-        $destination = $lon.','.$lat;
-        $key = '4d6777df67a2c81ec8ec6a8480821a73';
-        $url = 'http://restapi.amap.com/v3/distance?origins='.$origins.'&destination='.$destination.'&output=json&key='.$key;
-        $res = myCurl($url);
-        $res = json_decode($res,true);
-        $data = array();
-        if($res['info']=='OK'){
-            foreach($res['results'] as $k=>$v){
-                $t = $list[$k];
-                $t['distance'] = $v['distance'];
-                $t['time'] = $v['duration'];
-                $data[] = $t;
-            }
-        }
 
-        $extra['type'] = 'task';
-        $extra['tid'] = $tid;
-        $extra['title'] = $tInfo['title'];
-        $extra['address'] = $tInfo['address'];
-        $title = '有一个新任务';
-        $content = $tInfo['title'];
-var_dump($list,$deviceId);die;
-        return sendJPushNotify($deviceId,$title,$content,$extra);
+        //如果匹配到了设备
+        if(count($deviceId)) {
+            $origins = rtrim($origins, '|');
+            $destination = $lon . ',' . $lat;
+            $key = '4d6777df67a2c81ec8ec6a8480821a73';
+            $url = 'http://restapi.amap.com/v3/distance?origins=' . $origins . '&destination=' . $destination . '&output=json&key=' . $key;
+            $res = myCurl($url);
+            $res = json_decode($res, true);
+            $data = array();
+            if ($res['info'] == 'OK') {
+                foreach ($res['results'] as $k => $v) {
+                    $t = $list[$k];
+                    $t['distance'] = $v['distance'];
+                    $t['time'] = $v['duration'];
+                    $data[] = $t;
+                }
+            }
+
+            $extra['type'] = 'task';
+            $extra['tid'] = $tid;
+            $extra['title'] = $tInfo['title'];
+            $extra['address'] = $tInfo['address'];
+            $title = '有一个新任务';
+            $content = $tInfo['title'];
+
+            return sendJPushNotify($deviceId, $title, $content, $extra);
+        }else{
+            var_dump($list);
+            return false;
+        }
     }
 
     /**
