@@ -94,7 +94,6 @@ function getCookie(cookie_name){
         {
             cookie_end = allcookies.length;
         }
-
         var value = unescape(allcookies.substring(cookie_pos, cookie_end));         //这里就可以得到你想要的cookie的值了。。。
     }
     return value;
