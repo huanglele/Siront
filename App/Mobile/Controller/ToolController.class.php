@@ -105,7 +105,7 @@ class ToolController extends Controller
         $extra['address'] = $tInfo['address'];
         $title = '有一个新任务';
         $content = $tInfo['title'];
-var_dump($deviceId);die;
+var_dump($list,$deviceId);die;
         return sendJPushNotify($deviceId,$title,$content,$extra);
     }
 
