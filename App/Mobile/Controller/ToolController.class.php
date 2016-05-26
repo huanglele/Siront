@@ -86,7 +86,8 @@ class ToolController extends Controller
         }
 
         //如果匹配到了设备
-        if(count($deviceId)) {
+        $num = count($deviceId);
+        if($num) {
             $origins = rtrim($origins, '|');
             $destination = $lon . ',' . $lat;
             $key = '4d6777df67a2c81ec8ec6a8480821a73';
@@ -116,10 +117,8 @@ class ToolController extends Controller
             $content = $tInfo['title'];
 
             return sendJPushNotify($deviceId, $title, $content, $extra);
-        }else{
-            var_dump($list1,$list2,$list);die;
-            return false;
         }
+        return $num;
     }
 
     /**
