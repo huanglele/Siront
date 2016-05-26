@@ -170,17 +170,18 @@
     apiready = function(){
         initJPush();
         aMapLocation = api.require('aMapLocation');
+        updateInfo();
 
         //每隔是1分钟上床一次自己的信息
         setInterval(function(){
-            alert('开始定位');
             updateInfo();
         },30000);
+
+        var PHPSESSID = getCookie('PHPSESSID');
+        setV('PHPSESSID',PHPSESSID);    //存入session
     }
 
     $(window).ready(function(){
-
-
 
         $('#clearCache').click(function(){
             clearCache();

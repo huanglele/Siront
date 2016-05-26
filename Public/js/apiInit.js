@@ -78,15 +78,26 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 //获取cookie
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+function getCookie(cookie_name){
+    var allcookies = document.cookie;
+    var cookie_pos = allcookies.indexOf(cookie_name);   //索引的长度
+
+    // 如果找到了索引，就代表cookie存在，
+    // 反之，就说明不存在。
+    if (cookie_pos != -1)
+    {
+        // 把cookie_pos放在值的开始，只要给值加1即可。
+        cookie_pos += cookie_name.length + 1;      //这里容易出问题，所以请大家参考的时候自己好好研究一下
+        var cookie_end = allcookies.indexOf(";", cookie_pos);
+
+        if (cookie_end == -1)
+        {
+            cookie_end = allcookies.length;
+        }
+
+        var value = unescape(allcookies.substring(cookie_pos, cookie_end));         //这里就可以得到你想要的cookie的值了。。。
     }
-    return "";
+    return value;
 }
 //清除cookie
 function clearCookie(name) {
@@ -94,15 +105,40 @@ function clearCookie(name) {
 }
 
 /**
+ *读取数据
+ */
+function getV(k) {
+    var r = $api.getStorage(k);
+    if (r && typeof r != 'undefind') {
+        return r;
+    } else {
+        return false;
+    }
+}
+
+/**
+ *写入数据
+ */
+function setV(k, v) {
+    $api.setStorage(k, v);
+}
+
+/**
+ *删除数据
+ */
+function delV(k) {
+    $api.setStorage(k, null);
+}
+
+
+
+/**
  *发送ajax 更新自己信息
  */
 function sendInfo(data){
     $.ajax({
         url:baseUrl+'server/updateInfo',
-        data:data,
-        success:function(data){
-            alert(data);
-        }
+        data:data
     })
 }
 
