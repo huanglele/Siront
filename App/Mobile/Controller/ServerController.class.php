@@ -105,14 +105,14 @@ class ServerController extends Controller
     public function sureTask(){
         $tid = I('post.tid');
         $M = M('task');
-        $tStatsu = $M->where(array('tid'=>$tid))->getField('status');
-        if($tStatsu==1){
+        $tStatus = $M->where(array('tid'=>$tid))->getField('status');
+        if($tStatus==1){
             $data['tid'] = $tid;
             $data['status'] = 2;
             $data['work_uid'] = session('uid');
             $data['sure_time'] = time();
             if($M->save($data)){
-                $this->success('接单成功',U('server/taskDetail',array('tid'=>$tid)));
+                $this->success('接单成功',U('server/taskDetail',array('tid'=>$tid)),true,true);
             }else{
                 $this->error('操作失败，请重试');
             }

@@ -107,6 +107,7 @@ class ToolController extends Controller
 
             $extra['type'] = 'task';
             $extra['tid'] = $tid;
+            $extra['url'] = U('server/sureTask',array('tid'=>$tid),true,true);
             $extra['title'] = $tInfo['title'];
             $extra['address'] = $tInfo['address'];
             $extra['time'] = taskTime($tInfo['operate_time']);
