@@ -160,8 +160,11 @@ class ApiController extends Controller
     /**
      * 商家app测试单个推送
      */
-    public function serverinit($deviceId,$title,$content,$extra){
+    public function serverinit(){
         $deviceId = I('jpushDeviceId');
+        $title = 'title';
+        $content = 'content';
+        $extra = array('key'=>'傻逼');
         include_once LIB_PATH.'Org/JPush/JPush.php';
 //        $client = new \JPush(C('JPush.key'),C('JPush.secret'));
         $client = new \JPush(C('JPush.key'),C('JPush.secret'));
