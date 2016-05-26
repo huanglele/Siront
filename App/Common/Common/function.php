@@ -145,7 +145,7 @@ function myCurl($url,$params=false,$ispost=0){
 }
 
 function hidePhoneNum($s){
-    return substr($s,0,3).'****'.substr($s,6,4);
+    return substr($s,0,3).'****'.substr($s,7,4);
 }
 
 /**
@@ -198,16 +198,25 @@ function isMobil($s) {
     return true;
 }
 
-
-function jpushByDeviceIds($ids,$options){
-    $url = 'https://api.jpush.cn/v3/push';
-
-    $notification['android'] = array('alert'=>'我是alert','title'=>'我是title','builder_id'=>3,'extras'=>array('device',$ids[0]));
-    $notification['ios'] = array('alert'=>'我是alert','title'=>'我是title','extras'=>array('device',$ids[0]));
-
-    $data['platform'] = 'all';
-    $data['audience'] = json_encode(array("registration_id"=>$ids));
-    $data['notification'] = json_encode($notification);
-    $data['options'] = json_encode($options);
-
+/**
+ * 极光推送 发送通知
+ * @param String|array $deviceId 设备ID
+ * @param String $title 标题
+ * @param String $content 通知栏类容
+ * @param array $extra 发送的参数
+ * @return String string 发送结果
+ */
+function sendJPushNotify($deviceId,$title,$content,$extra){
+    include_once LIB_PATH.'Org/JPush/JPush.php';
+    $client = new \JPush(C('JPush.key'),C('JPush.secret'));
+    $result = $client->push()
+        ->setPlatform(array('ios', 'android'))
+        ->addRegistrationId($deviceId)
+        ->setNotificationAlert('Hi, JPush')
+        ->addAndroidNotification($content, $title, 1,$extra)
+        ->addIosNotification($content, 'iOS sound', \JPush::DISABLE_BADGE, true, 'iOS category',$extra)
+//            ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))
+        ->setOptions(100000, 3600, null, false)
+        ->send();
+    return json_encode($result);
 }

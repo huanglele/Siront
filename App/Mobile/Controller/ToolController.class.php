@@ -60,7 +60,7 @@ class ToolController extends Controller
      * 匹配一个符合任务的商家
      */
     public function matchServer($tid){
-        $tInfo = M('task')->field('title,status,cid,lon,lat')->find($tid);
+        $tInfo = M('task')->field('title,address,status,cid,lon,lat')->find($tid);
         if(!$tInfo || $tInfo['status']!=1){
             return 0;   //任务不存在或者已经结束了
         }
@@ -75,8 +75,11 @@ class ToolController extends Controller
         $list2 = M('person_info')->where($map)->order('dis asc')->field($filed)->select();
         $list = $list1+$list2;
         $origins = '';
+
+        $deviceId = array();
         foreach($list as $v){
             $origins .= $v['lon'].','.$v['lat'].'|';
+            $deviceId[] = $v['jPushDeviceId'];
         }
         $origins = rtrim($origins,'|');
         $destination = $lon.','.$lat;
@@ -93,9 +96,15 @@ class ToolController extends Controller
                 $data[] = $t;
             }
         }
-//        echo M('person_info')->getLastSql();
-//        echo M('company_info')->getLastSql();
-        var_dump($data);$this->display('index');die;
+
+        $extra['type'] = 'task';
+        $extra['tid'] = $tid;
+        $extra['title'] = $tInfo['title'];
+        $extra['address'] = $tInfo['address'];
+        $title = '有一个新任务';
+        $content = $tInfo['title'];
+
+        return sendJPushNotify($deviceId,$title,$content,$extra);
     }
 
     /**

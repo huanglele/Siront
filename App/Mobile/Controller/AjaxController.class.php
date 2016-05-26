@@ -45,6 +45,8 @@ class AjaxController extends Controller
                 $res['msg'] = '用户不存在';
             }
             $this->ajaxReturn($res);
+        }else{
+            echo 'no';
         }
     }
 
@@ -203,6 +205,7 @@ class AjaxController extends Controller
             S($uid.'deviceId',$deviceId);
             $info = M('user')->field('uid,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find($uid);
             $info['img'] = headImgUrl($info['img']);
+            $info['phone'] = hidePhoneNum($info['phone']);
             $ret['status'] = 'success';
             $ret['info'] = $info;
         }else{

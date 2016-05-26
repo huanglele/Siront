@@ -160,7 +160,7 @@ class ApiController extends Controller
     /**
      * 商家app测试单个推送
      */
-    public function serverinit(){
+    public function serverinit($deviceId,$title,$content,$extra){
         $deviceId = I('jpushDeviceId');
         include_once LIB_PATH.'Org/JPush/JPush.php';
 //        $client = new \JPush(C('JPush.key'),C('JPush.secret'));
@@ -169,13 +169,12 @@ class ApiController extends Controller
             ->setPlatform(array('ios', 'android'))
             ->addRegistrationId($deviceId)
             ->setNotificationAlert('Hi, JPush')
-            ->addAndroidNotification('Hi, android notification', 'notification title', 1, array("deviceId"=>$deviceId))
-            ->addIosNotification("Hi, iOS notification", 'iOS sound', \JPush::DISABLE_BADGE, true, 'iOS category', array("key1"=>"value1", "key2"=>"value2"))
-            ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))
+            ->addAndroidNotification($content, $title, 1,$extra)
+            ->addIosNotification($content, 'iOS sound', \JPush::DISABLE_BADGE, true, 'iOS category',$extra)
+//            ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))
             ->setOptions(100000, 3600, null, false)
             ->send();
-        echo 'Result=' . json_encode($result);
-
+        return json_encode($result);
     }
 
 }
