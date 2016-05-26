@@ -60,7 +60,7 @@ class ToolController extends Controller
      * 匹配一个符合任务的商家
      */
     public function matchServer($tid){
-        $tInfo = M('task')->field('title,address,status,cid,lon,lat')->find($tid);
+        $tInfo = M('task')->field('title,address,operate_time,status,cid,lon,lat')->find($tid);
         if(!$tInfo || $tInfo['status']!=1){
             return 0;   //任务不存在或者已经结束了
         }
@@ -103,10 +103,14 @@ class ToolController extends Controller
                 }
             }
 
+            $CatName = S('CatName');
+
             $extra['type'] = 'task';
             $extra['tid'] = $tid;
             $extra['title'] = $tInfo['title'];
             $extra['address'] = $tInfo['address'];
+            $extra['time'] = taskTime($tInfo['operate_time']);
+            $extra['cid'] = $CatName[$tInfo['cid']];
             $title = '有一个新任务';
             $content = $tInfo['title'];
 
