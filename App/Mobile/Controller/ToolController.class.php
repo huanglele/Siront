@@ -70,10 +70,11 @@ class ToolController extends Controller
 
         $map['status'] = 2;
 //        $map['cid'] = array('like','%'.$tInfo['cid'].',%');
+        $map['deviceid'] = array('neq','');
         $filed = "(POW(`lon`-".$lon.",2)+POW(`lat`-".$lat.",2)) as dis,uid,lon,lat,jPushDeviceId as deviceid";
         $list1 = M('company_info')->where($map)->order('dis asc')->field($filed)->select();
         $list2 = M('person_info')->where($map)->order('dis asc')->field($filed)->select();
-        $list = $list1+$list2;
+        $list = array_merge($list1,$list2);
         $origins = '';
 
         $deviceId = array();
