@@ -78,8 +78,8 @@ class ToolController extends Controller
 
         $deviceId = array();
         foreach($list as $v){
-            if(''!=$v['jPushDeviceId']){
-                $deviceId[] = $v['jPushDeviceId'];
+            if(''!=$v['jpushdeviceid']){
+                $deviceId[] = $v['jpushdeviceid'];
                 $origins .= $v['lon'].','.$v['lat'].'|';
             }
         }
