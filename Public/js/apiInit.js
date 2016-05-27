@@ -46,29 +46,31 @@ function updateInfo(){
         } else {
             //alert(err.code + ',' + err.msg);
             //采用系统定位
-            api.startLocation({
-                accuracy: '10m',
-                filter: 1,
-                autoStop: true
-            }, function(ret, err){
-                if( ret ){
-                    data = {
-                        lon:ret.longitude,
-                        lat:ret.latitude,
-                        deviceId:jpushDeviceId,
-                        time:ret.timestamp
-                    };
-                    sendInfo(data)
-                }else{
-                    //定位失败
-                }
-            });
+            getLoactionBySys();
         }
     }
-    aMap.open();
     aMap.getLocation(param,resultCallback);
 }
 
+function getLoactinBySys(){
+    api.startLocation({
+        accuracy: '10m',
+        filter: 1,
+        autoStop: true
+    }, function(ret, err){
+        if( ret ){
+            data = {
+                lon:ret.longitude,
+                lat:ret.latitude,
+                deviceId:jpushDeviceId,
+                time:ret.timestamp
+            };
+            sendInfo(data)
+        }else{
+            //定位失败
+        }
+    });
+}
 
 //设置cookie
 function setCookie(cname, cvalue, exdays) {

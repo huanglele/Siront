@@ -181,12 +181,14 @@
             style: 'light'
         });
         initJPush();
-        aMap = api.require('aMap');
-        updateInfo();
+        //aMap = api.require('aMap');
+//        updateInfo();
+        getLoactinBySys()
 
         //每隔是1分钟上床一次自己的信息
         setInterval(function(){
-            updateInfo();
+            //updateInfo();
+            getLoactinBySys()
         },30000);
 
         var PHPSESSID = getCookie('PHPSESSID');
