@@ -44,6 +44,7 @@
         aMap.addEventListener({
             name:'viewChange'
         },function(ret,err){
+            alert('发生了viewChange事件');
             aMap.annotationExist({id:1},function(ret){
                 if(ret.status){
                     aMap.moveAnnotation({
