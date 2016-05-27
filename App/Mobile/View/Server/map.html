@@ -85,7 +85,7 @@
             alert('获取到了位置');
             addMarker(mid,ret);mid++;
         }
-        aMap.getLocation(param,resultCallback);
+        aMap.getLocation({autoStop:true},resultCallback);
     }
 
 
