@@ -52,8 +52,11 @@
                         duration: 0.5,
                         end:ret
                     },function(ret, err){
-                        alert(ret.id + '移动结束')
+                        alert(JSON.stringify(err));
+                        alert(ret.id + '移动结束');
                     })
+                }else {
+                    alert('标记不存在');
                 }
             })
         })
