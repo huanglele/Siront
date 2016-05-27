@@ -38,6 +38,7 @@
             style: 'light'
         });
         aMap = api.require('aMap');
+        addChangeMapViewEvent();
         openMap();
         //监听地图点击事件
 
@@ -110,7 +111,6 @@
                 });
             }
         })
-        addChangeMapViewEvent();
 
     }
 
@@ -118,16 +118,17 @@
      * 监听地图视图改变事件
      */
     function addChangeMapViewEvent(){
-        aMap.addEventListener({
-            name:'viewChange'
-        },function(ret){
-            aMap.moveAnnotation({
-                id:1,
-                duration: 0.5,
-                end:ret
-            },function(ret, err){
-                alert(ret.id + '移动结束')
-            })
+        alert('添加了标记事件');
+        aMap.annotationExist({id:id},function(ret){
+            if(ret.status){
+                aMap.moveAnnotation({
+                    id:1,
+                    duration: 0.5,
+                    end:ret
+                },function(ret, err){
+                    alert(ret.id + '移动结束')
+                })
+            }
         })
     }
 
