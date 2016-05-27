@@ -107,14 +107,16 @@
                 lon: poi.lon,
                 lat: poi.lat
                  }]
-        },markerEvent(ret));
+        },function(ret, err){
+            markerEvent(ret);
+        });
     }
 
     /**
      * marker事件
      * @param ret
      */
-    markerEvent = function (ret){
+    function markerEvent(ret){
         alert(ret.dragState);
     }
 
