@@ -136,10 +136,7 @@ function delV(k) {
 function sendInfo(data){
     $.ajax({
         url:baseUrl+'server/updateInfo',
-        data:data,
-        success:function(ret){
-            alert(ret);
-        }
+        data:data
     })
 }
 

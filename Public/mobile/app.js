@@ -528,18 +528,10 @@ function trim(s){
  * @param url 请求地址
  */
 function ajaxSend(url){
-    mask.show();
     $.ajax({
         'url':url,
         'data':{
             tid:tid
-        },
-        beforeSend:function(){
-            mask.show();
-        },
-        success:function(ret){
-            mui.toast(ret.info);
-            mask.close();
         }
     })
 }

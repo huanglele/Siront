@@ -340,6 +340,9 @@
     }
 
     apiready = function(){
+        api.setStatusBarStyle({
+            style: 'light'
+        });
         jpush = api.require('ajpush');
 
         baseUrl = 'http://xyc.91yiso.com/mobile.php/';
