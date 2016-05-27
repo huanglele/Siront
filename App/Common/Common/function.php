@@ -212,6 +212,7 @@ function sendJPushNotify($deviceId,$title,$content,$extra){
     $result = $client->push()
         ->setPlatform(array('ios', 'android'))
         ->addRegistrationId($deviceId)
+        ->setNotificationAlert($title)
         ->addAndroidNotification($content, $title, 1,$extra)
         ->addIosNotification($content, 'iOS sound', \JPush::DISABLE_BADGE, true, 'iOS category',$extra)
 //            ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))

@@ -95,6 +95,7 @@ class ToolController extends Controller
             $res = myCurl($url);
             $res = json_decode($res, true);
             $data = array();
+            $CatName = S('CatName');
             if ($res['info'] == 'OK') {
                 foreach ($res['results'] as $k => $v) {
                     $t = $list[$k];
@@ -104,18 +105,16 @@ class ToolController extends Controller
                 }
             }
 
-            $CatName = S('CatName');
-
             $extra['type'] = 'task';
             $extra['tid'] = $tid;
-            $extra['url'] = U('server/sureTask',array('tid'=>$tid),true,true);
+            $extra['url'] = U('server/sureTask');
             $extra['title'] = $tInfo['title'];
             $extra['address'] = $tInfo['address'];
             $extra['time'] = taskTime($tInfo['operate_time']);
             $extra['cid'] = $CatName[$tInfo['cid']];
             $title = '有一个新任务';
             $content = $tInfo['title'];
-            sendJPushNotify($deviceId, $title, $content, $extra);
+            $this->sendAppNotify($deviceId, $title, $content, $extra);
         }
         return $num;
     }
@@ -123,12 +122,19 @@ class ToolController extends Controller
     /**
      * 发送一个广播
      */
-    public function sendAppNotify(){
-        $deviceId = I('id');
-        $title = I('tt');
-        $content = I('cn');
-        $extra = array('key'=>'测试');
-        sendJPushNotify($deviceId,$title,$content,$extra);
+    private function sendAppNotify($deviceId,$title,$content,$extra){
+        include_once LIB_PATH.'Org/JPush/JPush.php';
+        $client = new \JPush(C('JPush.key'),C('JPush.secret'));
+        $result = $client->push()
+            ->setPlatform(array('ios', 'android'))
+            ->addRegistrationId($deviceId)
+            ->setNotificationAlert($title)
+            ->addAndroidNotification($content, $title, 1,$extra)
+            ->addIosNotification($content, 'iOS sound', \JPush::DISABLE_BADGE, true, 'iOS category',$extra)
+//            ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))
+            ->setOptions(100000, 3600, null, false)
+            ->send();
+        return json_encode($result);
     }
 
     public function test(){
