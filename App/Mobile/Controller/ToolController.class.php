@@ -92,7 +92,7 @@ class ToolController extends Controller
 
         foreach($list as $v){
             if(''!=$v['deviceid']){
-//                $deviceId[] = $v['deviceid'];
+                $deviceId[] = $v['deviceid'];
                 $origins .= $v['lon'].','.$v['lat'].'|';
                 $this->sendAppNotify($v['deviceid'], $title, $content, array());
             }
@@ -118,7 +118,6 @@ class ToolController extends Controller
                 }
             }
         }*/
-
         return $num;
     }
 
@@ -127,17 +126,18 @@ class ToolController extends Controller
      */
     private function sendAppNotify($deviceId,$title,$content,$extra){
         include_once LIB_PATH.'Org/JPush/JPush.php';
+//        $client = new \JPush(C('JPush.key'),C('JPush.secret'));
         $client = new \JPush(C('JPush.key'),C('JPush.secret'));
         $result = $client->push()
             ->setPlatform(array('ios', 'android'))
             ->addRegistrationId($deviceId)
-            ->setNotificationAlert($title)
+            ->setNotificationAlert('Hi, JPush')
             ->addAndroidNotification($content, $title, 1,$extra)
             ->addIosNotification($content, 'iOS sound', \JPush::DISABLE_BADGE, true, 'iOS category',$extra)
-//            ->setMessage("msg content", 'msg title', 'type', array("key1"=>"value1", "key2"=>"value2"))
+//            ->setMessage($content, $title, 'type', $extra)
             ->setOptions(100000, 3600, null, false)
             ->send();
-        return json_encode($result);
+        echo json_encode($result);
     }
 
     public function test(){
