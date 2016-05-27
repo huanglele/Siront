@@ -40,26 +40,14 @@
         aMap = api.require('aMap');
         openMap();
         //监听地图点击事件
-        aMap.addEventListener({
-            name: 'longPress'
-        },function(ret){
-            alert('longPress')
-//            if(ret.status){
-//                alert(JSON.stringify(ret));
-//            }
-        });
 
         aMap.addEventListener({
             name:'viewChange'
         },function(ret){
-            alert('viewChange')
+            addMarker(id,ret);
         })
 
-        aMap.addEventListener({
-            name:'click'
-        },function(ret){
-            alert('click')
-        })
+
     }
 
     /**
