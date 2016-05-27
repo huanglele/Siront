@@ -83,6 +83,7 @@
         alert('开始定位');
         var resultCallback = function(ret, err){
             alert('获取到了位置');
+            aMap.setCenter({coords:ret,animation:true});
             addMarker(mid,ret);mid++;
         }
         aMap.getLocation({autoStop:true},resultCallback);
@@ -94,7 +95,7 @@
      */
     function addMarker(id,poi){
         alert('开始标记');
-        aMap.addAnnotations({
+        aMap.addMobileAnnotations({
             annotations: [{
                 id: id,
                 lon: poi.lon,
