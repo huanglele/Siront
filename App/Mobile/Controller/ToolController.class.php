@@ -137,7 +137,7 @@ class ToolController extends Controller
 //            ->setMessage($content, $title, 'type', $extra)
             ->setOptions(100000, 3600, null, false)
             ->send();
-        echo json_encode($result);
+        return json_encode($result);
     }
 
     public function test(){
