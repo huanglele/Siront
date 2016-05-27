@@ -183,7 +183,10 @@
         initJPush();
         aMap = api.require('aMap');
 //        updateInfo();
-        getLoactinBySys()
+        getLoactinBySys();
+        aMap.removeAnnotations({
+            ids: [1]
+        });
         aMap.close();
         //每隔是1分钟上床一次自己的信息
         setInterval(function(){
