@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>测试地图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="__PUBLIC__/mui/mui.min.css">
+    <script src="__PUBLIC__/mui/mui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<{:C('IconCssLink')}>"/>
+    <style>
+        .mui-bar-nav{
+            background-color: #EA4F23;
+            -webkit-box-shadow: 0 1px 6px #EA4F23;
+            box-shadow: 0 1px 6px #EA4F23;
+        }
+        .mui-bar-nav .mui-title{
+            color: #f7f7f7;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back mui-pull-left" style="color: #Ffffff;" href="<{:U('server/index')}>"></a>
+    <a id="info" class="mui-icon mui-icon-gear mui-pull-right" style="color: #Ffffff;"></a>
+    <h1 class="mui-title">测试地图</h1>
+</header>
+<div class="mui-content">
+
+</div>
+<script>
+    apiready = function(){
+        api.setStatusBarStyle({
+            style: 'light'
+        });
+        var aMap = api.require('aMap');
+        aMap.open({
+            rect: {
+                x: 0,
+                y: 0,
+                w: auto,
+                h: auto
+            },
+            showUserLocation: true,
+            zoomLevel: 11,
+            center: {
+                lon: 116.4021310000,
+                lat: 39.9994480000
+            },
+            fixedOn: api.frameName,
+            fixed: true
+        }, function(ret, err){
+            if( ret.status ){
+                alert( JSON.stringify( ret ) );
+            }else{
+                alert( JSON.stringify( err ) );
+            }
+        });
+    }
+</script>
+</body>
+</html>
