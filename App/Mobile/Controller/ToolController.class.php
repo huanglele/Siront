@@ -88,15 +88,16 @@ class ToolController extends Controller
         $extra['time'] = taskTime($tInfo['operate_time']);
         $extra['cid'] = $CatName[$tInfo['cid']];
         $title = '有一个新任务';
-        $content = $tInfo['title'];
+        $content = '点击查看';
 
         foreach($list as $v){
             if(''!=$v['deviceid']){
                 $deviceId[] = $v['deviceid'];
                 $origins .= $v['lon'].','.$v['lat'].'|';
-                $this->sendAppNotify($v['deviceid'], $title, $content, array());
+
             }
         }
+        $this->sendAppNotify($deviceId, $title, $content, array());
 
         //如果匹配到了设备
         $num = count($deviceId);
@@ -141,7 +142,12 @@ class ToolController extends Controller
     }
 
     public function test(){
-        echo json_encode(array(1,2,3,0));
+        $deviceId = array('1507bfd3f7c753da54a','140fe1da9eab45b0bee');
+        $title = '推送测试';
+        $content = 'content';
+        $extra = array();
+        $r = $this->sendAppNotify($deviceId,$title,$content,$extra);
+        echo $r;
     }
 
 }

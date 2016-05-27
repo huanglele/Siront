@@ -161,7 +161,7 @@ class ApiController extends Controller
      * 商家app测试单个推送
      */
     public function serverinit(){
-        $deviceId = I('jpushDeviceId');
+        $deviceId = I('id');
         $title = 'title';
         $content = 'content';
         $extra = array('key'=>'傻逼');
