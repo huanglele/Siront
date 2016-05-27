@@ -66,7 +66,6 @@
             fixed: true
         }, function(ret, err){
             if( ret.status ){
-                alert( JSON.stringify( ret ) );
                 getLoaction();
             }else{
                 alert( JSON.stringify( err ) );
@@ -90,7 +89,7 @@
                 }
             })
         }
-        aMap.getLocation({autoStop:true},resultCallback);
+        aMap.getLocation({autoStop:false},resultCallback);
     }
 
 
@@ -98,7 +97,8 @@
      *添加marker
      */
     function addMarker(id,poi){
-        alert('开始标记');
+        alert('开始标记,下面弹出位置');
+        alert(JSON.stringify(poi));
         aMap.addAnnotations({
             annotations: [{
                 id: id,
@@ -107,7 +107,7 @@
                  }]
         },function(ret, err){
             alert('标记成功');
-            markerEvent(ret);
+//            markerEvent(ret);
         });
     }
 
