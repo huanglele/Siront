@@ -529,10 +529,7 @@ function trim(s){
  */
 function ajaxSend(url){
     $.ajax({
-        'url':url,
-        'data':{
-            tid:tid
-        }
+        'url':url
     })
 }
 
