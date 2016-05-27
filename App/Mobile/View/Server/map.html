@@ -99,6 +99,7 @@
      *添加marker
      */
     function addMarker(id,poi){
+        alert('开始标记');
         aMap.annotationExist({id:id},function(ret){
             if(ret.status){
                 alert('标记已存在');
