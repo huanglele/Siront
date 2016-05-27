@@ -114,7 +114,7 @@ class ToolController extends Controller
             $extra['cid'] = $CatName[$tInfo['cid']];
             $title = '有一个新任务';
             $content = $tInfo['title'];
-            $this->sendAppNotify($deviceId, $title, $content, $extra);
+            $this->sendAppNotify($deviceId, $title, $content, $extra );
         }
         return $num;
     }
