@@ -33,9 +33,7 @@
 </div>
 <script>
     aMap = null;
-    mid = 0;
     apiready = function(){
-        mid++;
         api.setStatusBarStyle({
             style: 'light'
         });
@@ -43,13 +41,12 @@
         openMap();
         //监听地图点击事件
         aMap.addEventListener({
-            name: 'click'
+            name: 'longPress'
         },function(ret){
             if(ret.status){
                 alert(JSON.stringify(ret));
             }
         });
-        alert('mid是'+mid);
     }
 
     /**
@@ -102,7 +99,7 @@
      */
     function addMarker(id,poi){
         alert('开始标记');
-        aMap.addMobileAnnotations({
+        aMap.addAnnotations({
             annotations: [{
                 id: id,
                 lon: poi.lon,
