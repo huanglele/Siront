@@ -42,7 +42,7 @@
         //监听地图点击事件
 
         aMap.addEventListener({
-            name:'changeView'
+            name:'viewChange'
         },function(ret,err){
             aMap.annotationExist({id:1},function(ret){
                 if(ret.status){
