@@ -119,12 +119,13 @@
             name:'viewChange'
         },function(ret,err){
             alert('发生了viewChange事件');
+            poi = ret;
             aMap.annotationExist({id:1},function(ret){
                 if(ret.status){
                     aMap.moveAnnotation({
                         id:1,
-                        duration: 0.5,
-                        end:ret
+                        duration: 1,
+                        end:poi
                     },function(ret, err){
                         alert(JSON.stringify(ret));
                         alert(ret.id + '移动结束');
