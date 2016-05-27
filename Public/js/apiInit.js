@@ -32,7 +32,7 @@ function clearCache(){
  * 更新自己的信息 位置、设备id
  */
 function updateInfo(){
-    var param = {accuracy:100,filter:1,autoStop:true};
+    var param = {accuracy:10,filter:1,autoStop:true};
     var resultCallback = function(ret, err){
         if(ret.status){
             data = {
@@ -52,7 +52,6 @@ function updateInfo(){
                 autoStop: true
             }, function(ret, err){
                 if( ret ){
-                    alert('采用系统定位');
                     data = {
                         lon:ret.longitude,
                         lat:ret.latitude,
@@ -137,7 +136,10 @@ function delV(k) {
 function sendInfo(data){
     $.ajax({
         url:baseUrl+'server/updateInfo',
-        data:data
+        data:data,
+        success:function(ret){
+            alert(ret);
+        }
     })
 }
 
