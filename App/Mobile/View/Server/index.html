@@ -181,10 +181,10 @@
             style: 'light'
         });
         initJPush();
-        //aMap = api.require('aMap');
+        aMap = api.require('aMap');
 //        updateInfo();
         getLoactinBySys()
-
+        aMap.close();
         //每隔是1分钟上床一次自己的信息
         setInterval(function(){
             //updateInfo();
