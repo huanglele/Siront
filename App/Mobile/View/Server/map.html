@@ -84,7 +84,13 @@
         var resultCallback = function(ret, err){
             alert('获取到了位置');
             aMap.setCenter({coords:ret,animation:true});
-            addMarker(mid,ret);mid++;
+            aMap.annotationExist({id:1},function(ret){
+                if(ret.status){
+                    alert('标记已存在');
+                }else {
+                    addMarker(1,ret);
+                }
+            })
         }
         aMap.getLocation({autoStop:true},resultCallback);
     }
@@ -101,10 +107,7 @@
                 lon: poi.lon,
                 lat: poi.lat
                  }]
-        }, function(ret){
-            alert('标记成功');
-            markerEvent(ret)
-        });
+        },markerEvent(ret));
     }
 
     /**
@@ -112,9 +115,7 @@
      * @param ret
      */
     function markerEvent(ret){
-        if(ret.eventType == 'click'){
-            alert(ret.id);
-        }
+        alert(ret.dragState);
     }
 
 </script>
