@@ -41,13 +41,6 @@
         openMap();
         //监听地图点击事件
 
-        aMap.addEventListener({
-            name:'viewChange'
-        },function(ret){
-            addMarker(1,ret);
-        })
-
-
     }
 
     /**
@@ -117,7 +110,27 @@
                 });
             }
         })
+        addChangeMapViewEvent();
+
     }
+
+    /**
+     * 监听地图视图改变事件
+     */
+    function addChangeMapViewEvent(){
+        aMap.addEventListener({
+            name:'viewChange'
+        },function(ret){
+            aMap.moveAnnotation({
+                id:1,
+                duration: 0.5,
+                end:ret
+            },function(ret, err){
+                alert(ret.id + '移动结束')
+            })
+        })
+    }
+
 
     /**
      * marker事件
