@@ -41,26 +41,6 @@
         openMap();
         //监听地图点击事件
 
-        aMap.addEventListener({
-            name:'viewChange'
-        },function(ret,err){
-            alert('发生了viewChange事件');
-            aMap.annotationExist({id:1},function(ret){
-                if(ret.status){
-                    aMap.moveAnnotation({
-                        id:1,
-                        duration: 0.5,
-                        end:ret
-                    },function(ret, err){
-                        alert(JSON.stringify(err));
-                        alert(ret.id + '移动结束');
-                    })
-                }else {
-                    alert('标记不存在');
-                }
-            })
-        })
-
     }
 
     /**
@@ -130,9 +110,31 @@
                 });
             }
         })
+        onChangeView();
 
     }
 
+    function onChangeView(){
+        aMap.addEventListener({
+            name:'viewChange'
+        },function(ret,err){
+            alert('发生了viewChange事件');
+            aMap.annotationExist({id:1},function(ret){
+                if(ret.status){
+                    aMap.moveAnnotation({
+                        id:1,
+                        duration: 0.5,
+                        end:ret
+                    },function(ret, err){
+                        alert(JSON.stringify(err));
+                        alert(ret.id + '移动结束');
+                    })
+                }else {
+                    alert('标记不存在');
+                }
+            })
+        })
+    }
 
 
     /**
