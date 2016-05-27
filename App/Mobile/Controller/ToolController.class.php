@@ -96,14 +96,6 @@ class ToolController extends Controller
             $res = json_decode($res, true);
             $data = array();
             $CatName = S('CatName');
-            if ($res['info'] == 'OK') {
-                foreach ($res['results'] as $k => $v) {
-                    $t = $list[$k];
-                    $t['distance'] = $v['distance'];
-                    $t['time'] = $v['duration'];
-                    $data[] = $t;
-                }
-            }
 
             $extra['type'] = 'task';
             $extra['tid'] = $tid;
@@ -114,7 +106,14 @@ class ToolController extends Controller
             $extra['cid'] = $CatName[$tInfo['cid']];
             $title = '有一个新任务';
             $content = $tInfo['title'];
-            $this->sendAppNotify($deviceId, $title, $content, array() );
+            if ($res['info'] == 'OK') {
+                foreach ($res['results'] as $k => $v) {
+                    $t = $list[$k];
+                    $t['distance'] = $v['distance'];
+                    $t['time'] = $v['duration'];
+                    $this->sendAppNotify($t['distance'], $title, $content, $extra);
+                }
+            }
         }
         return $num;
     }
