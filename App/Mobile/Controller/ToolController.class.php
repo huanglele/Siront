@@ -78,16 +78,29 @@ class ToolController extends Controller
         $origins = '';
 
         $deviceId = array();
+        $CatName = S('CatName');
+
+        $extra['type'] = 'task';
+        $extra['tid'] = $tid;
+        $extra['url'] = U('server/sureTask');
+        $extra['title'] = $tInfo['title'];
+        $extra['address'] = $tInfo['address'];
+        $extra['time'] = taskTime($tInfo['operate_time']);
+        $extra['cid'] = $CatName[$tInfo['cid']];
+        $title = '有一个新任务';
+        $content = $tInfo['title'];
+
         foreach($list as $v){
             if(''!=$v['deviceid']){
-                $deviceId[] = $v['deviceid'];
+//                $deviceId[] = $v['deviceid'];
                 $origins .= $v['lon'].','.$v['lat'].'|';
+                $this->sendAppNotify($v['deviceid'], $title, $content, $extra);
             }
         }
 
         //如果匹配到了设备
         $num = count($deviceId);
-        if($num) {
+      /*  if($num) {
             $origins = rtrim($origins, '|');
             $destination = $lon . ',' . $lat;
             $key = '4d6777df67a2c81ec8ec6a8480821a73';
@@ -95,26 +108,17 @@ class ToolController extends Controller
             $res = myCurl($url);
             $res = json_decode($res, true);
             $data = array();
-            $CatName = S('CatName');
 
-            $extra['type'] = 'task';
-            $extra['tid'] = $tid;
-            $extra['url'] = U('server/sureTask');
-            $extra['title'] = $tInfo['title'];
-            $extra['address'] = $tInfo['address'];
-            $extra['time'] = taskTime($tInfo['operate_time']);
-            $extra['cid'] = $CatName[$tInfo['cid']];
-            $title = '有一个新任务';
-            $content = $tInfo['title'];
             if ($res['info'] == 'OK') {
                 foreach ($res['results'] as $k => $v) {
                     $t = $list[$k];
                     $t['distance'] = $v['distance'];
                     $t['time'] = $v['duration'];
-                    $this->sendAppNotify($t['distance'], $title, $content, $extra);
+                    $data[] = $t;
                 }
             }
-        }
+        }*/
+
         return $num;
     }
 
