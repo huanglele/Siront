@@ -32,15 +32,33 @@
 
 </div>
 <script>
+    aMap = null;
+    mid = 1;
     apiready = function(){
         api.setStatusBarStyle({
             style: 'light'
         });
-        var aMap = api.require('aMap');
+        aMap = api.require('aMap');
+
+        //监听地图点击事件
+        aMap.addEventListener({
+            name: 'click'
+        },function(ret){
+            if(ret.status){
+                alert(JSON.stringify(ret));
+            }
+        });
+        openMap();
+    }
+
+    /**
+     * 打开地图
+     */
+    function openMap(){
         aMap.open({
             rect: {
                 x: 0,
-                y: 0,
+                y: 46,
                 w: api.frameWidth,
                 h: api.frameHeight-46
             },
@@ -51,11 +69,53 @@
         }, function(ret, err){
             if( ret.status ){
                 alert( JSON.stringify( ret ) );
+                getLoaction();
             }else{
                 alert( JSON.stringify( err ) );
             }
         });
     }
+
+    /**
+     * 获取定位
+     */
+    function getLoaction(){
+        alert('开始定位');
+        var resultCallback = function(ret, err){
+            alert('获取到了位置');
+            addMarker(mid,ret);mid++;
+        }
+        aMap.getLocation(param,resultCallback);
+    }
+
+
+    /**
+     *添加marker
+     */
+    function addMarker(id,poi){
+        alert('开始标记');
+        aMap.addAnnotations({
+            annotations: [{
+                id: id,
+                lon: poi.lon,
+                lat: poi.lat
+                 }]
+        }, function(ret){
+            alert('标记成功');
+            markerEvent(ret)
+        });
+    }
+
+    /**
+     * marker事件
+     * @param ret
+     */
+    function markerEvent(ret){
+        if(ret.eventType == 'click'){
+            alert(ret.id);
+        }
+    }
+
 </script>
 </body>
 </html>
