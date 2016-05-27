@@ -97,7 +97,7 @@ class ToolController extends Controller
 
             }
         }
-        $this->sendAppNotify($deviceId, $title, $content, array());
+        $this->sendAppNotify($deviceId, $title, $content, $extra);
 
         //如果匹配到了设备
         $num = count($deviceId);
