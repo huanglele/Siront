@@ -94,7 +94,7 @@ class ToolController extends Controller
             if(''!=$v['deviceid']){
 //                $deviceId[] = $v['deviceid'];
                 $origins .= $v['lon'].','.$v['lat'].'|';
-                $this->sendAppNotify($v['deviceid'], $title, $content, $extra);
+                $this->sendAppNotify($v['deviceid'], $title, $content, array());
             }
         }
 
