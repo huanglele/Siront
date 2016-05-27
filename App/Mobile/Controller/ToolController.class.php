@@ -124,7 +124,11 @@ class ToolController extends Controller
      * 发送一个广播
      */
     public function sendAppNotify(){
-
+        $deviceId = I('id');
+        $title = I('tt');
+        $content = I('cn');
+        $extra = array('key'=>'测试');
+        sendJPushNotify($deviceId,$title,$content,$extra);
     }
 
     public function test(){
