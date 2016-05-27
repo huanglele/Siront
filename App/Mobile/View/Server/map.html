@@ -79,15 +79,17 @@
     function getLoaction(){
         alert('开始定位');
         var resultCallback = function(ret, err){
-            alert('获取到了位置');
-            aMap.setCenter({coords:ret,animation:true});
-            aMap.annotationExist({id:1},function(ret){
-                if(ret.status){
-                    alert('标记已存在');
-                }else {
+            if(ret.status){
+                alert('定位成功');
+                aMap.setCenter({coords:ret,animation:true});
+                addMarker(1,ret);
+            }else {
+                alert('获取位置信息失败');
+                aMap.getCenter(function(ret,err){
                     addMarker(1,ret);
-                }
-            })
+                });
+            }
+
         }
         aMap.getLocation({autoStop:true},resultCallback);
     }
@@ -97,18 +99,22 @@
      *添加marker
      */
     function addMarker(id,poi){
-        alert('开始标记,下面弹出位置');
-        alert(JSON.stringify(poi));
-        aMap.addAnnotations({
-            annotations: [{
-                id: id,
-                lon: poi.lon,
-                lat: poi.lat
-                 }]
-        },function(ret, err){
-            alert('标记成功');
+        aMap.annotationExist({id:id},function(ret){
+            if(ret.status){
+                alert('标记已存在');
+            }else {
+                aMap.addAnnotations({
+                    annotations: [{
+                        id: id,
+                        lon: poi.lon,
+                        lat: poi.lat
+                    }]
+                },function(ret, err){
+                    alert('标记成功');
 //            markerEvent(ret);
-        });
+                });
+            }
+        })
     }
 
     /**
