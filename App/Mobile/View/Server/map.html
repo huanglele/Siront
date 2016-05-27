@@ -43,10 +43,23 @@
         aMap.addEventListener({
             name: 'longPress'
         },function(ret){
-            if(ret.status){
-                alert(JSON.stringify(ret));
-            }
+            alert('longPress')
+//            if(ret.status){
+//                alert(JSON.stringify(ret));
+//            }
         });
+
+        aMap.addEventListener({
+            name:'viewChange'
+        },function(ret){
+            alert('viewChange')
+        })
+
+        aMap.addEventListener({
+            name:'click'
+        },function(ret){
+            alert('click')
+        })
     }
 
     /**
