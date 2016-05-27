@@ -65,7 +65,8 @@ function updateInfo(){
             });
         }
     }
-    aMapLocation.startLocation(param,resultCallback);
+    aMap.open();
+    aMap.getLocation(param,resultCallback);
 }
 
 

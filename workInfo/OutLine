@@ -1,3 +1,8 @@
+<feature name="aMapLocation">
+    <param name="android_api_key" value="85406b9e75e7c2892091ab0fab9e44a1"/>
+    <param name="ios_api_key" value="324937f60937b415bee4885542c226b8"/>
+  </feature>
+
 服务器信息
     120.76.78.77
     administrator
