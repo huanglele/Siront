@@ -84,7 +84,6 @@
 
     function getTaskList(){
         if(hasMore){
-            alert('加载第'+page+'页')
             $.ajax({
                 url:"<{:U('user/getTaskList')}>",
                 data:{
@@ -109,7 +108,7 @@
                         }else {
                             mui.toast('到底了');
                         }
-                        page = data.p;
+                        page = data.page;
                     }else {
                         mui.toast('系统错误');
                     }
