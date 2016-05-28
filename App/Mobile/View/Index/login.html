@@ -70,9 +70,10 @@
 
         <button type="button" id="login_sub" class="login_btn mui-btn mui-btn-primary mui-btn-block" >登&nbsp;&nbsp;&nbsp;录</button>
 
-        <div>
-            <a href="<{:U('index/reg')}>" class="index_reg_link mui-h4">没有账号</a>
-            <a href="<{:U('index/findPwd')}>" class="index_findPwd_link mui-h4">找回密码</a>
+        <div class="link-area">
+            <a href="<{:U('index/reg')}>" class="index_reg_link mui-h4">没有账号</a><span class="spliter">|</span>
+            <a href="<{:U('index/findPwd')}>" class="index_findPwd_link mui-h4">找回密码</a><span class="spliter">|</span>
+            <a href="<{:U('index/index')}>">返回首页</a>
         </div>
 
     </form>
@@ -104,7 +105,7 @@
                             mui.toast(data.msg);
                         }
                         if(data.status=='success'){
-                            setV('uid',data.uid);
+                            $api.setStorage('uid',data.uid);
                             window.location.href = "<{:U('index/index')}>";
                         }
                     }
