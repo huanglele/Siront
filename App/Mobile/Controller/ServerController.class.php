@@ -112,7 +112,7 @@ class ServerController extends Controller
             $data['work_uid'] = session('uid');
             $data['sure_time'] = time();
             if($M->save($data)){
-                $this->success('接单成功',U('server/taskDetail',array('tid'=>$tid)),true,true);
+                $this->success('接单成功',U('server/taskDetail',array('tid'=>$tid),true,true));
             }else{
                 $this->error('操作失败，请重试');
             }

@@ -50,10 +50,14 @@
     <div id="getDataTip"></div>
 </div>
 <script>
-    var page = 1;
-    var hasMore = true;
-    var sort = 'undo';
+    page = 1;
+    hasMore = true;
+    sort = 'undo';
+    loading = false;
     $(window).ready(function(){
+        /**
+         * 切换顶部tab标签
+         */
         $('.mui-control-item').on('tap',function(){
             page = 1;hasMore = true;
             $('#getDataTip').html('');
@@ -61,8 +65,12 @@
             sort = $(this).attr('data-sort');
             getTaskList();
         });
+        //页面打开自动加载第一页
         getTaskList();
 
+        /**
+         * 滚动加载
+         */
         $(window).scroll(function(){
             totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
             if ($(document).height() <= totalheight){
@@ -79,14 +87,14 @@
             $.ajax({
                 url:"<{:U('user/getTaskList')}>",
                 data:{
-                    p:page,
-                    filter:sort
+                    'p':page,
+                    'filter':sort
                 },
                 beforeSend:function(){
+                    hasMore = false;
                     $('#getDataTip').html('<span class="mui-spinner"></span>')
                 },
                 success:function(data){
-                    hasMore = false;
                     if(data.status=='success'){
                         if(data.num>0){
                             var html = '';
