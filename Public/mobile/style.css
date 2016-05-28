@@ -1062,13 +1062,13 @@ body {
 
 .location .wrapper .txt-from.default, .location .wrapper .txt-to.default {
     color: #fa8919;
+    text-align: left;
     background-color: #FAFAFA;
 }
 #workDesc .desc .wrapper:after {
     display: block;
     bottom: 0;
     position: absolute;
-    border-top: 1px solid #ccc;
     left: 0;
     width: 100%;
     content: ' '
