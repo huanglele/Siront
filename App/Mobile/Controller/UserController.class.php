@@ -53,9 +53,9 @@ class UserController extends Controller
             case 'all':$map['status'] = array('in',array(1,2,3,4));break;
             default: $map['status'] = array('in',array(1,2,3,4));
         }
-        $count = M('task')->where($map)->where($map)->count();
+        $count = $M->where($map)->where($map)->count();
         $Page = new \Think\Page($count,10);
-        $list = M('task')->where($map)->limit($Page->firstRow,$Page->listRows)->field('tid,title,status,create_time as ctime')->select();
+        $list = $M->where($map)->order('tid desc')->limit($Page->firstRow,$Page->listRows)->field('tid,title,status,create_time as ctime')->select();
         $num = count($list);
         if($num){
             $TaskStatus = C('TaskStatus');
@@ -67,7 +67,7 @@ class UserController extends Controller
         $ret['status'] = 'success';
         $ret['num'] = $num;
         $ret['list'] = $list;
-        if($p==10)  $p++;
+        if($num==10)  $p++;
         $ret['page'] = $p;
         $this->ajaxReturn($ret);
     }

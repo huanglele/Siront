@@ -55,7 +55,10 @@
     </form>
     <div class="mui-content-padded">
         <button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
-        <div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+        <div class="link-area">
+            <a id='reg'>注册账号</a> <span class="spliter">|</span>
+            <a id='forgetPassword'>忘记密码</a><span class="spliter">|</span>
+            <a href="<{:U('index/index')}>">返回首页</a>
         </div>
     </div>
 </div>
@@ -65,7 +68,6 @@
     jpushDeviceId = null;
     apiready = function(){
         initJPush();
-        alert('初始化完毕');
     };
 
 
@@ -99,7 +101,6 @@
         var patrn=/^(13[0-9]|14[5|7]|15[0-9]|17[0-9])\d{8}$/;
         if(patrn.exec(phone)){
             if(pwd.length>5){
-                alert('现在要登录了，获取到的设备id是'+jpushDeviceId)
                 $.ajax({
                     url:"<{:U('ajax/loginServer')}>",
                     type:'post',
@@ -131,12 +132,7 @@
      *读取数据
      */
     function getV(k) {
-        var r = $api.getStorage(k);
-        if (r && typeof r != 'undefind') {
-            return r;
-        } else {
-            return false;
-        }
+        $api.getStorage(k);
     }
 
     /**
