@@ -87,8 +87,8 @@
             $.ajax({
                 url:"<{:U('user/getTaskList')}>",
                 data:{
-                    'p':page,
-                    'filter':sort
+                    'filter':sort,
+                    'p':page
                 },
                 beforeSend:function(){
                     hasMore = false;
