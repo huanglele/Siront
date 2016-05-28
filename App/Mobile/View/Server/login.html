@@ -110,6 +110,8 @@
                     },
                     success:function(data){
                         if(data.status=='success'){
+                            setV('uid',data.uid);
+                            setV('type',data.type);
                             window.location.href = "<{:U('server/index')}>"
                         }else if(data.msg){
                             mui.toast(data.msg);
@@ -121,6 +123,18 @@
             }
         }else {
             mui.toast('手机号格式不对');
+        }
+    }
+
+    /**
+     *读取数据
+     */
+    function getV(k) {
+        var r = $api.getStorage(k);
+        if (r && typeof r != 'undefind') {
+            return r;
+        } else {
+            return false;
         }
     }
 

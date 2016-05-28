@@ -33,6 +33,7 @@ class AjaxController extends Controller
                         }
                         session('phone',$phone);
                         session('uid',$info['uid']);
+                        $ret['uid'] = $info['uid'];
                         S($info['uid'].'deviceId',$deviceId);
                         $res['status'] = 'success';
                     }else{
@@ -179,6 +180,8 @@ class AjaxController extends Controller
                         }elseif($type=='p'){
                             $M = M('person_info');
                         }
+                        $ret['uid'] = $info['uid'];
+                        $ret['type'] = $type;
                         $M->where(array('uid'=>$info['uid']))->setField('jPushDeviceId',$deviceId);
                     }else{
                         $UserStatus = array('0'=>'用户不存在','1' => '账户待认证', '3' => '账户被限制',);

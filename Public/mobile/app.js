@@ -6,7 +6,7 @@ $(window).ready(function(){
     //个人头像点击事件
     $('#btnMenu').click(function(){
         log('发送点击');
-        if(isLogin){
+        if(isLogin()){
             $('#menu').addClass('hidden').removeClass('visible');
             $('.closeMenu').addClass('visible');
         }else{
@@ -65,7 +65,7 @@ $(window).ready(function(){
                         $('#login_tip').html(data.msg);
                     }
                     if(data.status=='success'){
-                        isLogin = true;
+                        setV('uid',data.uid);
                         getUserInfo();
                         $('#closeLogin').click();
                     }
@@ -155,7 +155,7 @@ $(window).ready(function(){
 
     //提交任务
     $('#sub_task').click(function(){
-        if(isLogin){
+        if(isLogin()){
             var data = checkTaskInput();
             if(data){
                 $.ajax({
@@ -189,6 +189,13 @@ $(window).ready(function(){
     })
 
 })
+
+/**
+ * 判断是否登录了
+ */
+function isLogin(){
+    return getV('uid');
+}
 
 /**
  * 验证登陆输入
@@ -531,6 +538,32 @@ function ajaxSend(url){
     $.ajax({
         'url':url
     })
+}
+
+/**
+ *读取数据
+ */
+function getV(k) {
+    var r = $api.getStorage(k);
+    if (r && typeof r != 'undefind') {
+        return r;
+    } else {
+        return false;
+    }
+}
+
+/**
+ *写入数据
+ */
+function setV(k, v) {
+    $api.setStorage(k, v);
+}
+
+/**
+ *删除数据
+ */
+function delV(k) {
+    $api.rmStorage(k);
 }
 
 (function($, doc) {
