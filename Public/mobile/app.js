@@ -86,12 +86,7 @@ $(window).ready(function(){
      */
     $('input[name="workPlace"]').click(function(){
         //bgShow('show');
-        $('#chooseMap').animate({
-            'display':'block',
-            'right':0
-        });
-        $(this).blur();
-        event.preventDefault();
+        chooseMap();
     })
     /**
      * 关闭选择地址
@@ -189,6 +184,36 @@ $(window).ready(function(){
     })
 
 })
+
+/**
+ * 选择地图
+ */
+function chooseMap(){
+    //$('#chooseMap').animate({
+    //    'display':'block',
+    //    'right':0
+    //});
+    //$(this).blur();
+    //event.preventDefault();
+    api.openFrame({
+        name : 'chooseMap',
+        url : baseUrl+'Index/chooseMap',
+        bounces : false,
+        rect : {
+            w : 'auto',
+            h : 'auto'
+        },
+        progress : {
+            type : 'page'
+        },
+        animation:{
+            type:"none",                //动画类型（详见动画类型常量）
+            subType:"from_right",       //动画子类型（详见动画子类型常量）
+            duration:300                //动画过渡时间，
+        }
+    })
+}
+
 
 /**
  * 判断是否登录了
@@ -518,8 +543,6 @@ function isMobil(s) {
     if (!patrn.exec(s)) return false;
     return true;
 }
-
-
 
 /**
  *去除字符串两端空格
