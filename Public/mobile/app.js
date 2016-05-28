@@ -197,7 +197,7 @@ function chooseMap(){
     event.preventDefault();
     api.openFrame({
         name : 'chooseMap',
-        url : './html/chooseMap.html',
+        url : 'widget://html/chooseMap.html',
         bounces : false,
         rect : {
             w : 'auto',
