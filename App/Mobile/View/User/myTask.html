@@ -84,6 +84,7 @@
 
     function getTaskList(){
         if(hasMore){
+            alert('加载第'+p+'页')
             $.ajax({
                 url:"<{:U('user/getTaskList')}>",
                 data:{
