@@ -105,7 +105,7 @@
 <body>
 <header class="mui-bar mui-bar-nav">
     <a class="mui-icon mui-icon-back mui-pull-left" href="<{:U('user/myTask')}>"></a>
-    <a id="info" class="mui-icon mui-icon-gear mui-pull-right" style="color: #Ffffff;"></a>
+    <a id="info" class="mui-icon mui-icon-reload mui-pull-right"></a>
     <h1 class="mui-title">任务详情</h1>
 </header>
 <div class="mui-content">
@@ -161,6 +161,11 @@
             if(taskStatus>1 && taskStatus<5){
                 getTaskWorker();
             }
+
+            $('.mui-icon-reload').click(function(){
+                window.location.reload();
+            })
+
         });
 
         /**

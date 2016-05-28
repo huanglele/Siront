@@ -105,13 +105,21 @@ class ServerController extends Controller
     public function sureTask(){
         $tid = I('post.tid');
         $M = M('task');
-        $tStatus = $M->where(array('tid'=>$tid))->getField('status');
+        $tInfo = $M->where(array('tid'=>$tid))->field('title,from_uid,status')->find();
+        $tStatus = $tInfo['status'];
         if($tStatus==1){
             $data['tid'] = $tid;
             $data['status'] = 2;
             $data['work_uid'] = session('uid');
             $data['sure_time'] = time();
             if($M->save($data)){
+                $deviceId = S($tInfo['from_uid'].'deviceId');
+                if($deviceId){
+                    $title = '任务已接单';
+                    $content = '【'.$tInfo['title'].'】已接单';
+                    $extra = array('type'=>'task','tid'=>$tid,'title'=>$tInfo['title']);
+                    sendJPushNotify($deviceId,$title,$content,$extra);
+                }
                 $this->success('接单成功',U('server/taskDetail',array('tid'=>$tid),true,true));
             }else{
                 $this->error('操作失败，请重试');
@@ -197,7 +205,6 @@ class ServerController extends Controller
         if($deviceId) $data['jPushDeviceId'] = $deviceId;
         if($time) $data['time'] = $time;
         $M->save($data);
-        echo $M->getLastSql();
     }
 
 
