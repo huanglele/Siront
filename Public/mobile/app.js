@@ -110,6 +110,7 @@ $(window).ready(function(){
         $(this).blur();
         event.preventDefault();
     })
+
     //调整 选择类型位置
     $('#chooseTypeTitle').css('margin-left',($(window).width()-$('#chooseTypeTitle').width())/2-50);
 

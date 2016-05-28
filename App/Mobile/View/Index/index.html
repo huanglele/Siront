@@ -319,6 +319,12 @@
 
     });
 
+    function backLoacl(loacl) {
+        $('input[name="lat"]').val(loacl.lat);
+        $('input[name="lon"]').val(loacl.lon);
+        $('input[name="workPlace"]').val(loacl.workPlace);
+
+    };
 
     /**
      * 获取用户的信息
@@ -345,6 +351,11 @@
         api.setStatusBarStyle({
             style: 'light'
         });
+        alert(api.frameName);
+        api.setFrameAttr({
+            name: 'task'
+        });
+        alert(api.frameName);
         jpush = api.require('ajpush');
 
         baseUrl = 'http://xyc.91yiso.com/mobile.php/';
