@@ -36,7 +36,7 @@ function getV(k) {
     if (r && typeof r != 'undefind') {
         return r;
     } else {
-        return false;
+        return '';
     }
 }
 

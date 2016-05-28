@@ -321,6 +321,7 @@
 
     function backLoacl() {
         var loacl = getV(loacl);
+        loacl = JSON.parse(loacl);
         alert(typeof loacl);
         $('input[name="lat"]').val(loacl.lat);
         $('input[name="lon"]').val(loacl.lon);
