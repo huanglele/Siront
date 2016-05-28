@@ -374,7 +374,7 @@ function ajaxSend(url){
     $.init();
     $.ready(function() {
 
-        //   //级联示例
+        //级联示例
         var timePicker = new $.PopPicker({
             layer: 3
         });
