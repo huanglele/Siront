@@ -138,6 +138,20 @@
         }
     }
 
+    /**
+     *写入数据
+     */
+    function setV(k, v) {
+        $api.setStorage(k, v);
+    }
+
+    /**
+     *删除数据
+     */
+    function delV(k) {
+        $api.rmStorage(k);
+    }
+
     (function($, doc) {
         $.init({
             statusBarBackground: '#f7f7f7'
