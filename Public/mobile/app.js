@@ -193,8 +193,8 @@ function chooseMap(){
     //    'display':'block',
     //    'right':0
     //});
-    //$(this).blur();
-    //event.preventDefault();
+    $(this).blur();
+    event.preventDefault();
     api.openFrame({
         name : 'chooseMap',
         url : baseUrl+'Index/chooseMap',
