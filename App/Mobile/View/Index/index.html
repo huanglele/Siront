@@ -319,9 +319,8 @@
 
     });
 
-
-    function backLoacl(str) {
-        loacl = JSON.parse(str);
+    function backLoacl() {
+        var loacl = $api.getStorage('loacl');
         $('input[name="lat"]').val(loacl.lat);
         $('input[name="lon"]').val(loacl.lon);
         $('input[name="workPlace"]').val(loacl.workPlace);
@@ -353,7 +352,7 @@
         api.setStatusBarStyle({
             style: 'light'
         });
-        alert(api.frameName);
+
 
         jpush = api.require('ajpush');
 
