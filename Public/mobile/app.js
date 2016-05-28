@@ -179,8 +179,8 @@ function chooseMap(){
     //    'display':'block',
     //    'right':0
     //});
-    $(this).blur();
     event.preventDefault();
+    $(this).blur();
     api.openFrame({
         name : 'chooseMap',
         url : 'widget://html/chooseMap.html',
@@ -193,7 +193,7 @@ function chooseMap(){
             type : 'page'
         },
         animation:{
-            type:"none",                //动画类型（详见动画类型常量）
+            type:"push",                //动画类型（详见动画类型常量）
             subType:"from_right",       //动画子类型（详见动画子类型常量）
             duration:300                //动画过渡时间，
         }
