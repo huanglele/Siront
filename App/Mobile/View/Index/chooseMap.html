@@ -77,14 +77,14 @@
      * 获取定位
      */
     function getLoaction(){
-        alert('开始定位');
+//        alert('开始定位');
         var resultCallback = function(ret, err){
             if(ret.status){
-                alert('定位成功');
+//                alert('定位成功');
                 aMap.setCenter({coords:ret,animation:true});
                 addMarker(1,ret);
             }else {
-                alert('获取位置信息失败');
+//                alert('获取位置信息失败');
                 aMap.getCenter(function(ret,err){
                     addMarker(1,ret);
                 });
@@ -98,10 +98,10 @@
      *添加marker
      */
     function addMarker(id,poi){
-        alert('开始标记');
+//        alert('开始标记');
         aMap.annotationExist({id:id},function(ret){
             if(ret.status){
-                alert('标记已存在');
+//                alert('标记已存在');
             }else {
                 aMap.addMobileAnnotations({
                     annotations: [{
@@ -110,7 +110,7 @@
                         lat: poi.lat
                     }]
                 },function(ret, err){
-                    alert('标记成功');
+//                    alert('标记成功');
 //            markerEvent(ret);
                 });
             }
@@ -123,7 +123,7 @@
         aMap.addEventListener({
             name:'viewChange'
         },function(ret,err){
-            alert('发生了viewChange事件');
+//            alert('发生了viewChange事件');
             poi = ret;
             aMap.annotationExist({id:1},function(ret){
                 if(ret.status){
@@ -132,11 +132,11 @@
                         duration: 1,
                         end:poi
                     },function(ret, err){
-                        alert(JSON.stringify(ret));
-                        alert(ret.id + '移动结束');
+//                        alert(JSON.stringify(ret));
+//                        alert(ret.id + '移动结束');
                     })
                 }else {
-                    alert('标记不存在');
+//                    alert('标记不存在');
                 }
             })
         })
