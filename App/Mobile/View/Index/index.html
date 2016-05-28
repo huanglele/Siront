@@ -319,10 +319,11 @@
 
     });
 
-    function backLoacl() {
+    function backLoacl(str) {
         var loacl = getV(loacl);
         loacl = JSON.parse(loacl);
         alert(loacl);
+        alert(str);
         $('input[name="lat"]').val(loacl.lat);
         $('input[name="lon"]').val(loacl.lon);
         $('input[name="workPlace"]').val(loacl.workPlace);
