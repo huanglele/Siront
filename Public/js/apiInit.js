@@ -29,6 +29,33 @@ function clearCache(){
 }
 
 /**
+ *读取数据
+ */
+function getV(k) {
+    var r = $api.getStorage(k);
+    if (r && typeof r != 'undefind') {
+        return r;
+    } else {
+        return false;
+    }
+}
+
+/**
+ *写入数据
+ */
+function setV(k, v) {
+    $api.setStorage(k, v);
+}
+
+/**
+ *删除数据
+ */
+function delV(k) {
+    $api.rmStorage(k);
+}
+
+
+/**
  * 更新自己的信息 位置、设备id
  */
 function updateInfo(){

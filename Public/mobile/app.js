@@ -540,31 +540,6 @@ function ajaxSend(url){
     })
 }
 
-/**
- *读取数据
- */
-function getV(k) {
-    var r = $api.getStorage(k);
-    if (r && typeof r != 'undefind') {
-        return r;
-    } else {
-        return false;
-    }
-}
-
-/**
- *写入数据
- */
-function setV(k, v) {
-    $api.setStorage(k, v);
-}
-
-/**
- *删除数据
- */
-function delV(k) {
-    $api.rmStorage(k);
-}
 
 (function($, doc) {
     $.init();
