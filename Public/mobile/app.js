@@ -197,7 +197,7 @@ function chooseMap(){
     event.preventDefault();
     api.openFrame({
         name : 'chooseMap',
-        url : baseUrl+'Index/chooseMap',
+        url : './html/chooseMap.html',
         bounces : false,
         rect : {
             w : 'auto',
