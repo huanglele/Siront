@@ -207,7 +207,25 @@ class AjaxController extends Controller
         }
     }
 
-
+    /**
+     * 获取用户的基本信息
+     */
+    public function getUserInfo(){
+        $uid = session('uid');
+        $deviceId = I('deviceId');
+        if($uid){
+            S($uid.'deviceId',$deviceId);
+            $info = M('user')->field('uid,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find($uid);
+            $info['img'] = headImgUrl($info['img']);
+            $info['phoneHide'] = hidePhoneNum($info['phone']);
+            $ret['status'] = 'success';
+            $ret['info'] = $info;
+        }else{
+            $ret['status'] = 'error';
+            $ret['msg'] = '请先登录';
+        }
+        $this->ajaxReturn($ret);
+    }
 
     /**
      * 检测发布任务的数据是否正确
