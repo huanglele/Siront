@@ -65,7 +65,7 @@ $(window).ready(function(){
                         $('#login_tip').html(data.msg);
                     }
                     if(data.status=='success'){
-                        setV('uid',data.uid);
+                        setV('uInfo',data);
                         getUserInfo();
                         $('#closeLogin').click();
                     }
