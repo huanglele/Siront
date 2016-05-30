@@ -21,7 +21,7 @@ class AjaxController extends Controller
             $pwd = I('post.password');
             $deviceId = I('deviceId');
             $res['status'] = 'error';
-            $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find();
+            $info = M('user')->where(array('phone'=>$phone))->field('uid,password,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find();
             if($info){
                 if($info['password']==md5($pwd)){
                     if($info['status']!=3){
