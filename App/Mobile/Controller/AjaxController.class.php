@@ -21,7 +21,7 @@ class AjaxController extends Controller
             $pwd = I('post.password');
             $deviceId = I('deviceId');
             $res['status'] = 'error';
-            $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,password,user_status as status')->find();
+            $info = M('user')->where(array('phone'=>$phone))->field('uid,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find();
             if($info){
                 if($info['password']==md5($pwd)){
                     if($info['status']!=3){
@@ -35,7 +35,16 @@ class AjaxController extends Controller
                         session('uid',$info['uid']);
                         $ret['uid'] = $info['uid'];
                         S($info['uid'].'deviceId',$deviceId);
+                        if($info['pstatus']==2){
+                            $ret['type'] = 'p';
+                        }elseif($info['cstatus']==2){
+                            $ret['type'] = 'c';
+                        }else{
+                            $ret['type'] = 'u';
+                        }
                         $res['status'] = 'success';
+                        $res['img'] = headImgUrl($info['img']);
+                        $res['phoneHide'] = hidePhoneNum($info['phone']);
                     }else{
                         $res['msg'] = '账户被限制';
                     }
@@ -198,25 +207,7 @@ class AjaxController extends Controller
         }
     }
 
-    /**
-     * 获取用户的基本信息
-     */
-    public function getUserInfo(){
-        $uid = session('uid');
-        $deviceId = I('deviceId');
-        if($uid){
-            S($uid.'deviceId',$deviceId);
-            $info = M('user')->field('uid,nickname,phone,headimgurl as img,user_status as ustatus,person_status as pstatus,company_status as cstatus')->find($uid);
-            $info['img'] = headImgUrl($info['img']);
-            $info['phoneHide'] = hidePhoneNum($info['phone']);
-            $ret['status'] = 'success';
-            $ret['info'] = $info;
-        }else{
-            $ret['status'] = 'error';
-            $ret['msg'] = '请先登录';
-        }
-        $this->ajaxReturn($ret);
-    }
+
 
     /**
      * 检测发布任务的数据是否正确

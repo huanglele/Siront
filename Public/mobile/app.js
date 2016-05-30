@@ -57,7 +57,8 @@ $(window).ready(function(){
                 'url':baseUrl+'/ajax/ajaxLogin',
                 'data':{
                     phone:phone.val(),
-                    'password':password.val()
+                    'password':password.val(),
+                    'deviceId':jpushDeviceId
                 },
                 'type':'POST',
                 'success':function(data){
