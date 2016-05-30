@@ -66,7 +66,6 @@ $(window).ready(function(){
                     }
                     if(data.status=='success'){
                         setV('uid',data.uid);
-                        $api.rmStorage('type');
                         getUserInfo();
                         $('#closeLogin').click();
                     }

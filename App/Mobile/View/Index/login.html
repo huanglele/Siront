@@ -105,8 +105,7 @@
                             mui.toast(data.msg);
                         }
                         if(data.status=='success'){
-                            $api.setStorage('uid',data.uid);
-                            $api.rmStorage('type');
+                            $api.setStorage('uInfo',data);
                             window.location.href = "<{:U('index/index')}>";
                         }
                     }
