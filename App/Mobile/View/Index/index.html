@@ -304,10 +304,14 @@
      */
     function getUserInfo (){
         if(isLogin()){
+            alert('我登录了');
             var uInfo = getV('uInfo');
+            alert(JSON.stringify(uInfo));
             $('#userHeadImg').attr('src',uInfo.url);
             $('#userNickname').html(uInfo.nickname);
             $('#userPhone').html(uInfo.phoneHide);
+        }else {
+            alert('我没有登录');
         }
     }
 
