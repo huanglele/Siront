@@ -144,20 +144,6 @@ function getV(k) {
     }
 }
 
-/**
- *写入数据
- */
-function setV(k, v) {
-    $api.setStorage(k, v);
-}
-
-/**
- *删除数据
- */
-function delV(k) {
-    $api.setStorage(k, null);
-}
-
 
 
 /**

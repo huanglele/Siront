@@ -74,7 +74,6 @@ $(window).ready(function(){
         }
     })
 
-
     /**
      * 选择工作地点
      */
