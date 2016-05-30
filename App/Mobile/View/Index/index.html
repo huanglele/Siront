@@ -304,19 +304,10 @@
      */
     function getUserInfo (){
         if(isLogin()){
-            $.ajax({
-                url:"<{:U('ajax/getUserInfo')}>",
-                data:{
-                    deviceId:jpushDeviceId
-                },
-                success:function(ret){
-                    if(ret.status=='success'){
-                        $('#userHeadImg').attr('src',ret.info.img);
-                        $('#userNickname').html(ret.info.nickname);
-                        $('#userPhone').html(ret.info.phone);
-                    }
-                }
-            })
+            var uInfo = getV('uInfo');
+            $('#userHeadImg').attr('src',uInfo.url);
+            $('#userNickname').html(uInfo.nickname);
+            $('#userPhone').html(uInfo.phoneHide);
         }
     }
 
@@ -325,21 +316,9 @@
             style: 'light'
         });
 
-
-        jpush = api.require('ajpush');
-
         baseUrl = 'http://xyc.91yiso.com/mobile.php/';
 
-        jpush.init(function(ret, err) {
-            if (ret && ret.status) {
-                jpush.getRegistrationId(function(ret) {
-                    deviceId = ret.id;
-                    jpushDeviceId = ret.id;
-                });
-            } else {
-//                alert('获取deviceId失败!');
-            }
-        });
+        jpushDeviceId = getV('jPushRegId');
     }
 
 </script>

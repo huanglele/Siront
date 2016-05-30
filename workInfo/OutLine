@@ -11,7 +11,14 @@
 公共变量说
     telCode     发送的短信验证码
     uid         用户uid
-    type        服务商类型（p=>个体，s=>商家）
+    type        服务商类型（p=>个体，c=>企业）
+
+App缓存数据说明
+    uInfo       用户的基本信息
+        {uid,phone:电话号码,nickname:昵称,phoneHide:电话号码部分隐藏,type:身份,headimgUrl:头像本地缓存,img:头像远程,status:登录状态}
+
+    jpush       极光推送
+        {regisiterID:极光推送的设备ID}
 
 缓存数据说明
  S缓存

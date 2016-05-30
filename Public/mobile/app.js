@@ -66,6 +66,7 @@ $(window).ready(function(){
                     }
                     if(data.status=='success'){
                         setV('uid',data.uid);
+                        $api.rmStorage('type');
                         getUserInfo();
                         $('#closeLogin').click();
                     }
@@ -205,7 +206,12 @@ function chooseMap(){
  * 判断是否登录了
  */
 function isLogin(){
-    return getV('uid');
+    var uInfo = getV('uInfo');
+    if(uInfo.status=='success'){
+        return true;
+    }else {
+        return false;
+    }
 }
 
 /**
