@@ -41,8 +41,7 @@ class IndexController extends Controller {
     }
 
     public function test(){
-        $s = '546521146';
-        var_dump(isTel($s));
+        echo $_SERVER['HTTP_HOST'];
     }
 
     /**
@@ -68,6 +67,5 @@ class IndexController extends Controller {
     public function findPwd(){
         $this->display('findPwd');
     }
-
 
 }

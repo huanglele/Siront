@@ -13,11 +13,11 @@
  */
 function headImgUrl($url=false){
     if(!$url){//随机返回一个默认头像
-        return __ROOT__.'/Public/img/avatar.png';
+        return 'http://'.$_SERVER['HTTP_HOST'].'/Public/img/avatar.png';
     }elseif(preg_match('^http',$url)){
         return $url;
     }else{
-        return $url;
+        return 'http://'.$_SERVER['HTTP_HOST'].$url;
     }
 }
 

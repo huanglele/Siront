@@ -25,24 +25,20 @@ class AjaxController extends Controller
             if($info){
                 if($info['password']==md5($pwd)){
                     if($info['status']!=3){
-                        $data['msg'] = '登录成功';
-                        if($info['nickname']){
-                            $res['user'] = $info['nickname'];
-                        }else{
-                            $res['user'] = hidePhoneNum($phone);
-                        }
+                        $res['nickname'] = $info['nickname'];
                         session('phone',$phone);
                         session('uid',$info['uid']);
-                        $ret['uid'] = $info['uid'];
+                        $res['uid'] = $info['uid'];
                         S($info['uid'].'deviceId',$deviceId);
                         if($info['pstatus']==2){
-                            $ret['type'] = 'p';
+                            $res['type'] = 'p';
                         }elseif($info['cstatus']==2){
-                            $ret['type'] = 'c';
+                            $res['type'] = 'c';
                         }else{
-                            $ret['type'] = 'u';
+                            $res['type'] = 'u';
                         }
                         $res['status'] = 'success';
+                        $res['phone'] = $info['phone'];
                         $res['img'] = headImgUrl($info['img']);
                         $res['phoneHide'] = hidePhoneNum($info['phone']);
                     }else{
