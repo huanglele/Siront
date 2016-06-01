@@ -122,7 +122,7 @@ class UserController extends Controller
      */
     public function logout(){
         session('uid',null);
-        $this->success('安全退出');
+        $this->ajaxReturn(array('status'=>'success','info'=>'安全退出'));
     }
 
 }
