@@ -55,7 +55,7 @@ class UserController extends Controller
             if($info){
                 if($info['password']==md5($pwd)){
                     if($info['status']!=3){
-                        session('uid');
+                        session('uid',$info['uid']);
                         $ret['status'] = 'success';
                         $ret['uid'] = $info['uid'];
                         $ret['nickname'] = $info['nickname'];

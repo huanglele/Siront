@@ -1,6 +1,7 @@
 <?php
 return array(
 	//'配置项'=>'配置值'
+    'SHOW_PAGE_TRACE' => false,
 
     //极光推送配置信息
     'JPush' => array(   //native
